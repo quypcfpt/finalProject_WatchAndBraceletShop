@@ -9,6 +9,7 @@ package spring.mvc.model;
  *
  * @author Quy
  */
-public class Account {
+
+public class Order {
     
 }
