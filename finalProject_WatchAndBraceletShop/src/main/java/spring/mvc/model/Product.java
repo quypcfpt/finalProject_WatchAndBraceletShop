@@ -9,6 +9,7 @@ package spring.mvc.model;
  *
  * @author Quy
  */
+//thuPNM
 public class Product {
     
 }

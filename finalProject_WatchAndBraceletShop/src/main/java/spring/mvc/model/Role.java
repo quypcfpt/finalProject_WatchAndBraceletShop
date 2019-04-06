@@ -9,6 +9,7 @@ package spring.mvc.model;
  *
  * @author Quy
  */
+//THuPNM
 public class Role {
     
 }

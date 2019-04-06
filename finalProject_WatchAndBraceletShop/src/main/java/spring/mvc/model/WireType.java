@@ -9,6 +9,8 @@ package spring.mvc.model;
  *
  * @author Quy
  */
+
+//tinth
 public class WireType {
     
 }
