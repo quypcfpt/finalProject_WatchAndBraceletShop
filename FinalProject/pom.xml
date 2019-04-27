@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.spring2019</groupId>
-    <artifactId>trafficjamdetectionsystem</artifactId>
+    <artifactId>watchbraceletShop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>trafficjamdetectionsystem</name>
+    <name>watchbraceletShop</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
