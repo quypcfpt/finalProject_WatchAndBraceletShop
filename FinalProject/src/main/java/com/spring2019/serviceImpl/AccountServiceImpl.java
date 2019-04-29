@@ -1,6 +1,7 @@
 package com.spring2019.serviceImpl;
 
 import com.spring2019.entity.Account;
+import com.spring2019.entity.Product;
 import com.spring2019.repository.AccountRepository;
 import com.spring2019.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,16 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateAccount(Account account) {
         accountRepository.save(account);
+    }
+
+    @Override
+    public Page<Account> getAllAccountsActive(Pageable pageable) {
+        return accountRepository.findAllByActive(true, pageable);
+    }
+
+    @Override
+    public Page<Account> getAllAccounts(Pageable pageable) {
+        return accountRepository.findAll(pageable);
     }
 
     @Override

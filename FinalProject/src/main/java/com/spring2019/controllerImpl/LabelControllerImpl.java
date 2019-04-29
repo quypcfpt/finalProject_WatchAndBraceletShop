@@ -1,13 +1,14 @@
 package com.spring2019.controllerImpl;
 
 import com.spring2019.common.CoreConstant;
-import com.spring2019.controller.ProductController;
-import com.spring2019.entity.Product;
-import com.spring2019.model.MultiProductModel;
-import com.spring2019.model.ProductModel;
+import com.spring2019.controller.LabelController;
+import com.spring2019.entity.Label;
+import com.spring2019.model.LabelModel;
+import com.spring2019.model.MultiLabelModel;
 import com.spring2019.model.Response;
-import com.spring2019.service.ProductService;
-import com.spring2019.transformer.ProductTransformer;
+import com.spring2019.repository.LabelRepository;
+import com.spring2019.service.LabelService;
+import com.spring2019.transformer.LabelTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,22 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ProductControllerImpl extends AbstractController implements ProductController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductControllerImpl.class);
+public class LabelControllerImpl extends AbstractController implements LabelController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LabelControllerImpl.class);
 
     @Autowired
-    ProductService productService;
+    LabelService service;
 
     @Autowired
-    ProductTransformer productTransformer;
+    LabelRepository repository;
+
+    @Autowired
+    LabelTransformer transformer;
 
 
     @Override
-    public String loadAllProductActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiProductModel> response = new Response<MultiProductModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+    public String loadAllLabelActive(Integer page, Integer size, String sort, String sortBy) {
+        Response<MultiLabelModel> response = new Response<MultiLabelModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by(sortBy).ascending();
@@ -49,26 +53,26 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts active");
+        LOGGER.info("Start load all Label active");
 
         try {
-            MultiProductModel data = new MultiProductModel();
+            MultiLabelModel data = new MultiLabelModel();
 
-            List<ProductModel> productList = new ArrayList<>();
+            List<LabelModel> LabelModelList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProductsActive(pageable);
+                Page<Label> LabelsActive = service.getAllLabelsActive(pageable);
 
-                for (Product product : products) {
-                    productList.add(productTransformer.entityToModel(product));
+                for (Label item : LabelsActive) {
+                    LabelModelList.add(transformer.entityToModel(item));
                 }
                 data.setCurrentPage(page);
-                data.setTotalPage(products.getTotalPages());
-                data.setTotalRecord(products.getTotalElements());
+                data.setTotalPage(LabelsActive.getTotalPages());
+                data.setTotalRecord(LabelsActive.getTotalElements());
             }
-            data.setListProduct(productList);
+            data.setListLabel(LabelModelList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts active");
+            LOGGER.info("End load all Label active");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());
@@ -78,8 +82,8 @@ public class ProductControllerImpl extends AbstractController implements Product
     }
 
     @Override
-    public String loadAllProduct(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiProductModel> response = new Response<MultiProductModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+    public String loadAllLabel(Integer page, Integer size, String sort, String sortBy) {
+        Response<MultiLabelModel> response = new Response<MultiLabelModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by(sortBy).ascending();
@@ -93,26 +97,26 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts deactive");
+        LOGGER.info("Start load all Label deactive");
 
         try {
-            MultiProductModel data = new MultiProductModel();
+            MultiLabelModel data = new MultiLabelModel();
 
-            List<ProductModel> productList = new ArrayList<>();
+            List<LabelModel> LabelList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProducts(pageable);
+                Page<Label> Labels = service.getAllLabels(pageable);
 
-                for (Product product : products) {
-                    productList.add(productTransformer.entityToModel(product));
+                for (Label Label : Labels) {
+                    LabelList.add(transformer.entityToModel(Label));
                 }
                 data.setCurrentPage(page);
-                data.setTotalPage(products.getTotalPages());
-                data.setTotalRecord(products.getTotalElements());
+                data.setTotalPage(Labels.getTotalPages());
+                data.setTotalRecord(Labels.getTotalElements());
             }
-            data.setListProduct(productList);
+            data.setListLabel(LabelList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts deactive");
+            LOGGER.info("End load all Label deactive");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());

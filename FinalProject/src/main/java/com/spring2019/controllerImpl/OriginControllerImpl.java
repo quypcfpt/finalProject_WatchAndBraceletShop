@@ -1,13 +1,14 @@
 package com.spring2019.controllerImpl;
 
 import com.spring2019.common.CoreConstant;
-import com.spring2019.controller.ProductController;
-import com.spring2019.entity.Product;
-import com.spring2019.model.MultiProductModel;
-import com.spring2019.model.ProductModel;
+import com.spring2019.controller.OriginController;
+import com.spring2019.entity.Origin;
+import com.spring2019.model.OriginModel;
+import com.spring2019.model.MultiOriginModel;
 import com.spring2019.model.Response;
-import com.spring2019.service.ProductService;
-import com.spring2019.transformer.ProductTransformer;
+import com.spring2019.repository.OriginRepository;
+import com.spring2019.service.OriginService;
+import com.spring2019.transformer.OriginTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,22 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ProductControllerImpl extends AbstractController implements ProductController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductControllerImpl.class);
+public class OriginControllerImpl extends AbstractController implements OriginController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OriginControllerImpl.class);
 
     @Autowired
-    ProductService productService;
+    OriginService service;
 
     @Autowired
-    ProductTransformer productTransformer;
+    OriginRepository repository;
+
+    @Autowired
+    OriginTransformer transformer;
 
 
     @Override
-    public String loadAllProductActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiProductModel> response = new Response<MultiProductModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+    public String loadAllOriginActive(Integer page, Integer size, String sort, String sortBy) {
+        Response<MultiOriginModel> response = new Response<MultiOriginModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by(sortBy).ascending();
@@ -49,26 +53,26 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts active");
+        LOGGER.info("Start load all Origin active");
 
         try {
-            MultiProductModel data = new MultiProductModel();
+            MultiOriginModel data = new MultiOriginModel();
 
-            List<ProductModel> productList = new ArrayList<>();
+            List<OriginModel> OriginModelList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProductsActive(pageable);
+                Page<Origin> OriginsActive = service.getAllOriginsActive(pageable);
 
-                for (Product product : products) {
-                    productList.add(productTransformer.entityToModel(product));
+                for (Origin item : OriginsActive) {
+                    OriginModelList.add(transformer.entityToModel(item));
                 }
                 data.setCurrentPage(page);
-                data.setTotalPage(products.getTotalPages());
-                data.setTotalRecord(products.getTotalElements());
+                data.setTotalPage(OriginsActive.getTotalPages());
+                data.setTotalRecord(OriginsActive.getTotalElements());
             }
-            data.setListProduct(productList);
+            data.setListOrigin(OriginModelList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts active");
+            LOGGER.info("End load all Origin active");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());
@@ -78,8 +82,8 @@ public class ProductControllerImpl extends AbstractController implements Product
     }
 
     @Override
-    public String loadAllProduct(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiProductModel> response = new Response<MultiProductModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+    public String loadAllOrigin(Integer page, Integer size, String sort, String sortBy) {
+        Response<MultiOriginModel> response = new Response<MultiOriginModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by(sortBy).ascending();
@@ -93,26 +97,26 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts deactive");
+        LOGGER.info("Start load all Origin deactive");
 
         try {
-            MultiProductModel data = new MultiProductModel();
+            MultiOriginModel data = new MultiOriginModel();
 
-            List<ProductModel> productList = new ArrayList<>();
+            List<OriginModel> OriginList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProducts(pageable);
+                Page<Origin> Origins = service.getAllOrigins(pageable);
 
-                for (Product product : products) {
-                    productList.add(productTransformer.entityToModel(product));
+                for (Origin Origin : Origins) {
+                    OriginList.add(transformer.entityToModel(Origin));
                 }
                 data.setCurrentPage(page);
-                data.setTotalPage(products.getTotalPages());
-                data.setTotalRecord(products.getTotalElements());
+                data.setTotalPage(Origins.getTotalPages());
+                data.setTotalRecord(Origins.getTotalElements());
             }
-            data.setListProduct(productList);
+            data.setListOrigin(OriginList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts deactive");
+            LOGGER.info("End load all Origin deactive");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());

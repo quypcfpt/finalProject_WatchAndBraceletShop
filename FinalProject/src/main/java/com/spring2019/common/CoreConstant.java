@@ -2,6 +2,7 @@ package com.spring2019.common;
 
 public class CoreConstant {
     public static final String API_PRODUCT= "/api/product";
+    public static final String API_ACOUNT= "/api/account";
 
 
     //API Response code
