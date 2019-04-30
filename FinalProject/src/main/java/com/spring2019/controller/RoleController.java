@@ -5,12 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface RoleController {
-    @GetMapping(CoreConstant.API_PRODUCT+"/active")
-    String loadAllRoleActive(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
-                              @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
-                              @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
-                              @RequestParam(name = "sortBy", required = false, defaultValue = "id") String sortBy);
-    @GetMapping(CoreConstant.API_PRODUCT)
+    @GetMapping(CoreConstant.API_ROLE)
     String loadAllRole(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
                         @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                         @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,

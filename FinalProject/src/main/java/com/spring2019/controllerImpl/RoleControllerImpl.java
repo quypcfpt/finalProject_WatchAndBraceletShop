@@ -37,49 +37,7 @@ public class RoleControllerImpl extends AbstractController implements RoleContro
     RoleTransformer transformer;
 
 
-    @Override
-    public String loadAllRoleActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiRoleModel> response = new Response<MultiRoleModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
-        Sort sortable = null;
-        if (sort.equals("ASC")) {
-            sortable = Sort.by(sortBy).ascending();
-        }
-        if (sort.equals("DESC")) {
-            sortable = Sort.by(sortBy).descending();
-        }
 
-        Pageable pageable = null;
-        if (page > 0) {
-            pageable = PageRequest.of(page - 1, size, sortable);
-        }
-
-        LOGGER.info("Start load all Role active");
-
-        try {
-            MultiRoleModel data = new MultiRoleModel();
-
-            List<RoleModel> RoleModelList = new ArrayList<>();
-            if (page > 0) {
-                Page<Role> RolesActive = service.getAllRolesActive(pageable);
-
-                for (Role item : RolesActive) {
-                    RoleModelList.add(transformer.entityToModel(item));
-                }
-                data.setCurrentPage(page);
-                data.setTotalPage(RolesActive.getTotalPages());
-                data.setTotalRecord(RolesActive.getTotalElements());
-            }
-            data.setListRole(RoleModelList);
-
-            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all Role active");
-        } catch (Exception e) {
-            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
-            LOGGER.error(e.getMessage());
-        }
-        return gson.toJson(response);
-
-    }
 
     @Override
     public String loadAllRole(Integer page, Integer size, String sort, String sortBy) {

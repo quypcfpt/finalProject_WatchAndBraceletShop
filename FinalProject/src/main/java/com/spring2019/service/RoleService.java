@@ -5,6 +5,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface RoleService {
-    public Page<Role> getAllRolesActive(Pageable pageable);
     public Page<Role>  getAllRoles(Pageable pageable);
 }

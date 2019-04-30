@@ -13,10 +13,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleRepository repository;
-    @Override
-    public Page<Role>  getAllRolesActive(Pageable pageable) {
-        return repository.findAllByActive(true, pageable);
-    }
 
     @Override
     public Page<Role>  getAllRoles(Pageable pageable) {

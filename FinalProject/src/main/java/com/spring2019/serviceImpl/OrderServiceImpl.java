@@ -13,10 +13,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository repository;
-    @Override
-    public Page<Order>  getAllOrdersActive(Pageable pageable) {
-        return repository.findAllByActive(true, pageable);
-    }
 
     @Override
     public Page<Order>  getAllOrders(Pageable pageable) {

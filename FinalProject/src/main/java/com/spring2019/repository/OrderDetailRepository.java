@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail,Integer> {
-    Page<OrderDetail> findAllByActive(boolean isActive, Pageable pageable);
 }

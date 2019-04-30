@@ -13,10 +13,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository repository;
-    @Override
-    public Page<User>  getAllUsersActive(Pageable pageable) {
-        return repository.findAllByActive(true, pageable);
-    }
 
     @Override
     public Page<User>  getAllUsers(Pageable pageable) {

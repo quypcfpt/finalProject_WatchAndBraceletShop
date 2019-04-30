@@ -41,48 +41,7 @@ public class UserControllerImpl extends AbstractController implements UserContro
     @Autowired
     UserTransformer transformer;
     
-    @Override
-    public String loadAllUserActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiUserModel> response = new Response<MultiUserModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
-        Sort sortable = null;
-        if (sort.equals("ASC")) {
-            sortable = Sort.by(sortBy).ascending();
-        }
-        if (sort.equals("DESC")) {
-            sortable = Sort.by(sortBy).descending();
-        }
 
-        Pageable pageable = null;
-        if (page > 0) {
-            pageable = PageRequest.of(page - 1, size, sortable);
-        }
-
-        LOGGER.info("Start load all User active");
-
-        try {
-            MultiUserModel data = new MultiUserModel();
-
-            List<UserModel> UserModelList = new ArrayList<>();
-            if (page > 0) {
-                Page<User> UsersActive = service.getAllUsersActive(pageable);
-
-                for (User item : UsersActive) {
-                    UserModelList.add(transformer.entityToModel(item));
-                }
-                data.setCurrentPage(page);
-                data.setTotalPage(UsersActive.getTotalPages());
-                data.setTotalRecord(UsersActive.getTotalElements());
-            }
-            data.setListUser(UserModelList);
-
-            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all User active");
-        } catch (Exception e) {
-            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
-            LOGGER.error(e.getMessage());
-        }
-        return gson.toJson(response);
-    }
 
     @Override
     public String loadAllUser(Integer page, Integer size, String sort, String sortBy) {

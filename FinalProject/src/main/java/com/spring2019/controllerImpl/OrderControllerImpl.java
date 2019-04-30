@@ -40,49 +40,6 @@ public class OrderControllerImpl extends AbstractController implements OrderCont
     OrderTransformer transformer;
 
 
-    @Override
-    public String loadAllOrderActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiOrderModel> response = new Response<MultiOrderModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
-        Sort sortable = null;
-        if (sort.equals("ASC")) {
-            sortable = Sort.by(sortBy).ascending();
-        }
-        if (sort.equals("DESC")) {
-            sortable = Sort.by(sortBy).descending();
-        }
-
-        Pageable pageable = null;
-        if (page > 0) {
-            pageable = PageRequest.of(page - 1, size, sortable);
-        }
-
-        LOGGER.info("Start load all Order active");
-
-        try {
-            MultiOrderModel data = new MultiOrderModel();
-
-            List<OrderModel> OrderList = new ArrayList<>();
-            if (page > 0) {
-                Page<Order> OrdersActive = service.getAllOrdersActive(pageable);
-
-                for (Order item : OrdersActive) {
-                    OrderList.add(transformer.entityToModel(item));
-                }
-                data.setCurrentPage(page);
-                data.setTotalPage(OrdersActive.getTotalPages());
-                data.setTotalRecord(OrdersActive.getTotalElements());
-            }
-            data.setListOrder(OrderList);
-
-            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all Order active");
-        } catch (Exception e) {
-            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
-            LOGGER.error(e.getMessage());
-        }
-        return gson.toJson(response);
-
-    }
 
     @Override
     public String loadAllOrder(Integer page, Integer size, String sort, String sortBy) {

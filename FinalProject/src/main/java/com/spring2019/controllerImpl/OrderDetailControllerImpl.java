@@ -37,49 +37,7 @@ public class OrderDetailControllerImpl extends AbstractController implements Ord
     OrderDetailTransformer transformer;
 
 
-    @Override
-    public String loadAllOrderDetailActive(Integer page, Integer size, String sort, String sortBy) {
-        Response<MultiOrderDetailModel> response = new Response<MultiOrderDetailModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
-        Sort sortable = null;
-        if (sort.equals("ASC")) {
-            sortable = Sort.by(sortBy).ascending();
-        }
-        if (sort.equals("DESC")) {
-            sortable = Sort.by(sortBy).descending();
-        }
 
-        Pageable pageable = null;
-        if (page > 0) {
-            pageable = PageRequest.of(page - 1, size, sortable);
-        }
-
-        LOGGER.info("Start load all OrderDetail active");
-
-        try {
-            MultiOrderDetailModel data = new MultiOrderDetailModel();
-
-            List<OrderDetailModel> OrderDetailModelList = new ArrayList<>();
-            if (page > 0) {
-                Page<OrderDetail> OrderDetailsActive = service.getAllOrderDetailsActive(pageable);
-
-                for (OrderDetail item : OrderDetailsActive) {
-                    OrderDetailModelList.add(transformer.entityToModel(item));
-                }
-                data.setCurrentPage(page);
-                data.setTotalPage(OrderDetailsActive.getTotalPages());
-                data.setTotalRecord(OrderDetailsActive.getTotalElements());
-            }
-            data.setListOrderDetail(OrderDetailModelList);
-
-            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all OrderDetail active");
-        } catch (Exception e) {
-            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
-            LOGGER.error(e.getMessage());
-        }
-        return gson.toJson(response);
-
-    }
 
     @Override
     public String loadAllOrderDetail(Integer page, Integer size, String sort, String sortBy) {
