@@ -2,6 +2,16 @@ package com.spring2019.common;
 
 public class CoreConstant {
     public static final String API_PRODUCT= "/api/product";
+    public static final String API_GLASSTYPE= "/api/glasstype";
+    public static final String API_LABEL= "/api/label";
+    public static final String API_MACHINETYPE= "/api/machinetype";
+    public static final String API_ORDER= "/api/order";
+    public static final String API_ORDERDETAIL= "/api/orderdetail";
+    public static final String API_ORIGIN= "/api/origin";
+    public static final String API_PRODUCTCATEGORY= "/api/productcategory";
+    public static final String API_ROLE= "/api/role";
+    public static final String API_USER= "/api/user";
+    public static final String API_WIRETYPE= "/api/wiretype";
     public static final String API_ACOUNT= "/api/account";
 
 
