@@ -49,14 +49,14 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts active");
+        LOGGER.info("Start load all cameras");
 
         try {
             MultiProductModel data = new MultiProductModel();
 
             List<ProductModel> productList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProductsActive(pageable);
+                Page<Product> products = productService.getAllCamerasActive(pageable);
 
                 for (Product product : products) {
                     productList.add(productTransformer.entityToModel(product));
@@ -68,7 +68,7 @@ public class ProductControllerImpl extends AbstractController implements Product
             data.setListProduct(productList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts active");
+            LOGGER.info("End load all cameras");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());
@@ -93,14 +93,14 @@ public class ProductControllerImpl extends AbstractController implements Product
             pageable = PageRequest.of(page - 1, size, sortable);
         }
 
-        LOGGER.info("Start load all prouducts deactive");
+        LOGGER.info("Start load all cameras");
 
         try {
             MultiProductModel data = new MultiProductModel();
 
             List<ProductModel> productList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProducts(pageable);
+                Page<Product> products = productService.getAllCameras(pageable);
 
                 for (Product product : products) {
                     productList.add(productTransformer.entityToModel(product));
@@ -112,7 +112,7 @@ public class ProductControllerImpl extends AbstractController implements Product
             data.setListProduct(productList);
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
-            LOGGER.info("End load all prouducts deactive");
+            LOGGER.info("End load all cameras");
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());

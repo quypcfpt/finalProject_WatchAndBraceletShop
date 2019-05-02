@@ -30,4 +30,16 @@ public class ViewController {
         //Excute anything here
         return "product/home";
     }
+
+    /**
+     * Home Product Page
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/watch")
+    public String toWatch(Model model) {
+        //Excute anything here
+        return "product/watch";
+    }
 }
