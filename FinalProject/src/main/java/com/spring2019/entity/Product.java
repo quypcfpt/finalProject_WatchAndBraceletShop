@@ -16,6 +16,9 @@ public class Product {
     @Column(name = "Description", nullable = false, length = 255)
     private String description;
     @Basic
+    @Column(name = "Image", nullable = false)
+    private String imge;
+    @Basic
     @Column(name = "Price", nullable = false)
     private float price;
     @Basic
@@ -152,6 +155,14 @@ public class Product {
         this.active = active;
     }
 
+    public String getImge() {
+        return imge;
+    }
+
+    public void setImge(String imge) {
+        this.imge = imge;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -169,11 +180,12 @@ public class Product {
                 Objects.equals(id, product.id) &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(description, product.description) &&
+                Objects.equals(imge, product.imge) &&
                 Objects.equals(productCode, product.productCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, wireTypeId, glassTypeId, machineTypeId, labelId, originId, status, productCode, categoryId, active);
+        return Objects.hash(id, name, description, imge, price, wireTypeId, glassTypeId, machineTypeId, labelId, originId, status, productCode, categoryId, active);
     }
 }

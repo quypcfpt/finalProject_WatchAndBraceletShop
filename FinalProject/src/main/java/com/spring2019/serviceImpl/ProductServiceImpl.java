@@ -16,12 +16,12 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
     @Override
-    public Page<Product> getAllCamerasActive(Pageable pageable) {
+    public Page<Product>  getAllProductsActive(Pageable pageable) {
         return productRepository.findAllByActive(true, pageable);
     }
 
     @Override
-    public Page<Product> getAllCameras(Pageable pageable) {
+    public Page<Product>  getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
 }

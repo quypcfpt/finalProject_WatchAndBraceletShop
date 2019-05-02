@@ -5,7 +5,12 @@ import java.util.Objects;
 
 @Entity
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id", nullable = false)
     private int id;
+    @Basic
+    @Column(name = "Name", nullable = false, length = 255)
     private String username;
     private String password;
     private String name;

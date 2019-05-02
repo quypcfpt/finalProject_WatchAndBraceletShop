@@ -12,6 +12,9 @@ public class Origin {
     @Basic
     @Column(name = "Name", nullable = false , length = 255)
     private String name ;
+    @Basic
+    @Column(name = "Active", nullable = false , length = 255)
+    private boolean active ;
 
     public Integer getId() {
         return id;
@@ -29,17 +32,26 @@ public class Origin {
         this.name = name;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Origin)) return false;
         Origin origin = (Origin) o;
-        return Objects.equals(id, origin.id) &&
+        return active == origin.active &&
+                Objects.equals(id, origin.id) &&
                 Objects.equals(name, origin.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, active);
     }
 }
