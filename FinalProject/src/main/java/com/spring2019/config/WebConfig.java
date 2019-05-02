@@ -1,4 +1,4 @@
-package com.spring2019.controllerImpl;
+package com.spring2019.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
