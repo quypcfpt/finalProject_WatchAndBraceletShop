@@ -15,6 +15,8 @@ public class ProductModel {
     @Expose
     private float price;
     @Expose
+    private String image;
+    @Expose
     private int wireTypeId;
     @Expose
     private int glassTypeId;
@@ -38,11 +40,12 @@ public class ProductModel {
     }
 
 
-    public ProductModel(Integer id, String name, String description, float price, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int categoryId, boolean active) {
+    public ProductModel(Integer id, String name, String description, float price, String image, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int categoryId, boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.image = image;
         this.wireTypeId = wireTypeId;
         this.glassTypeId = glassTypeId;
         this.machineTypeId = machineTypeId;
@@ -52,6 +55,14 @@ public class ProductModel {
         this.productCode = productCode;
         this.categoryId = categoryId;
         this.active = active;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getId() {

@@ -21,6 +21,7 @@ public class ProductTransformerImpl implements ProductTransformer {
         model.setCategoryId(entity.getCategoryId());
         model.setDescription(entity.getDescription());
         model.setName(entity.getName());
+        model.setImage(entity.getImge());
         model.setGlassTypeId(entity.getGlassTypeId());
         model.setLabelId(entity.getLabelId());
         model.setMachineTypeId(entity.getMachineTypeId());
@@ -40,6 +41,7 @@ public class ProductTransformerImpl implements ProductTransformer {
         entity.setCategoryId(model.getCategoryId());
         entity.setDescription(model.getDescription());
         entity.setName(model.getName());
+        entity.setImge(model.getImage());
         entity.setGlassTypeId(model.getGlassTypeId());
         entity.setLabelId(model.getLabelId());
         entity.setMachineTypeId(model.getMachineTypeId());
