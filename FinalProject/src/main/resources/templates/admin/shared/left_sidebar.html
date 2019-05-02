@@ -1,0 +1,53 @@
+<aside class="left-sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="left_sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- User profile -->
+        <div class="user-profile" style="background: url('/st-admin/assets/images/background/user-info.jpg') no-repeat;">
+            <!-- User profile image -->
+            <div class="profile-img"> <img src="/st-admin/assets/images/users/profile.png" alt="user" id="avatar"/> </div>
+            <!-- User profile text-->
+            <div class="profile-text">
+                <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" id="username">AAA</a>
+                <div class="dropdown-menu animated flipInY">
+                    <a href="/Profile" class="dropdown-item"><i class="ti-user"></i> Profile</a>
+                    <div class="dropdown-divider"></div> <a href="/ChangePassword" class="dropdown-item"><i class="ti-settings"></i> Reset password</a>
+                    <div class="dropdown-divider"></div>
+                    <button id="logout" type="button" onclick="logout()" class="nav-link btn btn-link text-dark">  <i class="fa fa-power-off"></i>Logout</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- End User profile text-->
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li>
+                    <a class="waves-effect waves-dark" aria-expanded="false" href="/">
+                        <i class="mdi mdi-gauge"></i>  <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-devider"></li>
+                <li>
+                    <a class="waves-effect waves-dark" aria-expanded="false" href="/admin/users">
+                        <i class="mdi mdi-account-outline"></i>  <span class="hide-menu">Users</span>
+                    </a>
+                </li>
+                <li class="nav-devider"></li>
+                <li>
+                    <a class="waves-effect waves-dark" aria-expanded="false" href="/admin/product_category">
+                        <i class="fa fa-building"></i>  <span class="hide-menu">Category</span>
+                    </a>
+                </li>
+                <li class="nav-devider"></li>
+                <li>
+                    <a class="waves-effect waves-dark" aria-expanded="false" href="/admin/label">
+                        <i class="mdi mdi-clipboard-text"></i>  <span class="hide-menu">Label</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

@@ -11,4 +11,9 @@ public class UserControllerImpl extends AbstractController implements UserContro
     public ModelAndView homePage(HttpSession session) {
         return new ModelAndView("index");
     }
+
+    @Override
+    public String loadAllUser(Integer page, Integer size, String sort, String sortBy) {
+        return null;
+    }
 }

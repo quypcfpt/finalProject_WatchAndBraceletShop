@@ -7,7 +7,6 @@ import java.util.Objects;
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
     private Integer id;
     @Basic
     @Column(name = "Name", nullable = false, length = 255)
