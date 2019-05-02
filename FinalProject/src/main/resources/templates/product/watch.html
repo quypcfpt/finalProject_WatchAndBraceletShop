@@ -332,15 +332,17 @@
             let products = data.listProduct;
             //$("#list-parking-lot").empty();
             $.each(products, function (index, pro) {
-                let tr =
-                    "<tr>" +
-                    "<td><a href='/parking-lot-detail?id=" + lot.parkingLotId + "'>" + lot.displayName + "</a></td>" +
-                    "<td>" + lot.owner.lastName + " " + lot.owner.firstName + "</td>" +
-                    "<td>" + lot.totalSlot + "</td>" +
-                    "<td>" + status + "</td>" +
-                    activeStr +
-                    "</tr>";
-                $("#list-parking-lot").append(tr);
+                let div =
+                    "<div class=\"product-entry border\">" +
+                    "<a href=\"#\" class=\"prod-img\">" +
+                    "<img src=\"st-product/images/item-1.jpg\" class=\"img-fluid\">" +
+                    "</a>" +
+                    "<div class=\"desc\">" +
+                    "<h2><a href=\"#\">" + pro.name + "</a></h2>" +
+                    "<span class=\"price\">" + pro.price + "</span>" +
+                    "</div>"
+                    "</div>";
+                $("#list-products").append(div);
             });
         }, function (error) {
             console.log(error);
