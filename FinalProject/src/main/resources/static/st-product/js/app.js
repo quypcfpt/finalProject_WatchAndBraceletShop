@@ -8,12 +8,12 @@ function doAjax(url, method, data, callback, onError) {
             if (response.status) {
                 callback(response);
             } else {
-                showAlert(false, response.message);
+                //showAlert(false, response.message);
+                alert(response.message);
             }
         },
         error: function (xhr, status, error) {
-            debugger;
-            showAlert(false, xhr.responseJSON.message);
+            alert(response.message);
         },
         dataType: "json",
         contentType: "application/json"
