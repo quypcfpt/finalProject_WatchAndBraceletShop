@@ -43,6 +43,15 @@ public class Product {
     @Column(name = "ProductCode", nullable = false, length = 255)
     private String productCode;
     @Basic
+    @Column(name = "StockAmount", nullable = false, length = 255)
+    private int stockAmount;
+    @Basic
+    @Column(name = "StockIn", nullable = false, length = 255)
+    private int stockIn;
+    @Basic
+    @Column(name = "StockOut", nullable = false, length = 255)
+    private int stockOut;
+    @Basic
     @Column(name = "CategoryId", nullable = false)
     private int categoryId;
     @Basic
@@ -161,6 +170,30 @@ public class Product {
 
     public void setImge(String imge) {
         this.imge = imge;
+    }
+
+    public int getStockAmount() {
+        return stockAmount;
+    }
+
+    public void setStockAmount(int stockAmount) {
+        this.stockAmount = stockAmount;
+    }
+
+    public int getStockIn() {
+        return stockIn;
+    }
+
+    public void setStockIn(int stockIn) {
+        this.stockIn = stockIn;
+    }
+
+    public int getStockOut() {
+        return stockOut;
+    }
+
+    public void setStockOut(int stockOut) {
+        this.stockOut = stockOut;
     }
 
     @Override

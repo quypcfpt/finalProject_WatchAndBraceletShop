@@ -31,6 +31,12 @@ public class ProductModel {
     @Expose
     private String productCode;
     @Expose
+    private int stockAmount;
+    @Expose
+    private int stockIn;
+    @Expose
+    private int stockOut;
+    @Expose
     private int categoryId;
     @Expose
     private boolean active;
@@ -39,8 +45,7 @@ public class ProductModel {
 
     }
 
-
-    public ProductModel(Integer id, String name, String description, float price, String image, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int categoryId, boolean active) {
+    public ProductModel(Integer id, String name, String description, float price, String image, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int stockAmount, int stockIn, int stockOut, int categoryId, boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,6 +58,9 @@ public class ProductModel {
         this.originId = originId;
         this.status = status;
         this.productCode = productCode;
+        this.stockAmount = stockAmount;
+        this.stockIn = stockIn;
+        this.stockOut = stockOut;
         this.categoryId = categoryId;
         this.active = active;
     }
@@ -167,5 +175,29 @@ public class ProductModel {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getStockAmount() {
+        return stockAmount;
+    }
+
+    public void setStockAmount(int stockAmount) {
+        this.stockAmount = stockAmount;
+    }
+
+    public int getStockIn() {
+        return stockIn;
+    }
+
+    public void setStockIn(int stockIn) {
+        this.stockIn = stockIn;
+    }
+
+    public int getStockOut() {
+        return stockOut;
+    }
+
+    public void setStockOut(int stockOut) {
+        this.stockOut = stockOut;
     }
 }
