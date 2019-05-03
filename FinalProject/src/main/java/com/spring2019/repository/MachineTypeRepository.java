@@ -7,7 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MachineTypeRepository extends JpaRepository<MachineType,Integer> {
     Page<MachineType> findAllByActive(boolean isActive, Pageable pageable);
+    List<MachineType> findAllByActive(boolean isActive);
+    MachineType findByNameAndActiveTrue(String name);
+    MachineType findById(int id);
 }

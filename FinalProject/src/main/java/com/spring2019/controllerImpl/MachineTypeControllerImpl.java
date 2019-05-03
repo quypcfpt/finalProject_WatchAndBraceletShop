@@ -3,6 +3,7 @@ package com.spring2019.controllerImpl;
 import com.spring2019.common.CoreConstant;
 import com.spring2019.controller.MachineTypeController;
 import com.spring2019.entity.MachineType;
+import com.spring2019.model.DatatableModel;
 import com.spring2019.model.MachineTypeModel;
 import com.spring2019.model.MultiMachineTypeModel;
 import com.spring2019.model.Response;
@@ -117,6 +118,68 @@ public class MachineTypeControllerImpl extends AbstractController implements Mac
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
             LOGGER.info("End load all MachineType deactive");
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String loadAllMachineTypesAdmin() {
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        LOGGER.info("Start load all Machine Type Active");
+
+        try {
+            List<MachineTypeModel> machineTypeModels = new ArrayList<>();
+            List<MachineType> machineTypes = service.getAllMachineTypesAdmin();
+
+            for (MachineType machineType : machineTypes) {
+                machineTypeModels.add(transformer.entityToModel(machineType));
+            }
+            DatatableModel result = new DatatableModel();
+            result.setData(machineTypeModels);
+            LOGGER.info("End load all Machine Type Active");
+            return gson.toJson(result);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String loadMachineTypeById(int id) {
+        Response response = new Response<MachineTypeModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        LOGGER.info("Start load  machineType Id");
+        try {
+
+            MachineType machineType = service.getMachineTypeById(id);
+
+            MachineTypeModel model = transformer.entityToModel(machineType);
+
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, model);
+            LOGGER.info("End load  machineType by Id");
+            return gson.toJson(response);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String deleteMachineTypeById(int id) {
+        String msg = "Machine Type can not delete.";
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL,msg);
+        LOGGER.info("Start delete  Machine Type by Id");
+        try {
+
+            service.delete(id);
+            msg = "Machine Type is deleted.";
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, msg);
+            LOGGER.info("End delete  Machine Type by Id");
+            return gson.toJson(response);
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());
