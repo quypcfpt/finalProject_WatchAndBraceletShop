@@ -54,6 +54,7 @@ ProductCategoryService categoryService;
     public String toWatch(Model model) {
         //Excute anything here
         return "product/watch";
+    }
     //Admin
     @RequestMapping("/admin/product_category")
     public  String adminProductCategory(){
