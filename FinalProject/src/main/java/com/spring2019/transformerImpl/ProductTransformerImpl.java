@@ -27,6 +27,9 @@ public class ProductTransformerImpl implements ProductTransformer {
         model.setMachineTypeId(entity.getMachineTypeId());
         model.setOriginId(entity.getOriginId());
         model.setPrice(entity.getPrice());
+        model.setStockAmount(entity.getStockAmount());
+        model.setStockIn(entity.getStockIn());
+        model.setStockOut(entity.getStockOut());
         model.setProductCode(entity.getProductCode());
         model.setStatus(entity.getStatus());
         model.setWireTypeId(entity.getWireTypeId());
@@ -47,6 +50,9 @@ public class ProductTransformerImpl implements ProductTransformer {
         entity.setMachineTypeId(model.getMachineTypeId());
         entity.setOriginId(model.getOriginId());
         entity.setPrice(model.getPrice());
+        entity.setStockAmount(model.getStockAmount());
+        entity.setStockIn(model.getStockIn());
+        entity.setStockOut(model.getStockOut());
         entity.setProductCode(model.getProductCode());
         entity.setStatus(model.getStatus());
         entity.setWireTypeId(model.getWireTypeId());

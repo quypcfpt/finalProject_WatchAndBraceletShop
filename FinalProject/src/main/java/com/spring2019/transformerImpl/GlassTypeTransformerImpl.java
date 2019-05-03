@@ -20,6 +20,7 @@ public class GlassTypeTransformerImpl implements GlassTypeTransformer {
         model.setName(entity.getName());
         model.setDescription(entity.getDescription());
         model.setActive(entity.isActive());
+        model.setStatus(entity.getStatus());
         return model;
     }
 
@@ -31,6 +32,7 @@ public class GlassTypeTransformerImpl implements GlassTypeTransformer {
         entity.setName(model.getName());
         entity.setDescription(model.getDescription());
         entity.setActive(model.isActive());
+        entity.setStatus(model.getStatus());
         return entity;
     }
 }

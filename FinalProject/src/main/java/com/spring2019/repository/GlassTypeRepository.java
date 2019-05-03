@@ -7,7 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface GlassTypeRepository extends JpaRepository<GlassType,Integer> {
     Page<GlassType> findAllByActive(boolean isActive, Pageable pageable);
+    List<GlassType> findAllByActive(boolean isActive);
+    GlassType findById(int id);
 }

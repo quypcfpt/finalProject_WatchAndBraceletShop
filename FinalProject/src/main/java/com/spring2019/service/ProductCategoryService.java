@@ -11,7 +11,7 @@ public interface ProductCategoryService {
     public Page<ProductCategory>  getAllProductCategorys(Pageable pageable);
     public List<ProductCategory> getAllProductCategorysAdmin();
     void save(ProductCategory category);
-    public  ProductCategory getProductCategoryById(int id);
+    ProductCategory getProductCategoryById(int id);
     void delete(int id);
     void updateStatus(int id);
 }

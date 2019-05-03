@@ -20,6 +20,7 @@ public class LabelTransformerImpl implements LabelTransformer {
         model.setId(entity.getId());
         model.setName(entity.getName());
         model.setDescription(entity.getDescription());
+        model.setImage(entity.getImage());
         model.setStatus(entity.getStatus());
         model.setActive(entity.isActive());
         return model;
@@ -33,6 +34,7 @@ public class LabelTransformerImpl implements LabelTransformer {
         entity.setName(model.getName());
         entity.setDescription(model.getDescription());
         entity.setStatus(model.getStatus());
+        entity.setImage(model.getImage());
         entity.setActive(model.isActive());
         return entity;
 

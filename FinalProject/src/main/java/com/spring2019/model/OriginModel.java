@@ -11,13 +11,32 @@ public class OriginModel {
     private Integer id;
     @Expose
     private String name;
-
+    @Expose
+    private int status;
+    @Expose
+    private boolean active;
     public OriginModel() {
     }
 
     public OriginModel(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Integer getId() {

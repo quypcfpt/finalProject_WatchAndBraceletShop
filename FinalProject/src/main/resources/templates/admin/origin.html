@@ -18,7 +18,7 @@
                         <h3 class="text-themecolor">Manage</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active">Manage Label</li>
+                            <li class="breadcrumb-item active">Manage Origin</li>
                         </ol>
                     </div>
                 </div>
@@ -28,13 +28,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive m-t-40">
-                                    <table id="StoryLabelsDatatable"
+                                    <table id="StoryOriginDatatable"
                                            class="table table-striped table-bordered table-hover">
                                         <thead class="bg-info text-white">
                                         <tr>
                                             <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Image</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -47,19 +45,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="AddStoryLabelsModal" tabindex="-1" role="dialog"
+                <div class="modal fade" id="AddStoryOriginModal" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title w-100 font-weight-bold">Create New Label</h4>
+                                <h4 class="modal-title w-100 font-weight-bold">Create New Glass Type</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form class="form p-t-20" method="post" id="AddStoryCatesForm"
-                                  action="/admin/label/save" modelAttribute="form">
+                            <form class="form p-t-20" method="post" id="AddStoryOriginForm"
+                                  action="/admin/origin/save" modelAttribute="form">
                                 <div class="modal-body mx-3">
                                     <input type="hidden" name="id" class="form-control" id="id"
                                           value="0">
@@ -69,24 +67,9 @@
                                         <label for="name">Name<span class="text-danger">*</span> </label>
                                         <div class="input-group">
                                             <input type="text" name="name" class="form-control" id="name"
-                                                   placeholder="Enter Label name">
+                                                   placeholder="Enter Glass Type name">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <div class="input-group">
-                                            <textarea rows="5" class="form-control" name="description" id="description"
-                                                      placeholder="Description of this Label"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Image Link<span class="text-danger">*</span> </label>
-                                        <div class="input-group">
-                                            <input type="text" name="image" class="form-control" id="image"
-                                                   placeholder="Put Image Link">
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <input type="submit" id="btnAddNew"
@@ -125,7 +108,7 @@
         [# th:if="${msg}"]
         $.toast({
             heading: "Success!",
-            text: "Label is created.",
+            text: "Origin is created.",
             position: 'top-right',
             loaderBg: '#ffff',
             icon: 'success',
@@ -136,8 +119,8 @@
                     var name = $('#name').val();
                     if (name == "") {
                         $.toast({
-                            heading: "Label Name is invalid!",
-                            text: "Label Name is reuired.",
+                            heading: "Origin Name is invalid!",
+                            text: "Origin Name is reuired.",
                             position: 'top-right',
                             loaderBg: '#ffff',
                             icon: 'error',
@@ -148,14 +131,14 @@
                 });
     });
     var InitDatatable = function () {
-        $('#StoryLabelsDatatable').dataTable({
+        $('#StoryOriginDatatable').dataTable({
             "ajax": {
-                "url": '/api/label',
+                "url": '/api/origin',
                 "method": "GET",
             },
             "buttons": [
                 {
-                    text: '<i class="left-icon fa fa-plus"></i>&nbsp;Create Label',
+                    text: '<i class="left-icon fa fa-plus"></i>&nbsp;Create Origin',
                     className: 'dt-button-success',
                     action: function (e, dt, node, config) {
                         ShowAddNewEventForm();
@@ -165,17 +148,6 @@
             dom: 'Bftip',
             "columns": [
                 {data: 'name'},
-                {
-                    data: 'description',
-                    render: function (data, type, row) {
-                        return data;
-                    }
-                },{
-                    data: 'image',
-                    render: function (data, type, row) {
-                        return '<img src="'+row['image']+'" alt="Smiley face" height="42" width="42">';
-                    }
-                },
                 {
                     data: 'status',
                     render: function (data, type, row) {
@@ -201,12 +173,12 @@
 
     //Add New Event Module
     function ShowAddNewEventForm() {
-        $("#AddStoryLabelsModal").modal().show();
+        $("#AddStoryOriginModal").modal().show();
     }
     //Click Edit button in datatable row
     var getDetail = function (id) {
         $.ajax({
-            url: '/api/label/'+id,
+            url: '/api/origin/'+id,
             method: "GET",
             success: function (result) {
                 var obj = JSON.parse(result);
@@ -214,8 +186,7 @@
                 $('#description').val(obj.data.description);
                 $('#id').val(obj.data.id);
                 $('#status').val(obj.data.status);
-                $('#image').val(obj.data.image);
-                $("#AddStoryLabelsModal").modal('show');
+                $("#AddStoryOriginModal").modal('show');
             },
             error: function (result) {
                 $.toast({
@@ -235,7 +206,7 @@
     function Delete(id) {
         swal({
             title: "Are you sure?",
-            text: "Do you want to remove this Label?",
+            text: "Do you want to remove this Glass Type?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -244,7 +215,7 @@
         }, function () {
             $.ajax({
                 type: 'DELETE',
-                url: '/api/label/delete/'+id,
+                url: '/api/origin/delete/'+id,
                 success: function (result) {
                     var obj = JSON.parse(result);
                     if (obj.status_code == 1) {
@@ -257,7 +228,7 @@
                             hideAfter: 3500,
                             stack: 6
                         });
-                        $('#StoryLabelsDatatable').DataTable().ajax.reload();
+                        $('#StoryOriginDatatable').DataTable().ajax.reload();
                     } else {
                         $.toast({
                             heading: obj.message,
@@ -282,11 +253,11 @@
             });
         });
     }
-    //Update Status
+    // Update Status
     function ChangeStatus(id) {
         swal({
             title: "Are you sure?",
-            text: "Do you want to change this Label status?",
+            text: "Do you want to change this Glass Type status?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -295,7 +266,7 @@
         }, function () {
             $.ajax({
                 type: 'PUT',
-                url: '/api/label/updatestatus/'+id,
+                url: '/api/origin/updatestatus/'+id,
                 success: function (result) {
                     var obj = JSON.parse(result);
                     if (obj.status_code == 1) {
@@ -308,7 +279,7 @@
                             hideAfter: 3500,
                             stack: 6
                         });
-                        $('#StoryLabelsDatatable').DataTable().ajax.reload();
+                        $('#StoryOriginDatatable').DataTable().ajax.reload();
                     } else {
                         $.toast({
                             heading: obj.message,

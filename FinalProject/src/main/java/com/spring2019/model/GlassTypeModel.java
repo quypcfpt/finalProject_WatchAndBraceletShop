@@ -10,9 +10,19 @@ public class GlassTypeModel {
     @Expose
     private String description;
     @Expose
+    private int status;
+    @Expose
     private boolean active;
 
     public GlassTypeModel() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Integer getId() {

@@ -6,7 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OriginRepository extends JpaRepository<Origin,Integer> {
     Page<Origin> findAllByActive(boolean isActive, Pageable pageable);
+    List<Origin> findAllByActive(boolean isActive);
+    Origin findById(int id);
 }

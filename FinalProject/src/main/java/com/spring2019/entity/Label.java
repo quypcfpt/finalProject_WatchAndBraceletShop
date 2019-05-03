@@ -16,6 +16,9 @@ public class Label {
     @Column(name = "Description", nullable = false, length = 255)
     private String description;
     @Basic
+    @Column(name = "Image", nullable = false)
+    private String image;
+    @Basic
     @Column(name = "Status", nullable = false)
     private int status;
     @Basic
@@ -60,6 +63,14 @@ public class Label {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

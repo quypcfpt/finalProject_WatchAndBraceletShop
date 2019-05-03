@@ -19,6 +19,8 @@ public class OriginTransformerImpl implements OriginTransformer {
 
         model.setId(entity.getId());
         model.setName(entity.getName());
+        model.setStatus(entity.getStatus());
+        model.setActive(entity.isActive());
         return model;
     }
 
@@ -28,6 +30,8 @@ public class OriginTransformerImpl implements OriginTransformer {
 
         entity.setId(model.getId());
         entity.setName(model.getName());
+        entity.setStatus(model.getStatus());
+        entity.setActive(model.isActive());
         return entity;
 
 

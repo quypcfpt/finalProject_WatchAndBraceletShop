@@ -16,6 +16,9 @@ public class GlassType {
     @Column(name = "Description", nullable = false, length = 255)
     private String description;
     @Basic
+    @Column(name = "Status", nullable = false, length = 255)
+    private int status;
+    @Basic
     @Column(name = "Active", nullable = false)
     private boolean active;
 
@@ -49,6 +52,14 @@ public class GlassType {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override

@@ -12,6 +12,8 @@ public class LabelModel {
     @Expose
     private String description;
     @Expose
+    private String image;
+    @Expose
     private int status;
     @Expose
     private  boolean active;
@@ -54,6 +56,14 @@ public class LabelModel {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

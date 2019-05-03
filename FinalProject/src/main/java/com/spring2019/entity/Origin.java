@@ -13,6 +13,9 @@ public class Origin {
     @Column(name = "Name", nullable = false , length = 255)
     private String name ;
     @Basic
+    @Column(name = "Status", nullable = false , length = 255)
+    private int status ;
+    @Basic
     @Column(name = "Active", nullable = false , length = 255)
     private boolean active ;
 
@@ -38,6 +41,14 @@ public class Origin {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
