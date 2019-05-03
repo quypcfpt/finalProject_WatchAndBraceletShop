@@ -3,6 +3,7 @@ package com.spring2019.controllerImpl;
 import com.spring2019.common.CoreConstant;
 import com.spring2019.controller.ProductCategoryController;
 import com.spring2019.entity.ProductCategory;
+import com.spring2019.model.DatatableModel;
 import com.spring2019.model.ProductCategoryModel;
 import com.spring2019.model.MultiProductCategoryModel;
 import com.spring2019.model.Response;
@@ -117,6 +118,88 @@ public class ProductCategoryControllerImpl extends AbstractController implements
 
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
             LOGGER.info("End load all ProductCategory deactive");
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String loadAllProductCategoryAdmin() {
+        Response response = new Response<MultiProductCategoryModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        LOGGER.info("Start load all ProductCategory deactive");
+
+        try {
+            List<ProductCategoryModel> ProductCategoryList = new ArrayList<>();
+            List<ProductCategory> ProductCategorys = service.getAllProductCategorysAdmin();
+
+            for (ProductCategory ProductCategory : ProductCategorys) {
+                ProductCategoryList.add(transformer.entityToModel(ProductCategory));
+            }
+            DatatableModel result = new DatatableModel();
+            result.setData(ProductCategoryList);
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, ProductCategoryList);
+            LOGGER.info("End load all ProductCategory deactive");
+            return gson.toJson(result);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String loadProductCategoryById(int id) {
+        Response response = new Response<ProductCategoryModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        LOGGER.info("Start load  ProductCategory Id");
+        try {
+
+            ProductCategory ProductCategory = service.getProductCategoryById(id);
+
+           ProductCategoryModel model = transformer.entityToModel(ProductCategory);
+
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, model);
+            LOGGER.info("End load  ProductCategory by Id");
+            return gson.toJson(response);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String deleteProductCategoryById(int id) {
+        String msg = "Product category can not delete.";
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL,msg);
+        LOGGER.info("Start delete  ProductCategory Id");
+        try {
+
+            service.delete(id);
+             msg = "Product category is deleted.";
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, msg);
+            LOGGER.info("End delete  ProductCategory by Id");
+            return gson.toJson(response);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String updateProductCategoryById(int id) {
+        String msg = "Product category can not update status.";
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL,msg);
+        LOGGER.info("Start update status  ProductCategory Id");
+        try {
+
+            service.updateStatus(id);
+            msg = "Product category status is updated.";
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, msg);
+            LOGGER.info("End update ProductCategory status by Id");
+            return gson.toJson(response);
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());

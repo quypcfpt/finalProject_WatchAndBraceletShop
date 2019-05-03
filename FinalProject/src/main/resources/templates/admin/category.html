@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/shared/head :: head"></div>
+<body class="fix-header fix-sidebar card-no-border">
+<div th:replace="admin/shared/delayload :: delayload"></div>
+<div id="main-wrapper">
+    <div th:replace="admin/shared/header :: header"></div>
+    <div th:replace="admin/shared/left_sidebar :: left_sidebar"></div>
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor">Manage</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Manage Category</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive m-t-40">
+                                    <table id="StoryCategoriesDatatable"
+                                           class="table table-striped table-bordered table-hover">
+                                        <thead class="bg-info text-white">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="AddStoryCatesModal" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title w-100 font-weight-bold">Create New Product Category</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form class="form p-t-20" method="post" id="AddStoryCatesForm"
+                                  action="/admin/product_category/save" modelAttribute="form">
+                                <div class="modal-body mx-3">
+                                    <input type="hidden" name="id" class="form-control" id="id"
+                                          value="0">
+                                    <div class="form-group">
+                                        <label for="name">Name<span class="text-danger">*</span> </label>
+                                        <div class="input-group">
+                                            <input type="text" name="name" class="form-control" id="name"
+                                                   placeholder="Enter Product category name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <div class="input-group">
+                                            <textarea rows="5" class="form-control" name="description" id="description"
+                                                      placeholder="Description of this product category"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <input type="submit" id="btnAddNew"
+                                           class="btn btn-success" value="Add"/>
+                                    <button type="button" class="btn btn-black waves-effect waves-light m-r-10"
+                                            data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">Cancel</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div th:replace="admin/shared/footer :: footer"></div>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+
+<div th:if="${msg}" te></div>
+
+<div th:replace="admin/shared/script :: script"></div>
+<script src="/st-admin/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        InitDatatable();
+        [# th:if="${msg}"]
+        $.toast({
+            heading: "Success!",
+            text: "Category is created.",
+            position: 'top-right',
+            loaderBg: '#ffff',
+            icon: 'success',
+            hideAfter: 3500
+        });
+            [/]
+                $('form').on('submit', function (e) {
+                    var name = $('#name').val();
+                    if (name == "") {
+                        $.toast({
+                            heading: "Category Name is invalid!",
+                            text: "Category Name is reuired.",
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                        e.preventDefault();
+                    }
+                });
+    });
+    var InitDatatable = function () {
+        $('#StoryCategoriesDatatable').dataTable({
+            "ajax": {
+                "url": '/api/productcategory/admin',
+                "method": "GET",
+            },
+            "buttons": [
+                {
+                    text: '<i class="left-icon fa fa-plus"></i>&nbsp;Create Category',
+                    className: 'dt-button-success',
+                    action: function (e, dt, node, config) {
+                        ShowAddNewEventForm();
+                    }
+                },
+            ],
+            dom: 'Bftip',
+            "columns": [
+                {data: 'name'},
+                {
+                    data: 'description',
+                    render: function (data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    data: 'status',
+                    render: function (data, type, row) {
+                        if (data == 1) {
+                            return '<button class="btn btn-info"  onclick="ChangeStatus(' + row['id'] + ')">Active</button>'
+                        } else if (data == 2) {
+                            return '<button class="btn btn-danger"  onclick="ChangeStatus(' + row['id'] + ')">Deactive</button>'
+                        } else {
+                            return '<span class="label label-warning">Undifined</span>'
+                        }
+                    }
+                },
+                {
+                    data: 'id', render: function (data) {
+                        return '<button type="button" class="btn btn-success" onclick="getDetail(' + data + ')"><i class="fa fa-pencil"></i></button>'
+                            +'<button type="button" class="btn btn-danger" onclick="Delete(' + data + ')"><i class="fa fa-trash"></i></button>';
+                    }
+                }
+            ],
+            'bAutoWidth': false,
+        });
+    };
+
+    //Add New Event Module
+    function ShowAddNewEventForm() {
+        $("#AddStoryCatesModal").modal().show();
+    }
+    //Click Edit button in datatable row
+    var getDetail = function (id) {
+        $.ajax({
+            url: '/api/productcategory/'+id,
+            method: "GET",
+            success: function (result) {
+                var obj = JSON.parse(result);
+                $('#name').val(obj.data.name);
+                $('#description').val(obj.data.description);
+                $('#id').val(obj.data.id);
+                $("#AddStoryCatesModal").modal('show');
+            },
+            error: function (result) {
+                $.toast({
+                    heading: 'Error is occured!',
+                    text: 'Try again, please!',
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+
+
+    //Delete
+    function Delete(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to remove this product category?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+        }, function () {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/productcategory/delete/'+id,
+                success: function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.status_code == 1) {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'success',
+                            hideAfter: 3500,
+                            stack: 6
+                        });
+                        $('#StoryCategoriesDatatable').DataTable().ajax.reload();
+                    } else {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                },
+                Error: function (result) {
+                    $.toast({
+                        heading: 'Error is occured!',
+                        text: 'Try again, please!',
+                        position: 'top-right',
+                        loaderBg: '#ffff',
+                        icon: 'error',
+                        hideAfter: 3500
+                    });
+                }
+            });
+        });
+    }
+    //Update Status
+    function ChangeStatus(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to change this product category status?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+        }, function () {
+            $.ajax({
+                type: 'PUT',
+                url: '/api/productcategory/updatestatus/'+id,
+                success: function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.status_code == 1) {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'success',
+                            hideAfter: 3500,
+                            stack: 6
+                        });
+                        $('#StoryCategoriesDatatable').DataTable().ajax.reload();
+                    } else {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                },
+                Error: function (result) {
+                    $.toast({
+                        heading: 'Error is occured!',
+                        text: 'Try again, please!',
+                        position: 'top-right',
+                        loaderBg: '#ffff',
+                        icon: 'error',
+                        hideAfter: 3500
+                    });
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

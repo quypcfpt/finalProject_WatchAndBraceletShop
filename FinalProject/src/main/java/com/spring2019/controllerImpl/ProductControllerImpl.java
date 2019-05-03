@@ -56,7 +56,7 @@ public class ProductControllerImpl extends AbstractController implements Product
 
             List<ProductModel> productList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllCamerasActive(pageable);
+                Page<Product> products = productService.getAllProductsActive(pageable);
 
                 for (Product product : products) {
                     productList.add(productTransformer.entityToModel(product));
@@ -100,7 +100,7 @@ public class ProductControllerImpl extends AbstractController implements Product
 
             List<ProductModel> productList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllCameras(pageable);
+                Page<Product> products = productService.getAllProducts(pageable);
 
                 for (Product product : products) {
                     productList.add(productTransformer.entityToModel(product));
