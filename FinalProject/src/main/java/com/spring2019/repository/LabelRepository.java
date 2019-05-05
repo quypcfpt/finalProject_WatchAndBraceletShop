@@ -14,4 +14,5 @@ public interface LabelRepository extends JpaRepository<Label,Integer> {
     Page<Label> findAllByActive(boolean isActive, Pageable pageable);
     List<Label> findAllByActive(boolean isActive);
     Label findById(int id);
+    Label findByNameAndActiveIsTrue(String name);
 }

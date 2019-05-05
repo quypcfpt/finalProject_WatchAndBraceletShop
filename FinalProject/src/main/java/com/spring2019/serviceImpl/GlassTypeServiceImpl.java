@@ -19,8 +19,9 @@ public class GlassTypeServiceImpl implements GlassTypeService {
 
     @Autowired
     GlassTypeRepository repository;
+
     @Override
-    public Page<GlassType>  getAllGlassTypesActive(Pageable pageable) {
+    public Page<GlassType> getAllGlassTypesActive(Pageable pageable) {
         return repository.findAllByActive(true, pageable);
     }
 
@@ -28,20 +29,26 @@ public class GlassTypeServiceImpl implements GlassTypeService {
     public List<GlassType> getAllGlassTypes() {
         return repository.findAllByActive(true);
     }
+
     @Override
-    public void save(GlassType glassType) {
+    public boolean save(GlassType glassType) {
+        GlassType found = repository.findByNameAndActiveIsTrue(glassType.getName());
+        if (found != null && !(found.getId().equals(glassType.getId()))) {
+            return false;
+        }
         repository.save(glassType);
+        return true;
     }
 
     @Override
     public GlassType getGlassTypeById(int id) {
-        return  repository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public void delete(int id) {
         GlassType entity = repository.findById(id);
-        if(entity != null){
+        if (entity != null) {
             entity.setActive(false);
             repository.save(entity);
         }
@@ -50,10 +57,10 @@ public class GlassTypeServiceImpl implements GlassTypeService {
     @Override
     public void updateStatus(int id) {
         GlassType entity = repository.findById(id);
-        if(entity != null){
-            if(entity.getStatus()== 1){
+        if (entity != null) {
+            if (entity.getStatus() == 1) {
                 entity.setStatus(2);
-            }else {
+            } else {
                 entity.setStatus(1);
             }
             repository.save(entity);

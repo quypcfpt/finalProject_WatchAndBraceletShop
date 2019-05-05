@@ -12,6 +12,6 @@ import java.util.List;
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory,Integer> {
     Page<ProductCategory> findAllByActive(boolean isActive, Pageable pageable);
     List<ProductCategory> findAllByActive(boolean isActive);
-    ProductCategory findByName(String name);
+    ProductCategory findByNameAndActiveIsTrue(String name);
     ProductCategory findById(int id);
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface GlassTypeService {
     public Page<GlassType> getAllGlassTypesActive(Pageable pageable);
     public List<GlassType> getAllGlassTypes();
-    void save(GlassType glassType);
+    boolean save(GlassType glassType);
     public GlassType getGlassTypeById(int id);
     void delete(int id);
     void updateStatus(int id);

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
@@ -27,10 +27,7 @@ public class Order {
     private String  email;
     @Basic
     @Column(name = "Status", nullable = false, length = 255)
-    private String  status;
-    @Basic
-    @Column(name = "TotalPrice", nullable = false)
-    private Float  totalPrice;
+    private int  status;
     @Basic
     @Column(name = "Note", nullable = false, length = 255)
     private String  note;
@@ -89,21 +86,14 @@ public class Order {
         this.email = email;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public String getNote() {
         return note;
@@ -132,23 +122,22 @@ public class Order {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-                Objects.equals(custimerId, order.custimerId) &&
-                Objects.equals(customerName, order.customerName) &&
-                Objects.equals(address, order.address) &&
-                Objects.equals(phone, order.phone) &&
-                Objects.equals(email, order.email) &&
-                Objects.equals(status, order.status) &&
-                Objects.equals(totalPrice, order.totalPrice) &&
-                Objects.equals(note, order.note) &&
-                Objects.equals(createDateTime, order.createDateTime) &&
-                Objects.equals(paidDateTime, order.paidDateTime);
+        if (!(o instanceof Orders)) return false;
+        Orders orders = (Orders) o;
+        return Objects.equals(id, orders.id) &&
+                Objects.equals(custimerId, orders.custimerId) &&
+                Objects.equals(customerName, orders.customerName) &&
+                Objects.equals(address, orders.address) &&
+                Objects.equals(phone, orders.phone) &&
+                Objects.equals(email, orders.email) &&
+                Objects.equals(status, orders.status) &&
+                Objects.equals(note, orders.note) &&
+                Objects.equals(createDateTime, orders.createDateTime) &&
+                Objects.equals(paidDateTime, orders.paidDateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, custimerId, customerName, address, phone, email, status, totalPrice, note, createDateTime, paidDateTime);
+        return Objects.hash(id, custimerId, customerName, address, phone, email, status, note, createDateTime, paidDateTime);
     }
 }

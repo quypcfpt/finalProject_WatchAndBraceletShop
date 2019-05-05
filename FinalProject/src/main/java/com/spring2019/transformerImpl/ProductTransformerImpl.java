@@ -57,7 +57,13 @@ public class ProductTransformerImpl implements ProductTransformer {
         entity.setStatus(model.getStatus());
         entity.setWireTypeId(model.getWireTypeId());
         return entity;
-
-
     }
+
+    @Override
+    public Product modelToEntity2(ProductModel model) {
+        Product entity = new Product();
+
+        return entity;
+    }
+
 }

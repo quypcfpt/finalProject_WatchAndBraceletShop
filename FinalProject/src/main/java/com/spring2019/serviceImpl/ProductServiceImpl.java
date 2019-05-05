@@ -14,14 +14,56 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductRepository repository;
     @Override
     public Page<Product>  getAllProductsActive(Pageable pageable) {
-        return productRepository.findAllByActive(true, pageable);
+        return repository.findAllByActive(true, pageable);
     }
 
     @Override
     public Page<Product>  getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        return repository.findAll(pageable);
+    }
+
+    @Override
+    public List<Product> getAllProductList() {
+        return repository.findAllByActive(true);
+    }
+
+    @Override
+    public boolean save(Product product) {
+        Product found = repository.findByNameAndActiveIsTrue(product.getName());
+        if (found != null && !(found.getId().equals(product.getId()))) {
+            return false;
+        }
+        repository.save(product);
+        return true;
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        Product entity = repository.findById(id);
+        if (entity != null) {
+            entity.setActive(false);
+            repository.save(entity);
+        }
+    }
+
+    @Override
+    public void updateStatus(int id) {
+        Product entity = repository.findById(id);
+        if (entity != null) {
+            if (entity.getStatus() == 0) {
+                entity.setStatus(1);
+            } else {
+                entity.setStatus(0);
+            }
+            repository.save(entity);
+        }
     }
 }

@@ -10,7 +10,7 @@ public interface ProductCategoryService {
     public Page<ProductCategory> getAllProductCategorysActive(Pageable pageable);
     public Page<ProductCategory>  getAllProductCategorys(Pageable pageable);
     public List<ProductCategory> getAllProductCategorysAdmin();
-    void save(ProductCategory category);
+    boolean save(ProductCategory category);
     ProductCategory getProductCategoryById(int id);
     void delete(int id);
     void updateStatus(int id);
