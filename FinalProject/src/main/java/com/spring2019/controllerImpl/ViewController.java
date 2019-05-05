@@ -237,8 +237,12 @@ public class ViewController {
         //Excute anything here
         return "admin/order";
     }
-
-
+    //Admin Product Order Detail
+    @RequestMapping("/admin/orderdetail")
+    public String adminProductOrderDetail() {
+        //Excute anything here
+        return "admin/orderdetail";
+    }
     //Admin Product
     @RequestMapping("/admin/product")
     public String adminProduct() {

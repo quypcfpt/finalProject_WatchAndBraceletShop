@@ -1,5 +1,7 @@
 package com.spring2019.entity;
 
+import org.hibernate.criterion.Order;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,21 +11,19 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
-    @Basic
-    @Column(name = "ProductId", nullable = false)
-    private Integer productId;
-    @Basic
-    @Column(name = "OrderId", nullable = false)
-    private Integer orderId;
+    @ManyToOne
+    @JoinColumn(name = "ProductId", referencedColumnName = "id")
+    private Product productById;
+    @ManyToOne
+    @JoinColumn(name = "OrderId", referencedColumnName = "id")
+    private Orders orderById;
     @Basic
     @Column(name = "Price", nullable = false)
     private float price;
     @Basic
     @Column(name = "Quantity", nullable = false)
     private int quantity;
-    @Basic
-    @Column(name = "TotalPrice", nullable = false)
-    private float totalPrice;
+
 
     public Integer getId() {
         return id;
@@ -33,20 +33,20 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProductById() {
+        return productById;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProductById(Product productById) {
+        this.productById = productById;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Orders getOrderById() {
+        return orderById;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderById(Orders orderById) {
+        this.orderById = orderById;
     }
 
     public float getPrice() {
@@ -65,13 +65,6 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -80,14 +73,11 @@ public class OrderDetail {
         OrderDetail that = (OrderDetail) o;
         return Float.compare(that.price, price) == 0 &&
                 quantity == that.quantity &&
-                Float.compare(that.totalPrice, totalPrice) == 0 &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(productId, that.productId) &&
-                Objects.equals(orderId, that.orderId);
+                Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productId, orderId, price, quantity, totalPrice);
+        return Objects.hash(id, price, quantity);
     }
 }
