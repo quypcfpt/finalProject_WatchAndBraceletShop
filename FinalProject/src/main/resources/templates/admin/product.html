@@ -146,7 +146,7 @@
     </div>
 </div>
 
-<div th:if="${msg}" te></div>
+
 
 <div th:replace="admin/shared/script :: script"></div>
 <script src="/st-admin/assets/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -189,10 +189,10 @@
             },
             "buttons": [
                 {
-                    text: '',
+                    text: '<i class="left-icon fa fa-plus"></i>&nbsp; Add Product',
                     className: 'dt-button-success',
                     action: function (e, dt, node, config) {
-                        ShowAddNewEventForm();
+                       window.location.href ='/admin/product/create';
                     }
                 },
             ],

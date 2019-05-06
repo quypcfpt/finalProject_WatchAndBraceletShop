@@ -249,6 +249,13 @@ public class ViewController {
         //Excute anything here
         return "admin/product";
     }
+
+    @GetMapping("/admin/product/create")
+    public String postsCreate(Model model) {
+        model.addAttribute("form", new ProductModel());
+        return "admin/product-form";
+    }
+
     @PostMapping("/admin/product/save")
     public String productSave(@ModelAttribute("form") ProductModel model, RedirectAttributes ra) {
         //TODO validation

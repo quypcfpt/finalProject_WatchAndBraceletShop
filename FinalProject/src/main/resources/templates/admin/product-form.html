@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/shared/head :: head"></div>
+<body class="fix-header fix-sidebar card-no-bProduct">
+<div th:replace="admin/shared/delayload :: delayload"></div>
+<div id="main-wrapper">
+    <div th:replace="admin/shared/header :: header"></div>
+    <div th:replace="admin/shared/left_sidebar :: left_sidebar"></div>
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor">Product Form</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/product">Home</a></li>
+                            <li class="breadcrumb-item active">Product Form</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="card-title text-white">Product Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" action="/admin/product/save" modelAttribute="form">
+                                    <h3 class="card-title">Basic Information</h3>
+                                    <hr>
+                                    <input type="hidden" name="id" class="form-control" id="id"
+                                           value="0">
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="productCode">Product code&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="productCode"
+                                                       id="productCode" placeholder="Enter product code">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="name">Name&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                       placeholder="Enter product name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="stockIn">Stock In</label>
+                                                <input type="number" min="0" class="form-control" name="stockIn"
+                                                       id="stockIn" value="0">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="price">Price (VND)</label>
+                                                <input type="number" min="0" class="form-control" name="price"
+                                                       id="price" value="0">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <label class="custom-control custom-radio">
+                                                    <input checked id="active" name="status" value="1" type="radio"
+                                                           class="custom-control-input">
+                                                    <span class="custom-control-label">Active</span>
+                                                </label>
+                                                <label class="custom-control custom-radio">
+                                                    <input id="Deactive" name="status" value="2" type="radio"
+                                                           class="custom-control-input">
+                                                    <span class="custom-control-label">Deactive</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="imageUrl">Image</label>
+                                                <input type="button" class="btn btn-info" id="btnChange"
+                                                       value="Upload"/>
+                                                <div class="input-group">
+                                                    <input type="hidden" name="image" id="imageUrl" value=""/>
+                                                    <div id="review_container"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="categoryId">Category&nbsp;<span class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="categoryId" name="categoryId">
+                                                    <option selected value="0" disabled>Select Category</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="wireTypeId">Wire Type&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="wireTypeId" name="wireTypeId">
+                                                    <option selected value="0" disabled>Select Wire Type</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="glassTypeId">Glass Type&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="glassTypeId"
+                                                        name="glassTypeId">
+                                                    <option selected value="0" disabled>Select Glass Type</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="machineTypeId">Machine Type&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="machineTypeId"
+                                                        name="machineTypeId">
+                                                    <option selected value="0" disabled>Select Glass Type</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="labelId">Label &nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="labelId" name="labelId">
+                                                    <option selected value="0" disabled>Select Label</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="originId">Origin &nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="custom-select col-12" id="originId" name="originId">
+                                                    <option selected value="0" disabled>Select Origin</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="description">Description</label>
+                                                <textarea class="form-control"
+                                                          name="description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--/row-->
+
+                                    <div class="form-actions">
+                                        <input type="submit" class="btn btn-success" value="Add" id="btnAddCampaign"/>
+                                        <a href="/template" class="btn btn-inverse">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <div th:replace="admin/shared/footer :: footer"></div>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+
+<div th:if="${msg}" te></div>
+
+<div th:replace="admin/shared/script :: script"></div>
+<script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+<script src="//static.filestackapi.com/filestack-js/1.x.x/filestack.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        initCategoriesList();
+        initWireTypesList();
+        initGlassTypesList();
+        initMachineTypesList();
+        initLabelsList();
+        initOrginsList();
+        $('form').on('submit', function (e) {
+            var name = $('#name').val();
+            if (name == "") {
+                $.toast({
+                    heading: "Product  is invalid!",
+                    text: "Product  is reuired.",
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+                e.preventDefault();
+            }
+        });
+    });
+    //method to init event list
+    var initCategoriesList = function () {
+        $.ajax({
+            url: '/api/productcategory/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#categoryId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initWireTypesList = function () {
+        $.ajax({
+            url: '/api/wiretype/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#wireTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initGlassTypesList = function () {
+        $.ajax({
+            url: '/api/glasstype',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#glassTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initMachineTypesList = function () {
+        $.ajax({
+            url: '/api/machinetype/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#machineTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initLabelsList = function () {
+        $.ajax({
+            url: '/api/label',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#labelId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initOrginsList = function () {
+        $.ajax({
+            url: '/api/origin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#originId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    CKEDITOR.replace('description');
+    window.addEventListener('DOMContentLoaded', function () {
+        const apikey = `${configuration.APIKEY}`;
+        const client = filestack.init(apikey);
+        const options = {
+                maxFiles: 1,
+                accept: [
+                    "image/jpeg",
+                    "image/jpg",
+                    "image/png",
+                    "image/bmp",
+                    "image/gif",
+                ],
+                fromSources: ['local_file_system', 'url', 'imagesearch'],
+                uploadInBackground: false,
+                onOpen: () => console.log('opened picker!'),
+            onUploadDone: (res) => uploadDoneCallBack(res),
+    };
+        var picker = client.picker(options);
+        function uploadDoneCallBack(res) {
+            var oldUrl = $("#imageUrl").val();
+            var oldHandle = oldUrl.replace("https://cdn.filestackcontent.com/", "");
+            var url = res.filesUploaded[0].url;
+            var mimetype = res.filesUploaded[0].mimetype;
+            var handle = res.filesUploaded[0].handle;
+            $("#imageUrl").val(url);
+            $("#btnChange").val("Change");
+            $("#review_container").children().remove().end();
+            /*Change control base on mime type*/
+            $("#review_container").append("<img src='https://cdn.filestackcontent.com/resize=width:250/" + handle + "' alt='Preview-loading'/>");
+            if (oldHandle != "") {
+                /*Delete previous uploaded file*/
+                var policy = `${configuration.POLICY}`;
+                var signature = `${configuration.SIGNATURE}`;
+                var delUrl = "https://www.filestackapi.com/api/file/" + oldHandle + "?key=" + apikey + "&policy=" + policy + "&signature=" + signature;
+                $.ajax({
+                    type: "DELETE",
+                    url: delUrl,
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            }
+        }
+
+
+        btnChange.addEventListener('click', () => {
+        picker.open()
+    });
+
+    });
+</script>
+</body>
+</html>
