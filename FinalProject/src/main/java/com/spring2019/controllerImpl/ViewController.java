@@ -56,7 +56,7 @@ public class ViewController {
      */
     @RequestMapping(value = {"/login", "/"})
     public String toLogin(Model model) {
-        return "/login";
+        return "login";
     }
 
     /**
