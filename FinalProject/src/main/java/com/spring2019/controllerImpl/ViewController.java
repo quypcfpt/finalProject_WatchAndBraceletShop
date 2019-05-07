@@ -348,4 +348,10 @@ public class ViewController {
         return "redirect:/admin/user";
     }
 
+    // login
+    @GetMapping("/login")
+    public String openLogin(Model model) {
+        //To do
+        return "login";
+    }
 }

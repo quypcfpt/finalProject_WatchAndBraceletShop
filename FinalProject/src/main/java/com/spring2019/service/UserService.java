@@ -12,4 +12,7 @@ public interface UserService {
     void updateStatus(int id);
     User getUserById(int id);
     boolean save(User user);
+    User getAccountByUsernameAndIsAdmin (String username , String password);
+    User getAccountByUsernameAndIsUse (String username , String password);
+
 }
