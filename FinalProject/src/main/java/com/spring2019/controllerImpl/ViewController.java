@@ -5,11 +5,14 @@ import com.spring2019.model.*;
 import com.spring2019.service.*;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class ViewController {
@@ -85,8 +88,9 @@ public class ViewController {
 
     //Admin Product Category
     @RequestMapping("/admin/product_category")
-    public String adminProductCategory() {
+    public String adminProductCategory(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Category");
         return "admin/category";
     }
 
@@ -108,8 +112,9 @@ public class ViewController {
 
     //Label
     @RequestMapping("/admin/label")
-    public String adminProductLabel() {
+    public String adminProductLabel(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Label");
         return "admin/label";
     }
 
@@ -137,8 +142,9 @@ public class ViewController {
 
     //glass type
     @RequestMapping("/admin/glasstype")
-    public String adminProductGlassType() {
+    public String adminProductGlassType(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Glass Type");
         return "admin/glasstype";
     }
 
@@ -164,8 +170,9 @@ public class ViewController {
 
     //origin
     @RequestMapping("/admin/origin")
-    public String adminOrigin() {
+    public String adminOrigin(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Orgin");
         return "admin/origin";
     }
 
@@ -190,8 +197,9 @@ public class ViewController {
 
     //Admin Wire Type
     @RequestMapping("/admin/wireType")
-    public String adminWireType() {
+    public String adminWireType(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Wire Type");
         return "admin/wiretype";
     }
 
@@ -212,8 +220,9 @@ public class ViewController {
 
     //Admin Machine Type
     @RequestMapping("/admin/machineType")
-    public String adminMachineType() {
+    public String adminMachineType(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Machine Type");
         return "admin/machinetype";
     }
 
@@ -234,28 +243,32 @@ public class ViewController {
 
     //Admin Product Orders
     @RequestMapping("/admin/order")
-    public String adminProductOrder() {
+    public String adminProductOrder(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Order");
         return "admin/order";
     }
 
     //Admin Product Order Detail
     @RequestMapping("/admin/orderdetail")
-    public String adminProductOrderDetail() {
+    public String adminProductOrderDetail(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Order Detail");
         return "admin/orderdetail";
     }
 
     //Admin User
     @RequestMapping("/admin/product")
-    public String adminProduct() {
+    public String adminProduct(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage Product");
         return "admin/product";
     }
 
     @GetMapping("/admin/product/create")
     public String postsCreate(Model model) {
         ProductModel productModel = new ProductModel();
+        model.addAttribute("title", "Create Product");
         model.addAttribute("form",productModel);
         model.addAttribute("categories", categoryService.getAllProductCategorysAdmin());
         model.addAttribute("wireTypes", wireTypeService.getAllWireTypesAdmin());
@@ -272,6 +285,7 @@ public class ViewController {
         if (found != null) {
             ProductModel productModel = new ProductModel();
             productModel = productTransformer.entityToModel(found);
+            model.addAttribute("title", "Edit Product");
             model.addAttribute("form", productModel);
             model.addAttribute("categories", categoryService.getAllProductCategorysAdmin());
             model.addAttribute("wireTypes", wireTypeService.getAllWireTypesAdmin());
@@ -309,8 +323,9 @@ public class ViewController {
 
     //Admin Users
     @RequestMapping("/admin/user")
-    public String adminUser() {
+    public String adminUser(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Manage User");
         return "admin/user";
     }
     @GetMapping("/admin/user/create")
@@ -350,8 +365,23 @@ public class ViewController {
 
     //Dashboard
     @RequestMapping("/admin")
-    public String dashboard() {
+    public String dashboard(Model model) {
         //Excute anything here
+        model.addAttribute("title", "Dashboard");
+        //Users
+        List<User> users = userService.getAllByStatus(1);
+        List<User> customers = userService.getAllByStatusAndRole(2, 1);
+        model.addAttribute("totalUsers", users.size());
+        model.addAttribute("totalcustomers", customers.size());
+        model.addAttribute("totaladmin", users.size()-customers.size());
+        //Products
+        List<Product> products = productService.getAllProductList();
+        List<Product> activeProducts = productService.getAllProductListByStatus(1);
+        model.addAttribute("totalProducts", products.size());
+        model.addAttribute("totalActivePro", activeProducts.size());
+        model.addAttribute("totalDeactivePro", products.size()-activeProducts.size());
+        //Orders
+        List<Order> orders =
         return "admin/dashboard";
     }
 }

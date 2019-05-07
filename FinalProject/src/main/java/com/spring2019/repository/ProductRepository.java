@@ -13,6 +13,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product,Integer> {
     Page<Product> findAllByActive(boolean isActive, Pageable pageable);
     List<Product> findAllByActive(boolean isActive);
+    List<Product> findAllByStatusAndActiveTrue(int status);
     Product findByIdAndActiveIsTrue(int id);
     Product findByNameAndActiveIsTrue(String name);
 }

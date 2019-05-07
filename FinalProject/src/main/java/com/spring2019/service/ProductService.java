@@ -11,6 +11,7 @@ public interface ProductService {
     public Page<Product> getAllProductsActive(Pageable pageable);
     public Page<Product>  getAllProducts(Pageable pageable);
     public List<Product> getAllProductList();
+    public List<Product> getAllProductListByStatus(int status);
     boolean save(Product Product);
     public Product getProductById(int id);
     void delete(int id);

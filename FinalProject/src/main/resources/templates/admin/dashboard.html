@@ -36,7 +36,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h3 class="m-b-0 font-light" id="totalUser" th:text="${totalUsers}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total User</h5>
                                                     </div>
                                                 </div>
@@ -51,7 +51,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization" th:text="${totalProducts}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Product</h5>
                                                     </div>
                                                 </div>
@@ -179,11 +179,11 @@
                                                         <div class="soc-header box-facebook">User</div>
                                                         <div class="soc-content">
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h3 class="font-medium" id="systemAdministrator" th:text="${totaladmin}">0</h3>
                                                                 <h5 class="text-muted">System Administrator</h5>
                                                             </div>
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totalcustomers}">0</h3>
                                                                 <h5 class="text-muted">Customer</h5>
                                                             </div>
                                                         </div>
@@ -201,11 +201,11 @@
                                                         <div class="soc-header box-twitter">Product</div>
                                                         <div class="soc-content">
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h3 class="font-medium" id="systemAdministrator"  th:text="${totalActivePro}>0</h3>
                                                                 <h5 class="text-muted">Activate</h5>
                                                             </div>
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totalDeactivePro}>0</h3>
                                                                 <h5 class="text-muted">Deactivate</h5>
                                                             </div>
                                                         </div>
