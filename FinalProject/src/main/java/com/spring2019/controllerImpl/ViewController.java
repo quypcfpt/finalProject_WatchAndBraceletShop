@@ -348,4 +348,10 @@ public class ViewController {
         return "redirect:/admin/user";
     }
 
+    //Dashboard
+    @RequestMapping("/admin")
+    public String dashboard() {
+        //Excute anything here
+        return "admin/dashboard";
+    }
 }
