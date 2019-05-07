@@ -31,11 +31,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProductListByStatus(int status) {
-        return repository.findAllByStatusAndActiveTrue(status);
-    }
-
-    @Override
     public boolean save(Product product) {
         Product found = repository.findByNameAndActiveIsTrue(product.getName());
         if (found != null && !(found.getId().equals(product.getId()))) {

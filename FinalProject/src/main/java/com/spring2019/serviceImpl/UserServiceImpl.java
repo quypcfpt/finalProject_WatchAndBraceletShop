@@ -28,16 +28,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllByStatusAndRole(int roleId, int status) {
-        return repository.findByRoleIdAndStatus(roleId, status);
-    }
-
-    @Override
-    public List<User> getAllByStatus(int status) {
-        return repository.findByStatus(status);
-    }
-
-    @Override
     public void updateStatus(int id) {
         User entity = repository.findById(id);
         if (entity != null) {
