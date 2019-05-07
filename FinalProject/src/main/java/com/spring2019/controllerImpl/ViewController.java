@@ -51,6 +51,9 @@ public class ViewController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrderService orderService;
     /**
      * Login Page
      *
@@ -381,7 +384,27 @@ public class ViewController {
         model.addAttribute("totalActivePro", activeProducts.size());
         model.addAttribute("totalDeactivePro", products.size()-activeProducts.size());
         //Orders
-        List<Order> orders =
+        List<Orders> orders = orderService.getAllListOrders();
+        List<Orders> deliveringOrdersList = orderService.getAllListOrdersByStatus(2);
+        List<Orders> paidOrdersList = orderService.getAllListOrdersByStatus(3);
+        List<Orders> pendingOrdersList = orderService.getAllListOrdersByStatus(1);
+        model.addAttribute("totalorders", orders.size());
+        model.addAttribute("totalpending", pendingOrdersList.size());
+        model.addAttribute("totalpaid", paidOrdersList.size());
+        model.addAttribute("totaldelivery", deliveringOrdersList.size());
+        model.addAttribute("totalcancel", orders.size() - pendingOrdersList.size() - paidOrdersList.size()- deliveringOrdersList.size());
+        //Category
+        model.addAttribute("totalcategories", categoryService.getAllProductCategorysAdmin().size());
+        //Wire Type
+        model.addAttribute("totalwiretypes", wireTypeService.getAllWireTypesAdmin().size());
+        //Glass type
+        model.addAttribute("totalglasstype", glassTypeService.getAllGlassTypes().size());
+        //Label
+        model.addAttribute("totallabels", labelService.getAllLabels().size());
+        //Orgin
+        model.addAttribute("totalorgin", originService.getAllOrigin().size());
+        //Machine
+        model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
         return "admin/dashboard";
     }
 }
