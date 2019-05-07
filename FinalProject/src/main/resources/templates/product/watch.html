@@ -76,30 +76,30 @@
                 </div>
             </div>
             <div class="row row-pb-md" id="list-products">
-                <!--<div class="col-md-3 col-lg-3 mb-4 text-center" >-->
-                <!--<div class="product-entry border">-->
-                <!--<a href="#" class="prod-img">-->
-                <!--<img src="st-product/images/item-1.jpg" class="img-fluid"-->
-                <!--alt="Free html5 bootstrap 4 template">-->
-                <!--</a>-->
-                <!--<div class="desc">-->
-                <!--<h2><a href="#">Women's Boots Shoes Maca</a></h2>-->
-                <!--<span class="price">$139.00</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-md-3 col-lg-3 mb-4 text-center">-->
-                <!--<div class="product-entry border">-->
-                <!--<a href="#" class="prod-img">-->
-                <!--<img src="st-product/images/item-2.jpg" class="img-fluid"-->
-                <!--alt="Free html5 bootstrap 4 template">-->
-                <!--</a>-->
-                <!--<div class="desc">-->
-                <!--<h2><a href="#">Women's Minam Meaghan</a></h2>-->
-                <!--<span class="price">$139.00</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
+                <div class="col-md-3 col-lg-3 mb-4 text-center">
+                    <div class="product-entry border" th:each="product: ${products}">
+                        <a href="#" class="prod-img">
+                            <img src="st-product/images/item-1.jpg" class="img-fluid"
+                                 alt="Free html5 bootstrap 4 template">
+                        </a>
+                        <div class="desc">
+                            <h2><a href="#" th:text="${product.name}"></a></h2>
+                            <span class="price" th:text="${product.price}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 mb-4 text-center">
+                    <div class="product-entry border">
+                        <a href="#" class="prod-img">
+                            <img src="st-product/images/item-2.jpg" class="img-fluid"
+                                 alt="Free html5 bootstrap 4 template">
+                        </a>
+                        <div class="desc">
+                            <h2><a href="#">Women's Minam Meaghan</a></h2>
+                            <span class="price">$139.00</span>
+                        </div>
+                    </div>
+                </div>
                 <!--<div class="col-md-3 col-lg-3 mb-4 text-center">-->
                 <!--<div class="product-entry border">-->
                 <!--<a href="#" class="prod-img">-->
@@ -325,33 +325,36 @@
 <!--</div>-->
 
 <script src="st-product/js/app.js"></script>
+</body>
+
 <script>
 
-    $(document).ready(function () {
-        doAjax("/api/product/active?page=1&size=5" , "GET", null, function (data) {
-            //TODO Check empty
-            let products = data.listProduct;
-            console.log("aaaaaaaaaaa " + products);
-            $("#list-products").empty();
-            $.each(products, function (index, pro) {
-                let div =
-                    "<div class=\"col-md-3 col-lg-3 mb-4 text-center\" >" +
-                    "<div class=\"product-entry border\">" +
-                    "<a href=\"#\" class=\"prod-img\">" +
-                    "<img src='" + pro.image + "' class=\"img-fluid\">" +
-                    "</a>" +
-                    "<div class=\"desc\">" +
-                    "<h2><a href=\"#\">" + pro.name + "</a></h2>" +
-                    "<span class=\"price\">" + pro.price + "</span>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>";
-                $("#list-products").append(div);
-            });
-        }, function (error) {
-            console.log(error);
-        });
-    });
+    // ready(function () {
+    //     doAjax("http://localhost:8080/api/product/active?page=1&size=5" , "GET", null, function (data) {
+    //         //TODO Check empty
+    //         let products = data.listProduct;
+    //         console.log("aaaaaaaaaa" + products);
+    //         $("#list-products").empty();
+    //         $.each(products, function (index, pro) {
+    //             console.log(pro.name + " bbbbbbbbbbb")
+    //             let div =
+    //                 "<div class=\"col-md-3 col-lg-3 mb-4 text-center\" >" +
+    //                 "<div class=\"product-entry border\">" +
+    //                 "<a href=\"#\" class=\"prod-img\">" +
+    //                 "<img src='" + pro.image + "' class=\"img-fluid\">" +
+    //                 "</a>" +
+    //                 "<div class=\"desc\">" +
+    //                 "<h2><a href=\"#\">" + pro.name + "</a></h2>" +
+    //                 "<span class=\"price\">" + pro.price + "</span>" +
+    //                 "</div>" +
+    //                 "</div>" +
+    //                 "</div>";
+    //             $("#list-products").append(div);
+    //         });
+    //     }, function (error) {
+    //         console.log(error);
+    //     });
+    // });
 
     // var pageSize = 3;
     // $(document).ready(function () {
@@ -365,8 +368,5 @@
     //     });
     // });
 </script>
-</body>
-
-
 </html>
 

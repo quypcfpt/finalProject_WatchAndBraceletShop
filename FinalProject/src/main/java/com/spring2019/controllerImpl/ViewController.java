@@ -1,21 +1,24 @@
 package com.spring2019.controllerImpl;
 
+import com.spring2019.controller.ProductController;
 import com.spring2019.entity.*;
 import com.spring2019.model.*;
 import com.spring2019.service.*;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ViewController {
+
     @Autowired
     ProductCategoryTransformer cateTranform;
     @Autowired
@@ -42,6 +45,12 @@ public class ViewController {
     WireTypeService wireTypeService;
     @Autowired
     MachineTypeService machineTypeService;
+
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    ProductControllerImpl productControllerImpl;
 
     /**
      * Login Page
@@ -73,9 +82,12 @@ public class ViewController {
      * @return
      */
     @RequestMapping("/watch")
-    public String toWatch(Model model) {
-        //Excute anything here
-        return "product/watch";
+    public ModelAndView toWatch(Model model) {
+        ModelAndView view = new ModelAndView("product/watch");
+        String products = productControllerImpl.loadAllProductActive(1, 5, "ASC", "id");
+        view.addObject("products", products);
+        System.out.println(products);
+        return view;
     }
 
     //Admin Product Category
