@@ -61,4 +61,16 @@ public class UserServiceImpl implements UserService {
         repository.save(user);
         return true;
     }
+
+    @Override
+    public User getAccountByUsernameAndIsAdmin(String username, String password) {
+        User account = repository.findByUsernameAndPasswordAndRoleId(username, password, 1);
+        return account;
+    }
+
+    @Override
+    public User getAccountByUsernameAndIsUse(String username, String password) {
+        User account = repository.findByUsernameAndPasswordAndRoleId(username, password, 2);
+        return account;
+    }
 }
