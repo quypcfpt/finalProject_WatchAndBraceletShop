@@ -34,7 +34,6 @@
                                         <tr>
                                             <th>Product</th>
                                             <th>Code</th>
-                                            <th>Description</th>
                                             <th>Price</th>
                                             <th>Stock In</th>
                                             <th>Stock Out</th>
@@ -48,89 +47,6 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="AddStoryProductsModal" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title w-100 font-weight-bold">Create New Product</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form class="form p-t-20" method="post" id="AddStoryTypesForm"
-                                  action="/admin/product/save" modelAttribute="form">
-                                <div class="modal-body mx-3">
-                                    <input type="hidden" name="id" class="form-control" id="id"
-                                          value="0">
-                                    <input type="hidden" name="status" class="form-control" id="status"
-                                           value="0">
-                                    <input type="hidden" name="image" class="form-control" id="image"
-                                           value="0">
-                                    <input type="hidden" name="wireTypeId" class="form-control" id="wireTypeId"
-                                           value="0">
-                                    <input type="hidden" name="glassTypeId" class="form-control" id="glassTypeId"
-                                           value="0">
-                                    <input type="hidden" name="machineTypeId" class="form-control" id="machineTypeId"
-                                           value="0">
-                                    <input type="hidden" name="labelId" class="form-control" id="labelId"
-                                           value="0">
-                                    <input type="hidden" name="originId" class="form-control" id="originId"
-                                           value="0">
-                                    <input type="hidden" name="productCode" class="form-control" id="productCode"
-                                           value="0">
-                                    <input type="hidden" name="categoryId" class="form-control" id="categoryId"
-                                           value="0">
-                                    <div class="form-group">
-                                        <label for="name">Name<span class="text-danger">*</span> </label>
-                                        <div class="input-group">
-                                            <input type="text" name="name" class="form-control" id="name"
-                                                   placeholder="Enter Product name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <div class="input-group">
-                                            <textarea rows="5" class="form-control" name="description" id="description"
-                                                      placeholder="Description of this Order"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="price">Name</label>
-                                    <div class="input-group">
-                                        <input type="number" name="price" class="form-control" id="price"
-                                               placeholder="Enter Price">
-                                    </div>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="stockIn">Stock In</label>
-                                        <div class="input-group">
-                                            <input type="number" name="stockIn" class="form-control" id="stockIn"
-                                                   placeholder="Enter Stock In">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="stockOut">Stock Out</label>
-                                        <div class="input-group">
-                                            <input type="number" name="stockOut" class="form-control" id="stockOut"
-                                                   placeholder="Enter Stock Out">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <input type="submit" id="btnAddNew"
-                                           class="btn btn-success" value="Add"/>
-                                    <button type="button" class="btn btn-black waves-effect waves-light m-r-10"
-                                            data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">Cancel</span>
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -200,12 +116,6 @@
             "columns": [
                 {data: 'name'},
                 {data: 'productCode'},
-                {
-                    data: 'description',
-                    render: function (data, type, row) {
-                        return data;
-                    }
-                },
                 {data: 'price'},
                 {data: 'stockIn'},
                 {data: 'stockOut'},
@@ -238,43 +148,8 @@
     }
     //Click Edit button in datatable row
     var getDetail = function (id) {
-        $.ajax({
-            url: '/api/product/'+id,
-            method: "GET",
-            success: function (result) {
-                var obj = JSON.parse(result);
-                $('#id').val(obj.data.id);
-                $('#name').val(obj.data.name);
-                $('#description').val(obj.data.description);
-                $('#image').val(obj.data.image);
-                $('#price').val(obj.data.price);
-                $('#wireTypeId').val(obj.data.wireTypeId);
-                $('#glassTypeId').val(obj.data.glassTypeId);
-                $('#machineTypeId').val(obj.data.machineTypeId);
-                $('#labelId').val(obj.data.labelId);
-                $('#originId').val(obj.data.originId);
-                $('#productCode').val(obj.data.productCode);
-                $('#stockAmount').val(obj.data.stockAmount);
-                $('#stockIn').val(obj.data.stockIn);
-                $('#stockOut').val(obj.data.stockOut);
-                $('#categoryId').val(obj.data.categoryId);
-                $('#status').val(obj.data.status);
-                $("#AddStoryProductsModal").modal('show');
-            },
-            error: function (result) {
-                $.toast({
-                    heading: 'Error is occured!',
-                    text: 'Try again, please!',
-                    position: 'top-right',
-                    loaderBg: '#ffff',
-                    icon: 'error',
-                    hideAfter: 3500
-                });
-            }
-        });
-    };
-
-
+        window.location.href ="/admin/product/edit/"+id;
+    }
     //Delete
     function Delete(id) {
         swal({

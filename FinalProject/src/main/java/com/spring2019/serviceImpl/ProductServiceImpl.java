@@ -42,12 +42,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(int id) {
-        return repository.findById(id);
+        return repository.findByIdAndActiveIsTrue(id);
     }
 
     @Override
     public void delete(int id) {
-        Product entity = repository.findById(id);
+        Product entity = repository.findByIdAndActiveIsTrue(id);
         if (entity != null) {
             entity.setActive(false);
             repository.save(entity);
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateStatus(int id) {
-        Product entity = repository.findById(id);
+        Product entity = repository.findByIdAndActiveIsTrue(id);
         if (entity != null) {
             if (entity.getStatus() == 0) {
                 entity.setStatus(1);

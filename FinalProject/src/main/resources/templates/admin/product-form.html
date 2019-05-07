@@ -34,7 +34,7 @@
                                     <h3 class="card-title">Basic Information</h3>
                                     <hr>
                                     <input type="hidden" name="id" class="form-control" id="id"
-                                           value="0">
+                                           th:value="${form.id}">
                                     <!--/row-->
                                     <div class="row">
                                         <div class="col-md-6">
@@ -42,33 +42,33 @@
                                                 <label class="control-label" for="productCode">Product code&nbsp;<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="productCode"
-                                                       id="productCode" placeholder="Enter product code">
+                                                       id="productCode" placeholder="Enter product code" th:value="${form.productCode}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="name">Name&nbsp;<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name" id="name"
-                                                       placeholder="Enter product name">
+                                                       placeholder="Enter product name" th:value="${form.name}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="stockIn">Stock In</label>
                                                 <input type="number" min="0" class="form-control" name="stockIn"
-                                                       id="stockIn" value="0">
+                                                       id="stockIn" th:value="${form.stockIn}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="price">Price (VND)</label>
                                                 <input type="number" min="0" class="form-control" name="price"
-                                                       id="price" value="0">
+                                                       id="price" th:value="${form.price}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="status">Status</label>
                                                 <label class="custom-control custom-radio">
-                                                    <input checked id="active" name="status" value="1" type="radio"
+                                                    <input [# th:if="${form.status == 1}"] checked [/] id="active" name="status" value="1" type="radio"
                                                            class="custom-control-input">
                                                     <span class="custom-control-label">Active</span>
                                                 </label>
                                                 <label class="custom-control custom-radio">
-                                                    <input id="Deactive" name="status" value="2" type="radio"
+                                                    <input [# th:if="${form.status == 0}"] checked [/] id="Deactive" name="status"  value="0" type="radio"
                                                            class="custom-control-input">
                                                     <span class="custom-control-label">Deactive</span>
                                                 </label>
@@ -78,7 +78,7 @@
                                                 <input type="button" class="btn btn-info" id="btnChange"
                                                        value="Upload"/>
                                                 <div class="input-group">
-                                                    <input type="hidden" name="image" id="imageUrl" value=""/>
+                                                    <input type="hidden" name="image" id="imageUrl" th:value="${form.image}"/>
                                                     <div id="review_container"></div>
                                                 </div>
                                             </div>
@@ -89,6 +89,9 @@
                                                 <label for="categoryId">Category&nbsp;<span class="text-danger">*</span></label>
                                                 <select class="custom-select col-12" id="categoryId" name="categoryId">
                                                     <option selected value="0" disabled>Select Category</option>
+                                                    <option th:each="item : ${categories}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}" th:selected="${form.categoryId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -96,6 +99,9 @@
                                                         class="text-danger">*</span></label>
                                                 <select class="custom-select col-12" id="wireTypeId" name="wireTypeId">
                                                     <option selected value="0" disabled>Select Wire Type</option>
+                                                    <option th:each="item : ${wireTypes}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}" th:selected="${form.wireTypeId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -104,6 +110,9 @@
                                                 <select class="custom-select col-12" id="glassTypeId"
                                                         name="glassTypeId">
                                                     <option selected value="0" disabled>Select Glass Type</option>
+                                                    <option th:each="item : ${galssTypes}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}" th:selected="${form.glassTypeId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -112,6 +121,9 @@
                                                 <select class="custom-select col-12" id="machineTypeId"
                                                         name="machineTypeId">
                                                     <option selected value="0" disabled>Select Glass Type</option>
+                                                    <option th:each="item : ${machines}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}" th:selected="${form.machineTypeId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -119,6 +131,9 @@
                                                         class="text-danger">*</span></label>
                                                 <select class="custom-select col-12" id="labelId" name="labelId">
                                                     <option selected value="0" disabled>Select Label</option>
+                                                    <option th:each="item : ${labels}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}"  th:selected="${form.labelId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -126,6 +141,9 @@
                                                         class="text-danger">*</span></label>
                                                 <select class="custom-select col-12" id="originId" name="originId">
                                                     <option selected value="0" disabled>Select Origin</option>
+                                                    <option th:each="item : ${orgins}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.name}" th:selected="${form.originId == item.id}">Wireframe</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -133,7 +151,7 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="description">Description</label>
                                                 <textarea class="form-control"
-                                                          name="description"></textarea>
+                                                          name="description" th:text="${form.description}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +160,7 @@
 
                                     <div class="form-actions">
                                         <input type="submit" class="btn btn-success" value="Add" id="btnAddCampaign"/>
-                                        <a href="/template" class="btn btn-inverse">Cancel</a>
+                                        <a href="/admin/product" class="btn btn-inverse">Cancel</a>
                                     </div>
                                 </form>
                             </div>
@@ -163,19 +181,17 @@
     </div>
 </div>
 
-<div th:if="${msg}" te></div>
-
 <div th:replace="admin/shared/script :: script"></div>
 <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 <script src="//static.filestackapi.com/filestack-js/1.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     $(document).ready(function () {
-        initCategoriesList();
-        initWireTypesList();
-        initGlassTypesList();
-        initMachineTypesList();
-        initLabelsList();
-        initOrginsList();
+        // initCategoriesList();
+        // initWireTypesList();
+        // initGlassTypesList();
+        // initMachineTypesList();
+        // initLabelsList();
+        // initOrginsList();
         $('form').on('submit', function (e) {
             var name = $('#name').val();
             if (name == "") {
@@ -336,6 +352,44 @@
             }
         });
     };
+    //Click Edit button in datatable row
+    var getDetail = function (id) {
+        $.ajax({
+            url: '/api/product/'+id,
+            method: "GET",
+            success: function (result) {
+                var obj = JSON.parse(result);
+                $('#id').val(obj.data.id);
+                $('#name').val(obj.data.name);
+                $('#description').val(obj.data.description);
+                $('#image').val(obj.data.image);
+                $('#price').val(obj.data.price);
+                $('#wireTypeId').val(obj.data.wireTypeId);
+                $('#glassTypeId').val(obj.data.glassTypeId);
+                $('#machineTypeId').val(obj.data.machineTypeId);
+                $('#labelId').val(obj.data.labelId);
+                $('#originId').val(obj.data.originId);
+                $('#productCode').val(obj.data.productCode);
+                $('#stockAmount').val(obj.data.stockAmount);
+                $('#stockIn').val(obj.data.stockIn);
+                $('#stockOut').val(obj.data.stockOut);
+                $('#categoryId').val(obj.data.categoryId);
+                $('#status').val(obj.data.status);
+                $("#AddStoryProductsModal").modal('show');
+            },
+            error: function (result) {
+                $.toast({
+                    heading: 'Error is occured!',
+                    text: 'Try again, please!',
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+
     CKEDITOR.replace('description');
     window.addEventListener('DOMContentLoaded', function () {
         const apikey = `${configuration.APIKEY}`;

@@ -8,10 +8,7 @@ import com.spring2019.transformer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -237,12 +234,14 @@ public class ViewController {
         //Excute anything here
         return "admin/order";
     }
+
     //Admin Product Order Detail
     @RequestMapping("/admin/orderdetail")
     public String adminProductOrderDetail() {
         //Excute anything here
         return "admin/orderdetail";
     }
+
     //Admin Product
     @RequestMapping("/admin/product")
     public String adminProduct() {
@@ -252,8 +251,35 @@ public class ViewController {
 
     @GetMapping("/admin/product/create")
     public String postsCreate(Model model) {
-        model.addAttribute("form", new ProductModel());
+        ProductModel productModel = new ProductModel();
+        model.addAttribute("form",productModel);
+        model.addAttribute("categories", categoryService.getAllProductCategorysAdmin());
+        model.addAttribute("wireTypes", wireTypeService.getAllWireTypesAdmin());
+        model.addAttribute("galssTypes", glassTypeService.getAllGlassTypes());
+        model.addAttribute("machines", machineTypeService.getAllMachineTypesAdmin());
+        model.addAttribute("labels", labelService.getAllLabels());
+        model.addAttribute("orgins", originService.getAllOrigin());
         return "admin/product-form";
+    }
+
+    @GetMapping("/admin/product/edit/{id}")
+    public String postsCreate(Model model, @PathVariable("id") int id, RedirectAttributes ra) {
+        Product found = productService.getProductById(id);
+        if (found != null) {
+            ProductModel productModel = new ProductModel();
+            productModel = productTransformer.entityToModel(found);
+            model.addAttribute("form", productModel);
+            model.addAttribute("categories", categoryService.getAllProductCategorysAdmin());
+            model.addAttribute("wireTypes", wireTypeService.getAllWireTypesAdmin());
+            model.addAttribute("galssTypes", glassTypeService.getAllGlassTypes());
+            model.addAttribute("machines", machineTypeService.getAllMachineTypesAdmin());
+            model.addAttribute("labels", labelService.getAllLabels());
+            model.addAttribute("orgins", originService.getAllOrigin());
+            return "admin/product-form";
+        }else {
+            ra.addFlashAttribute("msgerror", "Product is not Existed");
+            return "redirect:/admin/product";
+        }
     }
 
     @PostMapping("/admin/product/save")
@@ -263,10 +289,10 @@ public class ViewController {
         entity = productTransformer.modelToEntity(model);
         entity.setActive(true);
         entity.setStockAmount(entity.getStockIn() - entity.getStockOut());
-        boolean result=false;
-        if(entity.getStockAmount() > 0){
-            result= productService.save(entity);
-        }else{
+        boolean result = false;
+        if (entity.getStockAmount() > 0) {
+            result = productService.save(entity);
+        } else {
             ra.addFlashAttribute("msgerror", "Stocck IN and Stock Out is wrong!");
         }
         if (result) {
