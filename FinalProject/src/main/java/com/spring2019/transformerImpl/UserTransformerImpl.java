@@ -26,6 +26,7 @@ public class UserTransformerImpl implements UserTransformer {
         model.setMiddleName(entity.getMiddleName());
         model.setLastName(entity.getLastName());
         model.setPhone(entity.getPhone());
+        model.setStatus(entity.getStatus());
         model.setRoleId(entity.getRoleId());
         return model;
     }
@@ -42,6 +43,7 @@ public class UserTransformerImpl implements UserTransformer {
         entity.setMiddleName(model.getMiddleName());
         entity.setLastName(model.getLastName());
         entity.setPhone(model.getPhone());
+        entity.setStatus(model.getStatus());
         entity.setRoleId(model.getRoleId());
         return entity;
 

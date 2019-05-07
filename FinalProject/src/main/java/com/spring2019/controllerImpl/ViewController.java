@@ -28,6 +28,8 @@ public class ViewController {
     @Autowired
     ProductTransformer productTransformer;
 
+    @Autowired
+    UserTransformer userTransformer;
 
     @Autowired
     ProductCategoryService categoryService;
@@ -44,6 +46,8 @@ public class ViewController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    UserService userService;
     /**
      * Login Page
      *
@@ -242,7 +246,7 @@ public class ViewController {
         return "admin/orderdetail";
     }
 
-    //Admin Product
+    //Admin User
     @RequestMapping("/admin/product")
     public String adminProduct() {
         //Excute anything here
@@ -263,7 +267,7 @@ public class ViewController {
     }
 
     @GetMapping("/admin/product/edit/{id}")
-    public String postsCreate(Model model, @PathVariable("id") int id, RedirectAttributes ra) {
+    public String postsEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra) {
         Product found = productService.getProductById(id);
         if (found != null) {
             ProductModel productModel = new ProductModel();
@@ -301,6 +305,47 @@ public class ViewController {
             ra.addFlashAttribute("msgerror", "Product is existed!");
         }
         return "redirect:/admin/product";
+    }
+
+    //Admin Users
+    @RequestMapping("/admin/user")
+    public String adminUser() {
+        //Excute anything here
+        return "admin/user";
+    }
+    @GetMapping("/admin/user/create")
+    public String userCreate(Model model) {
+        model.addAttribute("form",new UserModel());
+
+        return "admin/user-form";
+    }
+
+    @GetMapping("/admin/user/edit/{id}")
+    public String userEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra) {
+        User found = userService.getUserById(id);
+        if (found != null) {
+            UserModel userModel = new UserModel();
+            userModel = userTransformer.entityToModel(found);
+            model.addAttribute("form", userModel);
+            return "admin/user-form";
+        }else {
+            ra.addFlashAttribute("msgerror", "Product is not Existed");
+            return "redirect:/admin/user";
+        }
+    }
+    @PostMapping("/admin/user/save")
+    public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra) {
+        //TODO validation
+        User entity = new User();
+        entity = userTransformer.modelToEntity(model);
+        boolean result = false;
+        result = userService.save(entity);
+        if (result) {
+            ra.addFlashAttribute("msg", "Created!");
+        } else {
+            ra.addFlashAttribute("msgerror", "Product is existed!");
+        }
+        return "redirect:/admin/user";
     }
 
 }

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/shared/head :: head"></div>
+<body class="fix-header fix-sidebar card-no-bProduct">
+<div th:replace="admin/shared/delayload :: delayload"></div>
+<div id="main-wrapper">
+    <div th:replace="admin/shared/header :: header"></div>
+    <div th:replace="admin/shared/left_sidebar :: left_sidebar"></div>
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor">Administrator Form</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/user">Manage User</a></li>
+                            <li class="breadcrumb-item active">Administrator Form</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="card-title text-white">Administrator Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" action="/admin/user/save" modelAttribute="form">
+                                    <h3 class="card-title">Basic Information</h3>
+                                    <hr>
+                                    <input type="hidden" name="id" class="form-control" id="id"
+                                           th:value="${form.id}">
+                                    <input type="hidden" name="roleId" class="form-control" id="roleId"
+                                           th:value="${form.roleId}">
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="username">Username&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="username" id="username"
+                                                       placeholder="Enter username" th:value="${form.username}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="password">Password <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="password" id="password"
+                                                       placeholder="Enter password" th:value="${form.password}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="confirmPassword">Confirm Password <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+                                                       placeholder="Enter confirm Password" th:value="${form.confirmPassword}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
+                                                <label class="custom-control custom-radio">
+                                                    <input [# th:if="${form.status == 1}"] checked [/] id="active" name="status" value="1" type="radio"
+                                                           class="custom-control-input">
+                                                    <span class="custom-control-label">Active</span>
+                                                </label>
+                                                <label class="custom-control custom-radio">
+                                                    <input [# th:if="${form.status == 0}"] checked [/] id="Deactive" name="status"  value="0" type="radio"
+                                                           class="custom-control-input">
+                                                    <span class="custom-control-label">Deactive</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="email">Email&nbsp;<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="email" id="email"
+                                                       placeholder="Enter email" th:value="${form.username}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="phone">Phone</label>
+                                                <input type="text" class="form-control" name="phone" id="phone"
+                                                       placeholder="Enter phone" th:value="${form.phone}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="lastName">Last Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="lastName" id="lastName"
+                                                       placeholder="Enter confirm last Name" th:value="${form.lastName}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="middleName">Middle Name</label>
+                                                <input type="text" class="form-control" name="middleName" id="middleName"
+                                                       placeholder="Enter confirm middle Name" th:value="${form.middleName}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="firstName">First Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="firstName" id="firstName"
+                                                       placeholder="Enter confirm first Name" th:value="${form.firstName}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!--/row-->
+
+                                    <div class="form-actions">
+                                        <input type="submit" class="btn btn-success" value="Add" id="btnAddCampaign"/>
+                                        <a href="/admin/user" class="btn btn-inverse">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <div th:replace="admin/shared/footer :: footer"></div>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+
+<div th:replace="admin/shared/script :: script"></div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        // initCategoriesList();
+        // initWireTypesList();
+        // initGlassTypesList();
+        // initMachineTypesList();
+        // initLabelsList();
+        // initOrginsList();
+        $('form').on('submit', function (e) {
+            var name = $('#name').val();
+            if (name == "") {
+                $.toast({
+                    heading: "Product  is invalid!",
+                    text: "Product  is reuired.",
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+                e.preventDefault();
+            }
+        });
+    });
+    //method to init event list
+    var initCategoriesList = function () {
+        $.ajax({
+            url: '/api/productcategory/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#categoryId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initWireTypesList = function () {
+        $.ajax({
+            url: '/api/wiretype/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#wireTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initGlassTypesList = function () {
+        $.ajax({
+            url: '/api/glasstype',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#glassTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initMachineTypesList = function () {
+        $.ajax({
+            url: '/api/machinetype/admin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#machineTypeId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initLabelsList = function () {
+        $.ajax({
+            url: '/api/label',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#labelId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+    var initOrginsList = function () {
+        $.ajax({
+            url: '/api/origin',
+            method: "GET",
+            processData: false,
+            contentType: false,
+            success: function (obj) {
+                var result = JSON.parse(obj);
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#originId").append('<option value="' + result.data[i].id + '">' + result.data[i].name + '</option>');
+                }
+            },
+            error: function (result) {
+                $.toast({
+                    heading: result.data.title,
+                    text: result.data.msg,
+                    position: 'top-right',
+                    loaderBg: '#ffff',
+                    icon: 'error',
+                    hideAfter: 3500
+                });
+            }
+        });
+    };
+
+</script>
+</body>
+</html>

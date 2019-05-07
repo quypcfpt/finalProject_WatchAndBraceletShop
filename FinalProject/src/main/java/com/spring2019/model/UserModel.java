@@ -13,11 +13,11 @@ public class UserModel {
     @Expose
     private String password;
     @Expose
-    private float lastName;
+    private String lastName;
     @Expose
-    private int middleName;
+    private String middleName;
     @Expose
-    private int firstName;
+    private String firstName;
     @Expose
     private String phone;
     @Expose
@@ -27,10 +27,11 @@ public class UserModel {
     @Expose
     private int roleId;
 
+    private String confirmPassword;
     public UserModel() {
     }
 
-    public UserModel(Integer id, String username, String password, float lastName, int middleName, int firstName, String phone, String email, int status, int roleId) {
+    public UserModel(Integer id, String username, String password, String lastName, String middleName, String firstName, String phone, String email, int status, int roleId) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,6 +42,14 @@ public class UserModel {
         this.email = email;
         this.status = status;
         this.roleId = roleId;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Integer getId() {
@@ -67,27 +76,27 @@ public class UserModel {
         this.password = password;
     }
 
-    public float getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(float lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public int getMiddleName() {
+    public String getMiddleName() {
         return middleName;
     }
 
-    public void setMiddleName(int middleName) {
+    public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
-    public int getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(int firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
