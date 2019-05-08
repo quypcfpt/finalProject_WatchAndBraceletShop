@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ViewController {
     @Autowired
@@ -334,16 +336,19 @@ public class ViewController {
         }
     }
     @PostMapping("/admin/user/save")
-    public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra) {
+    public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra , HttpSession session) {
         //TODO validation
-        User entity = new User();
-        entity = userTransformer.modelToEntity(model);
-        boolean result = false;
-        result = userService.save(entity);
-        if (result) {
-            ra.addFlashAttribute("msg", "Created!");
-        } else {
-            ra.addFlashAttribute("msgerror", "Product is existed!");
+        User user = (User) session.getAttribute("user");
+        if(user.getRoleId() ==1 ) {
+            User entity = new User();
+            entity = userTransformer.modelToEntity(model);
+            boolean result = false;
+            result = userService.save(entity);
+            if (result) {
+                ra.addFlashAttribute("msg", "Created!");
+            } else {
+                ra.addFlashAttribute("msgerror", "Product is existed!");
+            }
         }
         return "redirect:/admin/user";
     }
@@ -353,5 +358,34 @@ public class ViewController {
     public String dashboard() {
         //Excute anything here
         return "admin/dashboard";
+    }
+
+    // Login
+    @PostMapping("/user/login")
+    public String userLogin(@ModelAttribute("form") UserModel user, RedirectAttributes ra, HttpSession session){
+        User entity = new User();
+        entity = userTransformer.modelToEntity(user);
+        User admin = userService.getAccountByUsernameAndIsAdmin(entity.getUsername(),entity.getPassword());
+        User userRole = userService.getAccountByUsernameAndIsUse(entity.getUsername(),entity.getPassword());
+        if (admin != null) {
+            session.setAttribute("user",admin);
+            return "redirect:/admin";
+        }else if (userRole !=null){
+            session.setAttribute("user",userRole);
+            return "redirect:/home";
+        }else{
+            ra.addFlashAttribute("error" , "UserName and password is invalid");
+        }
+
+        return "redirect:/login";
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        //Excute anything here
+        User user = (User) session.getAttribute("user");
+        if(user !=null)
+        session.removeAttribute("user");
+        System.out.println(user);
+        return "redirect:/login";
     }
 }

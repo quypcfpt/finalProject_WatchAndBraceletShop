@@ -34,7 +34,6 @@ public class UserTransformerImpl implements UserTransformer {
     @Override
     public User modelToEntity(UserModel model) {
         User entity = new User();
-
         entity.setId(model.getId());
         entity.setUsername(model.getUsername());
         entity.setPassword(model.getPassword());
