@@ -187,10 +187,6 @@ public class ViewController {
      * @param model
      * @return
      */
-    @RequestMapping("/cart")
-    public String toCart(Model model) {
-        return "product/cart";
-    }
 
     //Admin Product Category
     @RequestMapping("/admin/product_category")
@@ -815,5 +811,10 @@ public class ViewController {
     private static Date localDateTimeToDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
-
+    @RequestMapping("/cart")
+    public String toCart(Model model) {
+        //Excute anything here
+        getMenu(model);
+        return "product/cart";
+    }
 }
