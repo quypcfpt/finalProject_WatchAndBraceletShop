@@ -609,6 +609,7 @@ public class ViewController {
         } else {
             ra.addFlashAttribute("error", "UserName and password is invalid");
         }
+        session.setMaxInactiveInterval(300*1000);
 
         return "redirect:/login";
     }
