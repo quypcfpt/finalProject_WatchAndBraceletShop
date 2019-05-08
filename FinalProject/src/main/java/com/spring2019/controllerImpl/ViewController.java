@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -482,15 +487,42 @@ public class ViewController {
     //Daily Report
     @GetMapping("/admin/report")
     public String report(Model model) {
-        model.addAttribute("title", "Report");
-        Date start = new Date();
-        Date end = new Date();
+ model.addAttribute("title","Report");
+        try{
+            Date start = new Date();
+            Date end = new Date();
 
-        Calendar cStart = Calendar.getInstance();
-        cStart.setTime(start);
-        Calendar cEnd = Calendar.getInstance();
-        cEnd.setTime(end);
-        int soldProduct = orderDetailService.totalSoldProduct(start, end);
+            Date startDate = atStartOfDay(start);
+            Date endDate = atEndOfDay(end);
+
+            //Sold Product
+            int soldProduct = orderDetailService.totalSoldProduct(startDate, endDate);
+            model.addAttribute("soldProduct", soldProduct);
+
+            //Sold Product
+            int totalPrice = orderDetailService.totaltotalPrice(startDate, endDate);
+            model.addAttribute("totalprice", soldProduct);
+
+            //Orders
+            int orders = orderService.totaltotalOrder(startDate, endDate);
+            int deliveringOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,2);
+            int paidOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,3);
+            int pendingOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,1);
+            model.addAttribute("totalorders", orders);
+            model.addAttribute("totalpending", pendingOrdersList);
+            model.addAttribute("totalpaid", paidOrdersList);
+            model.addAttribute("totaldelivery", deliveringOrdersList);
+            model.addAttribute("totalcancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList);
+            List orderChart = new ArrayList();
+           orderChart.add(new Object[]{"Pending", pendingOrdersList});
+            orderChart.add(new Object[]{"On Delivery", deliveringOrdersList});
+            orderChart.add(new Object[]{"Paid", paidOrdersList});
+            orderChart.add(new Object[]{"Cancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList});
+            model.addAttribute("chart", orderChart);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
         return "admin/dailyreport";
     }
 
@@ -547,4 +579,26 @@ public class ViewController {
         }
         return "redirect:/changepassword";
     }
+       
+
+    public static Date atStartOfDay(Date date) {
+        LocalDateTime localDateTime = dateToLocalDateTime(date);
+        LocalDateTime startOfDay = localDateTime.with(LocalTime.MIN);
+        return localDateTimeToDate(startOfDay);
+    }
+
+    public static Date atEndOfDay(Date date) {
+        LocalDateTime localDateTime = dateToLocalDateTime(date);
+        LocalDateTime endOfDay = localDateTime.with(LocalTime.MAX);
+        return localDateTimeToDate(endOfDay);
+    }
+
+    private static LocalDateTime dateToLocalDateTime(Date date) {
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    private static Date localDateTimeToDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
 }

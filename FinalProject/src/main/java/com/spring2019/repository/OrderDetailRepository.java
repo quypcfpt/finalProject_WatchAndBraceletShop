@@ -13,13 +13,23 @@ import java.util.Date;
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail,Integer> {
     OrderDetail findById(int id);
-    @Query(nativeQuery = true, value =
+    @Query(value =
             "Select  " +
-                    "Count(Distinct od.ProductId) " +
+                    "Count(Distinct od.productById) " +
                     "FROM " +
-                    "[Order] o, OrderDetail od" +
+                    "Orders o, OrderDetail od " +
                     "WHERE "+
-                    ":startDate <= o.CreateDateTime and o.CreateDateTime <= :endDate" +
-                    "    and od.OrderId = o.Id")
+                    ":startDate <= o.createDateTime and o.createDateTime <= :endDate" +
+                    "    and od.orderById = o.id")
     int CountSoldProduct(@Param("startDate") Date startDate, @Param("endDate")Date endDate);
+
+    @Query(value =
+            "Select  " +
+                    "SUM(od.price) " +
+                    "FROM " +
+                    "Orders o, OrderDetail od " +
+                    "WHERE "+
+                    ":startDate <= o.createDateTime and o.createDateTime <= :endDate" +
+                    "    and od.orderById = o.id")
+    int CountTotalPrice(@Param("startDate") Date startDate, @Param("endDate")Date endDate);
 }

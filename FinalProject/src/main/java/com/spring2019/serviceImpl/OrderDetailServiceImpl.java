@@ -52,4 +52,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public int totalSoldProduct(Date startDate, Date endDate) {
        return  repository.CountSoldProduct(startDate, endDate);
     }
+    @Override
+    public int totaltotalPrice(Date startDate, Date endDate) {
+        return  repository.CountTotalPrice(startDate, endDate);
+    }
 }
