@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" type="image/png" href="/st-login/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/st-login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/st-login/css/main.css">
+</head>
+<body>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('/st-login/images/bg-01.jpg');">
+                <div class="wrap-login100 p-l-65 p-r-65 p-t-30 p-b-33">
+                    <form class="login100-form validate-form flex-sb flex-w" id="login-form" method="post"  action="/user/register">
+                            <span class="login100-form-title p-b-10">
+                               REGISTER
+                            </span>
+
+                        <div class="text-danger col-md-12 text-center" id="msgError" th:text="${error}"></div>
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="username">Username</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Username is required">
+                            <input type="text" name="username" class="form-control" id="username" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-13 p-b-9">
+                                <span class="txt1">Password</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <input type="password" name="password" class="form-control" id="password" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="p-t-13 p-b-9">
+                                <span class="txt1">Password Confirm</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <input type="password" name="con_password" class="form-control" id="con_password" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="lastname">LastName</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Lastname is required">
+                            <input type="text" name="lastName" class="form-control" id="lastname" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="middle">Middle Name</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Middle Name is required">
+                            <input type="text" name="middleName" class="form-control" id="middle" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="first">First Name</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="FirstName is required">
+                            <input type="text" name="firstName" class="form-control" id="first" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="phone">Phone</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Lastname is required">
+                            <input type="number" name="phone" class="form-control" id="phone" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="email">Email</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Email is required">
+                            <input type="text" name="email" class="form-control" id="email" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn m-t-17">
+                            <button type="submit" id="login-btn" class="login100-form-btn">Login</button>
+                        </div>
+                    </form>
+                    <i id="login-error" style="color: red; visibility: hidden">Sai tên tài khoản hoặc mật khẩu</i>
+                </div>
+            </div>
+        </div>
+        <div id="dropDownSelect1"></div>
+    </div>
+</div>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/bootstrap/js/popper.js"></script>
+<script src="/st-login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/daterangepicker/moment.min.js"></script>
+<script src="/st-login/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="/st-login/js/main.js"></script>
+<script type="application/javascript">
+    var host = "http://" + location.hostname + ":" + location.port;
+    // $('#login-btn').click(function (e) {
+    //     e.preventDefault();
+    //     var url = host + "/api/user/login"
+    //     var accountModel = {
+    //         username: $('#txtUsername').val(),
+    //         password: $('#txtPassword').val()
+    //     }
+    //
+    //     var account = JSON.stringify(accountModel);
+    //     var formData = new FormData();
+    //     formData.append("accountModel", account);
+    //     // window.location.href = "/portal/test";
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         url: url,
+    //         data: formData,
+    //         datatype: 'json',
+    //         contentType: false,
+    //         processData: false,
+    //         success: function (res) {
+    //             var result = JSON.parse(res);
+    //             if(result.data === "1"){
+    //                 window.location.href = "/admin/product_category";
+    //             }else if(result.data === "2"){
+    //                 window.location.href = "/product/home";
+    //             }
+    //             else if(result.data === "failed"){
+    //                 $('#login-error').css('visibility', 'visible');
+    //                 $('#txtPassword').val("");
+    //                 console.log(res);
+    //                 // alert(("Invalid username or password"));
+    //             }
+    //         }
+    //     })
+    // })
+</script>
+</body>
+</html>

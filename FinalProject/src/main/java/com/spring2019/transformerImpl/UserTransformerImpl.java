@@ -34,17 +34,32 @@ public class UserTransformerImpl implements UserTransformer {
     @Override
     public User modelToEntity(UserModel model) {
         User entity = new User();
-
-        entity.setId(model.getId());
+        if(model.getId()!=null) {
+            entity.setId(model.getId());
+        }
         entity.setUsername(model.getUsername());
         entity.setPassword(model.getPassword());
-        entity.setEmail(model.getEmail());
-        entity.setFirstName(model.getFirstName());
-        entity.setMiddleName(model.getMiddleName());
-        entity.setLastName(model.getLastName());
-        entity.setPhone(model.getPhone());
-        entity.setStatus(model.getStatus());
-        entity.setRoleId(model.getRoleId());
+        if(model.getEmail()!=null) {
+            entity.setEmail(model.getEmail());
+        }
+        if(model.getFirstName()!=null) {
+            entity.setFirstName(model.getFirstName());
+        }
+        if(model.getMiddleName()!=null) {
+            entity.setMiddleName(model.getMiddleName());
+        }
+        if(model.getLastName()!=null) {
+            entity.setLastName(model.getLastName());
+        }
+        if(model.getPhone()!=null) {
+            entity.setPhone(model.getPhone());
+        }
+        if(model.getStatus()!=0) {
+            entity.setStatus(model.getStatus());
+        }
+        if(model.getRoleId()!=0) {
+            entity.setRoleId(model.getRoleId());
+        }
         return entity;
 
 

@@ -26,8 +26,11 @@ public class UserModel {
     private int status;
     @Expose
     private int roleId;
-
+    @Expose
     private String confirmPassword;
+    @Expose
+    private String oldPassword;
+
     public UserModel() {
     }
 
@@ -132,4 +135,11 @@ public class UserModel {
         this.roleId = roleId;
     }
 
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
 }

@@ -63,12 +63,12 @@
                                             <div class="form-group">
                                                 <label for="status">Status</label>
                                                 <label class="custom-control custom-radio">
-                                                    <input [# th:if="${form.status == 1}"] checked [/] id="active" name="status" value="1" type="radio"
+                                                    <input th:checked="${form.status == 1}"] id="active" name="status" value="1" type="radio"
                                                            class="custom-control-input">
                                                     <span class="custom-control-label">Active</span>
                                                 </label>
                                                 <label class="custom-control custom-radio">
-                                                    <input [# th:if="${form.status == 0}"] checked [/] id="Deactive" name="status"  value="0" type="radio"
+                                                    <input th:checked="${form.status == 0}"] id="Deactive" name="status"  value="0" type="radio"
                                                            class="custom-control-input">
                                                     <span class="custom-control-label">Deactive</span>
                                                 </label>

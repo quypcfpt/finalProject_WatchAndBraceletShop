@@ -14,5 +14,8 @@ public interface UserService {
     boolean save(User user);
     User getAccountByUsernameAndIsAdmin (String username , String password);
     User getAccountByUsernameAndIsUse (String username , String password);
+    public List<User> getAllByStatusAndRole(int roleId, int status);
+    public List<User> getAllByStatus(int status);
+    boolean changePassword(User user);
 
 }

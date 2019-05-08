@@ -9,6 +9,7 @@ import java.util.List;
 public interface OrderService {
     public Page<Orders>  getAllOrders(Pageable pageable);
     public List<Orders> getAllListOrders();
+    public List<Orders> getAllListOrdersByStatus(int status);
     public Orders getOrderById(int id);
     void updateStatus(int id);
 }
