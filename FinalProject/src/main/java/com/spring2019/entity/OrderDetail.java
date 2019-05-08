@@ -1,6 +1,5 @@
 package com.spring2019.entity;
 
-import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -64,6 +63,7 @@ public class OrderDetail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
 
 
     @Override

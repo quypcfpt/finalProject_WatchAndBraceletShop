@@ -15,4 +15,5 @@ public interface OrderService {
     void updateStatus(int id);
     int totaltotalOrder(Date startDate, Date endDate);
     int totaltotalOrderByStatus(Date startDate, Date endDate, int status);
+    Orders save(Orders orders);
 }

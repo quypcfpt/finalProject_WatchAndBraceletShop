@@ -60,8 +60,11 @@ public class Product {
     @Column(name = "Active", nullable = false)
     private boolean active;
 
-
-
+    public Product(Integer id) {
+        this.id = id;
+    }
+    public Product() {
+    }
     public Integer getId() {
         return id;
     }

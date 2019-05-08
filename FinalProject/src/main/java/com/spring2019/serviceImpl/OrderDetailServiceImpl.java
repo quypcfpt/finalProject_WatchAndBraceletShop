@@ -56,4 +56,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public int totaltotalPrice(Date startDate, Date endDate) {
         return  repository.CountTotalPrice(startDate, endDate);
     }
+
+    @Override
+    public OrderDetail save(OrderDetail orderDetail) {
+        return repository.save(orderDetail);
+    }
 }

@@ -2,7 +2,7 @@ package com.spring2019.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "[Order]")
@@ -11,9 +11,6 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
-    @Basic
-    @Column(name = "CustomerId", nullable = false)
-    private Integer custimerId;
     @Basic
     @Column(name = "CustomerName", nullable = false, length = 255)
     private String customerName;
@@ -38,6 +35,8 @@ public class Orders {
     @Basic
     @Column(name = "PaidDateTime", nullable = false)
     private Date  paidDateTime;
+    @OneToMany(mappedBy = "orderById")
+    private List<OrderDetail> detail = new ArrayList<>() ;
 
     public Integer getId() {
         return id;
@@ -47,13 +46,6 @@ public class Orders {
         this.id = id;
     }
 
-    public Integer getCustimerId() {
-        return custimerId;
-    }
-
-    public void setCustimerId(Integer custimerId) {
-        this.custimerId = custimerId;
-    }
 
     public String getCustomerName() {
         return customerName;
@@ -120,13 +112,20 @@ public class Orders {
         this.paidDateTime = paidDateTime;
     }
 
+    public List<OrderDetail> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(List<OrderDetail> detail) {
+        this.detail = detail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Orders)) return false;
         Orders orders = (Orders) o;
         return Objects.equals(id, orders.id) &&
-                Objects.equals(custimerId, orders.custimerId) &&
                 Objects.equals(customerName, orders.customerName) &&
                 Objects.equals(address, orders.address) &&
                 Objects.equals(phone, orders.phone) &&
@@ -139,6 +138,6 @@ public class Orders {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, custimerId, customerName, address, phone, email, status, note, createDateTime, paidDateTime);
+        return Objects.hash(id, customerName, address, phone, email, status, note, createDateTime, paidDateTime);
     }
 }

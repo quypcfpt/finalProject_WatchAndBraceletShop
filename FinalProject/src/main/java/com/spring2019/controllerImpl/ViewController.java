@@ -6,6 +6,7 @@ import com.spring2019.model.*;
 import com.spring2019.service.*;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -95,15 +96,15 @@ public class ViewController {
      * @return
      */
     @RequestMapping(value = {"/login", "/"})
-    public String toLogin(Model model,HttpSession session) {
+    public String toLogin(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null){
+        if (user == null) {
             return "login";
         }
-        if(user.getRoleId()==1){
-            return"/admin";
-        }else{
-            return"/home";
+        if (user.getRoleId() == 1) {
+            return "/admin";
+        } else {
+            return "/home";
         }
 
     }
@@ -119,11 +120,11 @@ public class ViewController {
         getMenu(model);
         MultiProductModel data = new MultiProductModel();
         List<ProductModel> productList = new ArrayList<>();
-            List<Product> products = productService.getAllProductsActive();
-            for (Product product : products) {
-                productList.add(productTransformer.entityToModel(product));
-            }
-            data.setListProduct(productList);
+        List<Product> products = productService.getAllProductsActive();
+        for (Product product : products) {
+            productList.add(productTransformer.entityToModel(product));
+        }
+        data.setListProduct(productList);
         model.addAttribute("resultProduct", data);
         return "product/home";
     }
@@ -188,7 +189,7 @@ public class ViewController {
     /**
      * Cart Page
      *
-     * @param model
+     * @param
      * @return
      */
 
@@ -197,12 +198,12 @@ public class ViewController {
     public String adminProductCategory(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/category";
         }
-            return "/login";
+        return "/login";
 
     }
 
@@ -210,7 +211,7 @@ public class ViewController {
     public String postsSave(@ModelAttribute("form") ProductCategoryModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             ProductCategory entity = new ProductCategory();
@@ -233,7 +234,7 @@ public class ViewController {
     public String adminProductLabel(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/label";
@@ -245,7 +246,7 @@ public class ViewController {
     public String postsSaveLabel(@ModelAttribute("form") LabelModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             Label entity = new Label();
@@ -274,7 +275,7 @@ public class ViewController {
     public String adminProductGlassType(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/glasstype";
@@ -286,7 +287,7 @@ public class ViewController {
     public String postsSaveGlassType(@ModelAttribute("form") GlassTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             GlassType entity = new GlassType();
@@ -313,7 +314,7 @@ public class ViewController {
     public String adminOrigin(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/origin";
@@ -325,7 +326,7 @@ public class ViewController {
     public String postsSaveOrigin(@ModelAttribute("form") OriginModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             Origin entity = new Origin();
@@ -351,7 +352,7 @@ public class ViewController {
     public String adminWireType(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/wiretype";
@@ -363,7 +364,7 @@ public class ViewController {
     public String wireTypeSave(@ModelAttribute("form") WireTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             WireType entity = new WireType();
@@ -385,7 +386,7 @@ public class ViewController {
     public String adminMachineType(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/machinetype";
@@ -397,7 +398,7 @@ public class ViewController {
     public String machineTypeSave(@ModelAttribute("form") MachineTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             MachineType entity = new MachineType();
@@ -419,7 +420,7 @@ public class ViewController {
     public String adminProductOrder(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/order";
@@ -432,7 +433,7 @@ public class ViewController {
     public String adminProductOrderDetail(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/orderdetail";
@@ -445,7 +446,7 @@ public class ViewController {
     public String adminProduct(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/product";
@@ -456,7 +457,7 @@ public class ViewController {
     @GetMapping("/admin/product/create")
     public String postsCreate(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             ProductModel productModel = new ProductModel();
@@ -476,7 +477,7 @@ public class ViewController {
     public String postsEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra, HttpSession session) {
         Product found = productService.getProductById(id);
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             if (found != null) {
@@ -502,7 +503,7 @@ public class ViewController {
     public String productSave(@ModelAttribute("form") ProductModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             Product entity = new Product();
@@ -530,7 +531,7 @@ public class ViewController {
     public String adminUser(HttpSession session) {
         //Excute anything here
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             return "admin/user";
@@ -539,9 +540,9 @@ public class ViewController {
     }
 
     @GetMapping("/admin/user/create")
-    public String userCreate(Model model,HttpSession session) {
+    public String userCreate(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             model.addAttribute("form", new UserModel());
@@ -554,7 +555,7 @@ public class ViewController {
     @GetMapping("/admin/user/edit/{id}")
     public String userEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             User found = userService.getUserById(id);
@@ -575,7 +576,7 @@ public class ViewController {
     public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             User entity = new User();
@@ -609,7 +610,7 @@ public class ViewController {
         } else {
             ra.addFlashAttribute("error", "UserName and password is invalid");
         }
-        session.setMaxInactiveInterval(300*1000);
+        session.setMaxInactiveInterval(300 * 1000);
 
         return "redirect:/login";
     }
@@ -626,9 +627,9 @@ public class ViewController {
 
     //Dashboard
     @RequestMapping("/admin")
-    public String dashboard(Model model,HttpSession session) {
+    public String dashboard(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             //Excute anything here
@@ -669,7 +670,7 @@ public class ViewController {
             model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
             return "admin/dashboard";
         }
-        return"/login";
+        return "/login";
     }
 
     private void getMenu(Model model) {
@@ -695,9 +696,9 @@ public class ViewController {
 
     //Daily Report
     @GetMapping("/admin/report")
-    public String report(Model model,HttpSession session) {
+    public String report(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if(user == null)
+        if (user == null)
             return "/login";
         if (user.getRoleId() == 1) {
             model.addAttribute("title", "Report");
@@ -778,7 +779,7 @@ public class ViewController {
         User userSession = (User) session.getAttribute("user");
         user.setUsername(userSession.getUsername());
         entity = userTransformer.modelToEntity(user);
-        if(user.getOldPassword().equals(userSession.getPassword())) {
+        if (user.getOldPassword().equals(userSession.getPassword())) {
             if (!user.getPassword().equals(userSession.getPassword())) {
                 boolean result = userService.changePassword(entity);
                 if (result) {
@@ -789,12 +790,12 @@ public class ViewController {
             } else {
                 ra.addFlashAttribute("error", "New Password  is the same as the old one");
             }
-        }else{
+        } else {
             ra.addFlashAttribute("error", "Old Password  is not matched as current password");
         }
         return "redirect:/changepassword";
     }
-       
+
 
     public static Date atStartOfDay(Date date) {
         LocalDateTime localDateTime = dateToLocalDateTime(date);
@@ -815,10 +816,39 @@ public class ViewController {
     private static Date localDateTimeToDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
+
     @RequestMapping("/cart")
     public String toCart(Model model) {
         //Excute anything here
         getMenu(model);
         return "product/cart";
+    }
+
+    @RequestMapping("/test")
+    public String addOrder(Model model) {
+        Orders order = new Orders();
+        order.setCustomerName("Quy");
+        order.setAddress("14 Cộng Hòa");
+        order.setStatus(1);
+        order.setEmail("QUyPC@gmail.com");
+        Orders orders = orderService.save(order);
+        if (orders != null) {
+            Product pro = new Product();
+            pro.setId(1);
+            OrderDetail detail = new OrderDetail();
+            detail.setProductById(pro);
+            detail.setQuantity(3);
+            detail.setPrice(100);
+            pro.setId(2);
+            OrderDetail detail2 = new OrderDetail();
+            detail2.setProductById(pro);
+            detail2.setQuantity(4);
+            detail2.setPrice(200);
+            detail.setOrderById(order);
+            detail2.setOrderById(order);
+                orderDetailService.save(detail);
+                orderDetailService.save(detail2);
+        }
+        return "";
     }
 }

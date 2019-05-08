@@ -4,13 +4,12 @@ import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class OrderModel {
     @Expose
     private Integer id;
-    @Expose
-    private Integer custimerId;
     @Expose
     private String customerName;
     @Expose
@@ -29,13 +28,13 @@ public class OrderModel {
     private Date createDateTime;
     @Expose
     private Date paidDateTime;
-
+    @Expose
+    private List<OrderDetailModel> list;
     public OrderModel() {
     }
 
-    public OrderModel(Integer id, Integer custimerId, String customerName, String address, String phone, String email, int status, Float totalPrice, String note, Date createDateTime, Date paidDateTime) {
+    public OrderModel(Integer id, String customerName, String address, String phone, String email, int status, Float totalPrice, String note, Date createDateTime, Date paidDateTime) {
         this.id = id;
-        this.custimerId = custimerId;
         this.customerName = customerName;
         this.address = address;
         this.phone = phone;
@@ -55,13 +54,6 @@ public class OrderModel {
         this.id = id;
     }
 
-    public Integer getCustimerId() {
-        return custimerId;
-    }
-
-    public void setCustimerId(Integer custimerId) {
-        this.custimerId = custimerId;
-    }
 
     public String getCustomerName() {
         return customerName;
@@ -133,5 +125,13 @@ public class OrderModel {
 
     public void setPaidDateTime(Date paidDateTime) {
         this.paidDateTime = paidDateTime;
+    }
+
+    public List<OrderDetailModel> getList() {
+        return list;
+    }
+
+    public void setList(List<OrderDetailModel> list) {
+        this.list = list;
     }
 }

@@ -67,5 +67,10 @@ public class OrderServiceImpl implements OrderService {
         return  repository.CountOrderStatus(startDate, endDate, status);
     }
 
+    @Override
+    public Orders save(Orders orders) {
+        return repository.save(orders);
+    }
+
 
 }

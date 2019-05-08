@@ -1,19 +1,23 @@
 package com.spring2019.transformerImpl;
 
+import com.spring2019.entity.OrderDetail;
 import com.spring2019.entity.Orders;
 import com.spring2019.model.OrderModel;
+import com.spring2019.transformer.OrderDetailTransformer;
 import com.spring2019.transformer.OrderTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderTransformerImpl implements OrderTransformer {
+    @Autowired
+    OrderDetailTransformer transformer;
 
     @Override
     public OrderModel entityToModel(Orders entity) {
         OrderModel model = new OrderModel();
 
         model.setId(entity.getId());
-        model.setCustimerId(entity.getCustimerId());
         model.setCustomerName(entity.getCustomerName());
         model.setAddress(entity.getAddress());
         model.setEmail(entity.getEmail());
@@ -30,7 +34,6 @@ public class OrderTransformerImpl implements OrderTransformer {
         Orders entity = new Orders();
 
         entity.setId(model.getId());
-        entity.setCustimerId(model.getCustimerId());
         entity.setCustomerName(model.getCustomerName());
         entity.setAddress(model.getAddress());
         entity.setEmail(model.getEmail());
@@ -42,5 +45,15 @@ public class OrderTransformerImpl implements OrderTransformer {
         return entity;
 
 
+    }
+
+    @Override
+    public OrderModel entityToModel2(Orders entity) {
+        return null;
+    }
+
+    @Override
+    public Orders modelToEntity2(OrderModel model) {
+        return null;
     }
 }
