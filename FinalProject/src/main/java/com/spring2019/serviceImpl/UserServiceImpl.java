@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService {
         if(found !=null) {
             return false;
         }
-        user.setRoleId(2);
         user.setStatus(1);
         repository.save(user);
         return true;

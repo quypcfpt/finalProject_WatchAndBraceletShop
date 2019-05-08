@@ -72,8 +72,17 @@ public class ViewController {
      * @return
      */
     @RequestMapping(value = {"/login", "/"})
-    public String toLogin(Model model) {
-        return "login";
+    public String toLogin(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user == null){
+            return "login";
+        }
+        if(user.getRoleId()==1){
+            return"/admin";
+        }else{
+            return"/home";
+        }
+
     }
 
     /**
@@ -102,15 +111,24 @@ public class ViewController {
 
     //Admin Product Category
     @RequestMapping("/admin/product_category")
-    public String adminProductCategory() {
+    public String adminProductCategory(HttpSession session) {
         //Excute anything here
-        return "admin/category";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/category";
+        }
+            return "/login";
+
     }
 
     @PostMapping("/admin/product_category/save")
     public String postsSave(@ModelAttribute("form") ProductCategoryModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             ProductCategory entity = new ProductCategory();
             entity = cateTranform.modelToEntity(model);
@@ -129,15 +147,23 @@ public class ViewController {
 
     //Label
     @RequestMapping("/admin/label")
-    public String adminProductLabel() {
+    public String adminProductLabel(HttpSession session) {
         //Excute anything here
-        return "admin/label";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/label";
+        }
+        return "/login";
     }
 
     @PostMapping("/admin/label/save")
     public String postsSaveLabel(@ModelAttribute("form") LabelModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             Label entity = new Label();
             entity = labelTransformer.modelToEntity(model);
@@ -162,15 +188,23 @@ public class ViewController {
 
     //glass type
     @RequestMapping("/admin/glasstype")
-    public String adminProductGlassType() {
+    public String adminProductGlassType(HttpSession session) {
         //Excute anything here
-        return "admin/glasstype";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/glasstype";
+        }
+        return "/login";
     }
 
     @PostMapping("/admin/product_glass_type/save")
     public String postsSaveGlassType(@ModelAttribute("form") GlassTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             GlassType entity = new GlassType();
             entity = glassTypeTransformer.modelToEntity(model);
@@ -193,15 +227,23 @@ public class ViewController {
 
     //origin
     @RequestMapping("/admin/origin")
-    public String adminOrigin() {
+    public String adminOrigin(HttpSession session) {
         //Excute anything here
-        return "admin/origin";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/origin";
+        }
+        return "login";
     }
 
     @PostMapping("/admin/origin/save")
     public String postsSaveOrigin(@ModelAttribute("form") OriginModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             Origin entity = new Origin();
             entity = originTransformer.modelToEntity(model);
@@ -223,15 +265,23 @@ public class ViewController {
 
     //Admin Wire Type
     @RequestMapping("/admin/wireType")
-    public String adminWireType() {
+    public String adminWireType(HttpSession session) {
         //Excute anything here
-        return "admin/wiretype";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/wiretype";
+        }
+        return "/login";
     }
 
     @PostMapping("/admin/wireType/save")
     public String wireTypeSave(@ModelAttribute("form") WireTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             WireType entity = new WireType();
             entity = wireTransformer.modelToEntity(model);
@@ -249,15 +299,23 @@ public class ViewController {
 
     //Admin Machine Type
     @RequestMapping("/admin/machineType")
-    public String adminMachineType() {
+    public String adminMachineType(HttpSession session) {
         //Excute anything here
-        return "admin/machinetype";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/machinetype";
+        }
+        return "/login";
     }
 
     @PostMapping("/admin/machineType/save")
     public String machineTypeSave(@ModelAttribute("form") MachineTypeModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             MachineType entity = new MachineType();
             entity = machineTypeTransformer.modelToEntity(model);
@@ -275,28 +333,48 @@ public class ViewController {
 
     //Admin Product Orders
     @RequestMapping("/admin/order")
-    public String adminProductOrder() {
+    public String adminProductOrder(HttpSession session) {
         //Excute anything here
-        return "admin/order";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/order";
+        }
+        return "/login";
     }
 
     //Admin Product Order Detail
     @RequestMapping("/admin/orderdetail")
-    public String adminProductOrderDetail() {
+    public String adminProductOrderDetail(HttpSession session) {
         //Excute anything here
-        return "admin/orderdetail";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/orderdetail";
+        }
+        return "/login";
     }
 
     //Admin User
     @RequestMapping("/admin/product")
-    public String adminProduct() {
+    public String adminProduct(HttpSession session) {
         //Excute anything here
-        return "admin/product";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/product";
+        }
+        return "/login";
     }
 
     @GetMapping("/admin/product/create")
     public String postsCreate(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             ProductModel productModel = new ProductModel();
             model.addAttribute("form", productModel);
@@ -315,6 +393,8 @@ public class ViewController {
     public String postsEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra, HttpSession session) {
         Product found = productService.getProductById(id);
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             if (found != null) {
                 ProductModel productModel = new ProductModel();
@@ -339,6 +419,8 @@ public class ViewController {
     public String productSave(@ModelAttribute("form") ProductModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             Product entity = new Product();
             entity = productTransformer.modelToEntity(model);
@@ -362,21 +444,35 @@ public class ViewController {
 
     //Admin Users
     @RequestMapping("/admin/user")
-    public String adminUser() {
+    public String adminUser(HttpSession session) {
         //Excute anything here
-        return "admin/user";
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            return "admin/user";
+        }
+        return "/login";
     }
 
     @GetMapping("/admin/user/create")
-    public String userCreate(Model model) {
-        model.addAttribute("form", new UserModel());
-        model.addAttribute("title", "Create User");
-        return "admin/user-form";
+    public String userCreate(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            model.addAttribute("form", new UserModel());
+            model.addAttribute("title", "Create User");
+            return "admin/user-form";
+        }
+        return "/login";
     }
 
     @GetMapping("/admin/user/edit/{id}")
     public String userEdit(Model model, @PathVariable("id") int id, RedirectAttributes ra, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             User found = userService.getUserById(id);
             if (found != null) {
@@ -396,6 +492,8 @@ public class ViewController {
     public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra, HttpSession session) {
         //TODO validation
         User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
         if (user.getRoleId() == 1) {
             User entity = new User();
             entity = userTransformer.modelToEntity(model);
@@ -444,86 +542,98 @@ public class ViewController {
 
     //Dashboard
     @RequestMapping("/admin")
-    public String dashboard(Model model) {
-        //Excute anything here
-        model.addAttribute("title", "Dashboard");
-        //Users
-        List<User> users = userService.getAllByStatus(1);
-        List<User> customers = userService.getAllByStatusAndRole(2, 1);
-        model.addAttribute("totalUsers", users.size());
-        model.addAttribute("totalcustomers", customers.size());
-        model.addAttribute("totaladmin", users.size() - customers.size());
-        //Products
-        List<Product> products = productService.getAllProductList();
-        List<Product> activeProducts = productService.getAllProductListByStatus(1);
-        model.addAttribute("totalProducts", products.size());
-        model.addAttribute("totalActivePro", activeProducts.size());
-        model.addAttribute("totalDeactivePro", products.size() - activeProducts.size());
-        //Orders
-        List<Orders> orders = orderService.getAllListOrders();
-        List<Orders> deliveringOrdersList = orderService.getAllListOrdersByStatus(2);
-        List<Orders> paidOrdersList = orderService.getAllListOrdersByStatus(3);
-        List<Orders> pendingOrdersList = orderService.getAllListOrdersByStatus(1);
-        model.addAttribute("totalorders", orders.size());
-        model.addAttribute("totalpending", pendingOrdersList.size());
-        model.addAttribute("totalpaid", paidOrdersList.size());
-        model.addAttribute("totaldelivery", deliveringOrdersList.size());
-        model.addAttribute("totalcancel", orders.size() - pendingOrdersList.size() - paidOrdersList.size() - deliveringOrdersList.size());
-        //Category
-        model.addAttribute("totalcategories", categoryService.getAllProductCategorysAdmin().size());
-        //Wire Type
-        model.addAttribute("totalwiretypes", wireTypeService.getAllWireTypesAdmin().size());
-        //Glass type
-        model.addAttribute("totalglasstype", glassTypeService.getAllGlassTypes().size());
-        //Label
-        model.addAttribute("totallabels", labelService.getAllLabels().size());
-        //Orgin
-        model.addAttribute("totalorgin", originService.getAllOrigin().size());
-        //Machine
-        model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
-        return "admin/dashboard";
+    public String dashboard(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            //Excute anything here
+            model.addAttribute("title", "Dashboard");
+            //Users
+            List<User> users = userService.getAllByStatus(1);
+            List<User> customers = userService.getAllByStatusAndRole(2, 1);
+            model.addAttribute("totalUsers", users.size());
+            model.addAttribute("totalcustomers", customers.size());
+            model.addAttribute("totaladmin", users.size() - customers.size());
+            //Products
+            List<Product> products = productService.getAllProductList();
+            List<Product> activeProducts = productService.getAllProductListByStatus(1);
+            model.addAttribute("totalProducts", products.size());
+            model.addAttribute("totalActivePro", activeProducts.size());
+            model.addAttribute("totalDeactivePro", products.size() - activeProducts.size());
+            //Orders
+            List<Orders> orders = orderService.getAllListOrders();
+            List<Orders> deliveringOrdersList = orderService.getAllListOrdersByStatus(2);
+            List<Orders> paidOrdersList = orderService.getAllListOrdersByStatus(3);
+            List<Orders> pendingOrdersList = orderService.getAllListOrdersByStatus(1);
+            model.addAttribute("totalorders", orders.size());
+            model.addAttribute("totalpending", pendingOrdersList.size());
+            model.addAttribute("totalpaid", paidOrdersList.size());
+            model.addAttribute("totaldelivery", deliveringOrdersList.size());
+            model.addAttribute("totalcancel", orders.size() - pendingOrdersList.size() - paidOrdersList.size() - deliveringOrdersList.size());
+            //Category
+            model.addAttribute("totalcategories", categoryService.getAllProductCategorysAdmin().size());
+            //Wire Type
+            model.addAttribute("totalwiretypes", wireTypeService.getAllWireTypesAdmin().size());
+            //Glass type
+            model.addAttribute("totalglasstype", glassTypeService.getAllGlassTypes().size());
+            //Label
+            model.addAttribute("totallabels", labelService.getAllLabels().size());
+            //Orgin
+            model.addAttribute("totalorgin", originService.getAllOrigin().size());
+            //Machine
+            model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
+            return "admin/dashboard";
+        }
+        return"/login";
     }
 
     //Daily Report
     @GetMapping("/admin/report")
-    public String report(Model model) {
- model.addAttribute("title","Report");
-        try{
-            Date start = new Date();
-            Date end = new Date();
+    public String report(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user == null)
+            return "/login";
+        if (user.getRoleId() == 1) {
+            model.addAttribute("title", "Report");
+            try {
+                Date start = new Date();
+                Date end = new Date();
 
-            Date startDate = atStartOfDay(start);
-            Date endDate = atEndOfDay(end);
+                Date startDate = atStartOfDay(start);
+                Date endDate = atEndOfDay(end);
 
-            //Sold Product
-            int soldProduct = orderDetailService.totalSoldProduct(startDate, endDate);
-            model.addAttribute("soldProduct", soldProduct);
+                //Sold Product
+                int soldProduct = orderDetailService.totalSoldProduct(startDate, endDate);
+                model.addAttribute("soldProduct", soldProduct);
 
-            //Sold Product
-            int totalPrice = orderDetailService.totaltotalPrice(startDate, endDate);
-            model.addAttribute("totalprice", soldProduct);
+                //Sold Product
+                int totalPrice = orderDetailService.totaltotalPrice(startDate, endDate);
+                model.addAttribute("totalprice", soldProduct);
 
-            //Orders
-            int orders = orderService.totaltotalOrder(startDate, endDate);
-            int deliveringOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,2);
-            int paidOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,3);
-            int pendingOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate,1);
-            model.addAttribute("totalorders", orders);
-            model.addAttribute("totalpending", pendingOrdersList);
-            model.addAttribute("totalpaid", paidOrdersList);
-            model.addAttribute("totaldelivery", deliveringOrdersList);
-            model.addAttribute("totalcancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList);
-            List orderChart = new ArrayList();
-           orderChart.add(new Object[]{"Pending", pendingOrdersList});
-            orderChart.add(new Object[]{"On Delivery", deliveringOrdersList});
-            orderChart.add(new Object[]{"Paid", paidOrdersList});
-            orderChart.add(new Object[]{"Cancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList});
-            model.addAttribute("chart", orderChart);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+                //Orders
+                int orders = orderService.totaltotalOrder(startDate, endDate);
+                int deliveringOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate, 2);
+                int paidOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate, 3);
+                int pendingOrdersList = orderService.totaltotalOrderByStatus(startDate, endDate, 1);
+                model.addAttribute("totalorders", orders);
+                model.addAttribute("totalpending", pendingOrdersList);
+                model.addAttribute("totalpaid", paidOrdersList);
+                model.addAttribute("totaldelivery", deliveringOrdersList);
+                model.addAttribute("totalcancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList);
+                List orderChart = new ArrayList();
+                orderChart.add(new Object[]{"Pending", pendingOrdersList});
+                orderChart.add(new Object[]{"On Delivery", deliveringOrdersList});
+                orderChart.add(new Object[]{"Paid", paidOrdersList});
+                orderChart.add(new Object[]{"Cancel", orders - pendingOrdersList - paidOrdersList - deliveringOrdersList});
+                model.addAttribute("chart", orderChart);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            return "admin/dailyreport";
         }
-
-        return "admin/dailyreport";
+        return "/login";
     }
 
     // Register
