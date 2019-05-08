@@ -47,9 +47,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean save(User user) {
-        User found = repository.findById((int)user.getId());
+        User found = repository.findByUsername(user.getUsername());
+        if(found !=null) {
+            return false;
+        }
+        user.setRoleId(2);
+        user.setStatus(1);
         repository.save(user);
         return true;
+
     }
 
     @Override
@@ -62,5 +68,26 @@ public class UserServiceImpl implements UserService {
     public User getAccountByUsernameAndIsUse(String username, String password) {
         User account = repository.findByUsernameAndPasswordAndRoleId(username, password, 2);
         return account;
+    }
+
+    @Override
+    public List<User> getAllByStatusAndRole(int roleId, int status) {
+        return repository.findByRoleIdAndStatus(roleId, status);
+    }
+
+    @Override
+    public List<User> getAllByStatus(int status) {
+        return repository.findByStatus(status);
+    }
+
+    @Override
+    public boolean changePassword(User user) {
+        User found = repository.findByUsername(user.getUsername());
+        if(found !=null) {
+            found.setPassword(user.getPassword());
+            repository.save(found);
+            return true;
+        }
+        return false;
     }
 }

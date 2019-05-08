@@ -31,9 +31,9 @@
         <div class="limiter">
             <div class="container-login100" style="background-image: url('/st-login/images/bg-01.jpg');">
                 <div class="wrap-login100 p-l-65 p-r-65 p-t-30 p-b-33">
-                    <form class="login100-form validate-form flex-sb flex-w" id="login-form" method="post"  action="/user/login">
+                    <form class="login100-form validate-form flex-sb flex-w" id="login-form" method="post"  action="/user/register">
                             <span class="login100-form-title p-b-10">
-                               LOGIN
+                               REGISTER
                             </span>
 
                         <div class="text-danger col-md-12 text-center" id="msgError" th:text="${error}"></div>
@@ -55,16 +55,65 @@
                             <input type="password" name="password" class="form-control" id="password" />
                             <span class="focus-input100"></span>
                         </div>
-                        <div class="container-login100-form-btn m-t-17">
-                            <button type="submit" id="login-btn" class="login100-form-btn">Login</button>
+                        <div class="p-t-13 p-b-9">
+                                <span class="txt1">Password Confirm</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <input type="password" name="con_password" class="form-control" id="con_password" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="lastname">LastName</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Lastname is required">
+                            <input type="text" name="lastName" class="form-control" id="lastname" />
+                            <span class="focus-input100"></span>
                         </div>
 
-                        <div class="w-full text-center p-t-10">
-                                <span class="txt2">
-                                    Register ?
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="middle">Middle Name</label>
                                 </span>
-                            <a class="txt2 bo1" id="forgot-password" th:href="@{/register
-                            }">Click here.</a>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Middle Name is required">
+                            <input type="text" name="middleName" class="form-control" id="middle" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="first">First Name</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="FirstName is required">
+                            <input type="text" name="firstName" class="form-control" id="first" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="phone">Phone</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Lastname is required">
+                            <input type="number" name="phone" class="form-control" id="phone" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="p-t-10 p-b-9">
+                                <span class="txt1">
+                                    <label for="email">Email</label>
+                                </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Email is required">
+                            <input type="text" name="email" class="form-control" id="email" />
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn m-t-17">
+                            <button type="submit" id="login-btn" class="login100-form-btn">Login</button>
                         </div>
                     </form>
                     <i id="login-error" style="color: red; visibility: hidden">Sai tên tài khoản hoặc mật khẩu</i>
