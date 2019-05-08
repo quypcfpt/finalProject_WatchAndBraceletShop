@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "[Order]")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

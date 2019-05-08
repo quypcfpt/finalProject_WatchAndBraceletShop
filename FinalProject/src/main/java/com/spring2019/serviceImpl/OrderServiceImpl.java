@@ -26,6 +26,10 @@ public class OrderServiceImpl implements OrderService {
         return repository.findAll();
     }
 
+    @Override
+    public List<Orders> getAllListOrdersByStatus(int status) {
+        return repository.findAllByStatus(status);
+    }
 
 
     @Override

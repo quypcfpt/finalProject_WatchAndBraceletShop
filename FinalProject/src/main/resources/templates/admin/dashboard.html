@@ -66,7 +66,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate" th:text="${totalorders}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Order</h5>
                                                     </div>
                                                 </div>
@@ -83,7 +83,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h3 class="m-b-0 font-light" id="totalUser" th:text="${totalcategories}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Category</h5>
                                                     </div>
                                                 </div>
@@ -98,7 +98,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization" th:text="${totalwiretypes}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Wire Type</h5>
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate" th:text="${totalglasstype}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Glass Type</h5>
                                                     </div>
                                                 </div>
@@ -130,7 +130,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h3 class="m-b-0 font-light" id="totalUser" th:text="${totallabels}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total label</h5>
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization" th:text="${totalorgin}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Orgin</h5>
                                                     </div>
                                                 </div>
@@ -160,7 +160,7 @@
                                                 <div class="d-flex flex-row">
                                                     <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
                                                     <div class="m-l-10 align-self-center">
-                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate" th:text="${machine}">0</h3>
                                                         <h5 class="text-muted m-b-0">Total Machine Type</h5>
                                                     </div>
                                                 </div>
@@ -201,11 +201,11 @@
                                                         <div class="soc-header box-twitter">Product</div>
                                                         <div class="soc-content">
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h3 class="font-medium" id="systemAdministrator"  th:text="${totalActivePro}">0</h3>
                                                                 <h5 class="text-muted">Activate</h5>
                                                             </div>
                                                             <div class="col-6 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totalDeactivePro}">0</h3>
                                                                 <h5 class="text-muted">Deactivate</h5>
                                                             </div>
                                                         </div>
@@ -225,19 +225,19 @@
                                                         <div class="soc-header box-google">Order</div>
                                                         <div class="soc-content">
                                                             <div class="col-3 b-r">
-                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
-                                                                <h5 class="text-muted">Waiting</h5>
+                                                                <h3 class="font-medium" id="systemAdministrator" th:text="${totalpending}">0</h3>
+                                                                <h5 class="text-muted">Pending</h5>
                                                             </div>
                                                             <div class="col-3 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
-                                                                <h5 class="text-muted">Processing</h5>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totaldelivery}">0</h3>
+                                                                <h5 class="text-muted">On Delivery</h5>
                                                             </div>
                                                             <div class="col-3 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totalpaid}">0</h3>
                                                                 <h5 class="text-muted">Paid</h5>
                                                             </div>
                                                             <div class="col-3 b-r">
-                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h3 class="font-medium" id="eventManager" th:text="${totalcancel}">0</h3>
                                                                 <h5 class="text-muted">Cancel</h5>
                                                             </div>
                                                         </div>

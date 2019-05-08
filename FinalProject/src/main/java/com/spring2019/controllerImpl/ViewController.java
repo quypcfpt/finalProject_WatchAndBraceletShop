@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ViewController {
@@ -50,6 +52,12 @@ public class ViewController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    OrderDetailService orderDetailService;
     /**
      * Login Page
      *
@@ -318,7 +326,7 @@ public class ViewController {
     @GetMapping("/admin/user/create")
     public String userCreate(Model model) {
         model.addAttribute("form",new UserModel());
-
+        model.addAttribute("title", "Create User");
         return "admin/user-form";
     }
 
@@ -388,4 +396,54 @@ public class ViewController {
         System.out.println(user);
         return "redirect:/login";
     }
+        model.addAttribute("title", "Dashboard");
+        //Users
+        List<User> users = userService.getAllByStatus(1);
+        List<User> customers = userService.getAllByStatusAndRole(2, 1);
+        model.addAttribute("totalUsers", users.size());
+        model.addAttribute("totalcustomers", customers.size());
+        model.addAttribute("totaladmin", users.size()-customers.size());
+        //Products
+        List<Product> products = productService.getAllProductList();
+        List<Product> activeProducts = productService.getAllProductListByStatus(1);
+        model.addAttribute("totalProducts", products.size());
+        model.addAttribute("totalActivePro", activeProducts.size());
+        model.addAttribute("totalDeactivePro", products.size()-activeProducts.size());
+        //Orders
+        List<Orders> orders = orderService.getAllListOrders();
+        List<Orders> deliveringOrdersList = orderService.getAllListOrdersByStatus(2);
+        List<Orders> paidOrdersList = orderService.getAllListOrdersByStatus(3);
+        List<Orders> pendingOrdersList = orderService.getAllListOrdersByStatus(1);
+        model.addAttribute("totalorders", orders.size());
+        model.addAttribute("totalpending", pendingOrdersList.size());
+        model.addAttribute("totalpaid", paidOrdersList.size());
+        model.addAttribute("totaldelivery", deliveringOrdersList.size());
+        model.addAttribute("totalcancel", orders.size() - pendingOrdersList.size() - paidOrdersList.size()- deliveringOrdersList.size());
+        //Category
+        model.addAttribute("totalcategories", categoryService.getAllProductCategorysAdmin().size());
+        //Wire Type
+        model.addAttribute("totalwiretypes", wireTypeService.getAllWireTypesAdmin().size());
+        //Glass type
+        model.addAttribute("totalglasstype", glassTypeService.getAllGlassTypes().size());
+        //Label
+        model.addAttribute("totallabels", labelService.getAllLabels().size());
+        //Orgin
+        model.addAttribute("totalorgin", originService.getAllOrigin().size());
+        //Machine
+        model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
+        return "admin/dashboard";
+    }
+    //Daily Report
+    @GetMapping("/admin/report")
+    public String report(Model model) {
+        model.addAttribute("title","Report");
+        Date start = new Date();
+        Date end = new Date();
+
+        Calendar cStart = Calendar.getInstance(); cStart.setTime(start);
+        Calendar cEnd = Calendar.getInstance(); cEnd.setTime(end);
+        int soldProduct = orderDetailService.totalSoldProduct(start, end);
+        return "admin/dailyreport";
+    }
+
 }
