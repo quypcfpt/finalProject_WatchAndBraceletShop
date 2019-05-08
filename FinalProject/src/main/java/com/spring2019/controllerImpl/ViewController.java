@@ -1,15 +1,24 @@
 package com.spring2019.controllerImpl;
 
+import com.spring2019.controller.ProductController;
 import com.spring2019.entity.*;
 import com.spring2019.model.*;
 import com.spring2019.service.*;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
@@ -23,6 +32,7 @@ import java.util.List;
 
 @Controller
 public class ViewController {
+
     @Autowired
     ProductCategoryTransformer cateTranform;
     @Autowired
@@ -65,6 +75,16 @@ public class ViewController {
     @Autowired
     OrderDetailService orderDetailService;
 
+
+    @Autowired
+    ProductController productController;
+
+    @Autowired
+    ProductCategoryService productCategoryService;
+
+    @Autowired
+    ProductCategoryTransformer transformer;
+
     /**
      * Login Page
      *
@@ -93,7 +113,15 @@ public class ViewController {
      */
     @RequestMapping("/home")
     public String toHome(Model model) {
-        //Excute anything here
+        getMenu(model);
+        MultiProductModel data = new MultiProductModel();
+        List<ProductModel> productList = new ArrayList<>();
+            List<Product> products = productService.getAllProductsActive();
+            for (Product product : products) {
+                productList.add(productTransformer.entityToModel(product));
+            }
+            data.setListProduct(productList);
+        model.addAttribute("resultProduct", data);
         return "product/home";
     }
 
@@ -103,10 +131,65 @@ public class ViewController {
      * @param model
      * @return
      */
-    @RequestMapping("/watch")
-    public String toWatch(Model model) {
-        //Excute anything here
+    @RequestMapping("/watch/{page}")
+    public String toWatch(Model model, @PathVariable("page") int page) {
+        getMenu(model);
+        Pageable pageable = null;
+        if (page > 0) {
+            pageable = PageRequest.of(page - 1, 8);
+        }
+        try {
+            MultiProductModel data = new MultiProductModel();
+
+            List<ProductModel> productList = new ArrayList<>();
+            if (page > 0) {
+                Page<Product> products = productService.getAllProductsActive(pageable);
+
+                for (Product product : products) {
+                    productList.add(productTransformer.entityToModel(product));
+                }
+                data.setListProduct(productList);
+                data.setCurrentPage(page);
+                data.setTotalPage(products.getTotalPages());
+                data.setTotalRecord(products.getTotalElements());
+            }
+            data.setListProduct(productList);
+
+            model.addAttribute("result", data);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return "product/watch";
+    }
+
+    /**
+     * Home Product Page
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/productdetail")
+    public String toProductDetail(Model model, @RequestParam("proid") int id) {
+        getMenu(model);
+        try {
+            Product product = productService.getProductById(id);
+            ProductModel productModel = productTransformer.entityToModel(product);
+            model.addAttribute("prodetail", productModel);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "product/product-detail";
+    }
+
+    /**
+     * Cart Page
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/cart")
+    public String toCart(Model model) {
+        return "product/cart";
     }
 
     //Admin Product Category
@@ -586,6 +669,27 @@ public class ViewController {
             return "admin/dashboard";
         }
         return"/login";
+    }
+
+    private void getMenu(Model model) {
+        MultiProductCategoryModel data = new MultiProductCategoryModel();
+        List<ProductCategoryModel> productCategoryList = new ArrayList<>();
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategorysAdmin();
+        for (ProductCategory ProductCategory : productCategories) {
+            productCategoryList.add(transformer.entityToModel(ProductCategory));
+        }
+        data.setListProductCategory(productCategoryList);
+        model.addAttribute("listCates", data);
+
+        //get label
+        MultiLabelModel dataLabel = new MultiLabelModel();
+        List<LabelModel> labelModelList = new ArrayList<>();
+        List<Label> labelsActive = labelService.getAllLabels();
+        for (Label item : labelsActive) {
+            labelModelList.add(labelTransformer.entityToModel(item));
+        }
+        dataLabel.setListLabel(labelModelList);
+        model.addAttribute("labels", dataLabel);
     }
 
     //Daily Report

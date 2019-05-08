@@ -83,6 +83,27 @@ public class ProductCategoryControllerImpl extends AbstractController implements
     }
 
     @Override
+    public String getListProductCategoryActive() {
+        Response<MultiProductCategoryModel> response = new Response<MultiProductCategoryModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        try {
+            MultiProductCategoryModel data = new MultiProductCategoryModel();
+            List<ProductCategoryModel> productCategoryModelList = new ArrayList<>();
+                List<ProductCategory> productCategorysActive = service.getAllProductCategorysAdmin();
+                for (ProductCategory item : productCategorysActive) {
+                    productCategoryModelList.add(transformer.entityToModel(item));
+                }
+            data.setListProductCategory(productCategoryModelList);
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, data);
+            LOGGER.info("End load all ProductCategory active");
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+
+    }
+
+    @Override
     public String loadAllProductCategory(Integer page, Integer size, String sort, String sortBy) {
         Response<MultiProductCategoryModel> response = new Response<MultiProductCategoryModel>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
         Sort sortable = null;
