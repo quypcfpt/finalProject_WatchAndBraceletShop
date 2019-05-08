@@ -23,4 +23,7 @@ public interface ProductController {
     String deleteProductById(@PathVariable("id") int id);
     @PutMapping(CoreConstant.API_PRODUCT+"/updatestatus/{id}")
     String updateProductById(@PathVariable("id") int id);
+
+    @GetMapping(CoreConstant.API_PRODUCTDETAIL)
+    String getProductDetail(@RequestParam("id") int id);
 }

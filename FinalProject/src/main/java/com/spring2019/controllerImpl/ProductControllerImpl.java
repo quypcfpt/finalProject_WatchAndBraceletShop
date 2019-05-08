@@ -122,7 +122,7 @@ public class ProductControllerImpl extends AbstractController implements Product
     @Override
     public String deleteProductById(int id) {
         String msg = "Product can not delete.";
-        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL,msg);
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL, msg);
         LOGGER.info("Start delete  Product Id");
         try {
 
@@ -141,7 +141,7 @@ public class ProductControllerImpl extends AbstractController implements Product
     @Override
     public String updateProductById(int id) {
         String msg = "Product can not update status.";
-        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL,msg);
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL, msg);
         LOGGER.info("Start update status  Product Id");
         try {
 
@@ -150,6 +150,23 @@ public class ProductControllerImpl extends AbstractController implements Product
             response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, msg);
             LOGGER.info("End update Product status by Id");
             return gson.toJson(response);
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+    }
+
+    @Override
+    public String getProductDetail(int id) {
+        String msg = "Product detail cannot load.";
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL, msg);
+        try {
+            ProductDetailModel productDetailModel = service.getProductDetail(id);
+
+            response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, msg);
+            LOGGER.info("End load Product detail by Id");
+            return gson.toJson(productDetailModel);
         } catch (Exception e) {
             response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
             LOGGER.error(e.getMessage());

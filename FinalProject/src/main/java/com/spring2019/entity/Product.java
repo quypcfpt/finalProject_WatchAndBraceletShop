@@ -30,9 +30,11 @@ public class Product {
     @Basic
     @Column(name = "MachineTypeId", nullable = false)
     private int machineTypeId;
+
     @Basic
     @Column(name = "LabelId", nullable = false)
     private int labelId;
+
     @Basic
     @Column(name = "OriginId", nullable = false)
     private int originId;
@@ -205,7 +207,6 @@ public class Product {
                 wireTypeId == product.wireTypeId &&
                 glassTypeId == product.glassTypeId &&
                 machineTypeId == product.machineTypeId &&
-                labelId == product.labelId &&
                 originId == product.originId &&
                 status == product.status &&
                 categoryId == product.categoryId &&
@@ -219,6 +220,6 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, imge, price, wireTypeId, glassTypeId, machineTypeId, labelId, originId, status, productCode, categoryId, active);
+        return Objects.hash(id, name, description, imge, price, wireTypeId, glassTypeId, machineTypeId, originId, status, productCode, categoryId, active);
     }
 }

@@ -1,6 +1,7 @@
 package com.spring2019.service;
 
 import com.spring2019.entity.Product;
+import com.spring2019.model.ProductDetailModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,6 @@ public interface ProductService {
     void updateStatus(int id);
     List<Product> getAllProductActiveByCategoryId(int categoryId);
     List<Product> getAllProductsActive();
+
+    ProductDetailModel getProductDetail(int id);
 }

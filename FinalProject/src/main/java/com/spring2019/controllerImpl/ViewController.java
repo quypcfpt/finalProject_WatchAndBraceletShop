@@ -80,6 +80,9 @@ public class ViewController {
     @Autowired
     ProductCategoryTransformer transformer;
 
+    @Autowired
+    OrderDetailTransformer orderDetailTransformer;
+
     /**
      * Login Page
      *
@@ -158,9 +161,10 @@ public class ViewController {
     public String toProductDetail(Model model, @RequestParam("proid") int id) {
         getMenu(model);
         try {
-            Product product = productService.getProductById(id);
-            ProductModel productModel = productTransformer.entityToModel(product);
-            model.addAttribute("prodetail", productModel);
+            ProductDetailModel product = productService.getProductDetail(id);
+            //ProductModel productModel = productTransformer.entityToModel(product);
+            model.addAttribute("prodetail", product);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

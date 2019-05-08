@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @Service
 public class ProductTransformerImpl implements ProductTransformer {
 
-
     @Override
     public ProductModel entityToModel(Product entity) {
         ProductModel model = new ProductModel();

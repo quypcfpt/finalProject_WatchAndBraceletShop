@@ -8,15 +8,15 @@
 <div id="page">
     <div th:replace="product/pro-shared/navbar :: navbar"></div>
 
-    <!--<div class="breadcrumbs">-->
-    <!--<div class="container">-->
-    <!--<div class="row">-->
-    <!--<div class="col">-->
-    <!--<p class="bread"><span><a href="index.html">Home</a></span> / <span>Product Details</span></p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Product Details</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="colorlib-product">
@@ -24,14 +24,15 @@
             <div class="row row-pb-lg product-detail-wrap">
                 <div class="col-sm-8">
                     <!--<div class="owl-carousel">-->
-                        <div class="item">
-                            <div class="product-entry ">
-                                <!--<a href="#" class="prod-img">-->
-                                    <img th:src="${prodetail.image}" class="img-fluid" style="height: 400px; padding-left: 200px"
-                                         alt="Free html5 bootstrap 4 template"/>
-                                <!--</a>-->
-                            </div>
+                    <div class="item">
+                        <div class="product-entry ">
+                            <!--<a href="#" class="prod-img">-->
+                            <img th:src="${prodetail.image}" class="img-fluid"
+                                 style="height: 400px; padding-left: 200px"
+                                 alt="Free html5 bootstrap 4 template"/>
+                            <!--</a>-->
                         </div>
+                    </div>
                     <!--</div>-->
                 </div>
                 <div class="col-sm-4">
@@ -39,21 +40,48 @@
                         <h3 th:text="${prodetail.name}"></h3>
                         <p class="price">
                             <span th:text="${prodetail.price}"></span>
-                            <!--<span class="rate">-->
-                            <!--<i class="icon-star-full"></i>-->
-                            <!--<i class="icon-star-full"></i>-->
-                            <!--<i class="icon-star-full"></i>-->
-                            <!--<i class="icon-star-full"></i>-->
-                            <!--<i class="icon-star-half"></i>-->
-                            <!--(74 Rating)-->
-                            <!--</span>-->
                         </p>
-                        <p th:text="${prodetail.description}"></p>
 
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <p class="addtocart"><a href="cart.html" class="btn btn-primary btn-addtocart"><i
-                                        class="icon-shopping-cart"></i> Add to Cart</a></p>
+                        <div class="cart-detail">
+                            <ul>
+                                <li>
+                                    <span>Mã sản phẩm</span> <span th:text="${prodetail.productCode}"></span>
+                                </li>
+                                <li><span>Thương hiệu</span> <span th:text="${prodetail.label}"></span></li>
+                                <li><span>Xuất xứ</span> <span th:text="${prodetail.origin}"></span></li>
+                                <li><span>Loại dây</span> <span th:text="${prodetail.wireType}"></span></li>
+                                <li><span>Loại máy</span> <span th:text="${prodetail.machineType}"></span></li>
+                                <li><span>Mặt kính</span> <span th:text="${prodetail.glassType}"></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <p class="addtocart"><a href="cart.html" class="btn btn-primary btn-addtocart"><i
+                                    class="icon-shopping-cart"></i> Add to Cart</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-12 pills">
+                            <div class="bd-example bd-example-tabs">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-description-tab" data-toggle="pill"
+                                           href="#pills-description" role="tab" aria-controls="pills-description"
+                                           aria-expanded="true">Description</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane border fade show active" id="pills-description" role="tabpanel"
+                                         aria-labelledby="pills-description-tab">
+                                        <p th:text="${prodetail.description}"></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,11 +91,10 @@
     </div>
 </div>
 
-
 <div th:replace="product/pro-shared/footer :: footer"></div>
 
 <!--<div class="gototop js-top">-->
-    <!--<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>-->
+<!--<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>-->
 <!--</div>-->
 
 <script>

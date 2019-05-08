@@ -23,7 +23,7 @@ public class ProductModel {
     @Expose
     private int machineTypeId;
     @Expose
-    private int labelId;
+    private Integer labelId;
     @Expose
     private int originId;
     @Expose
@@ -40,6 +40,21 @@ public class ProductModel {
     private int categoryId;
     @Expose
     private boolean active;
+
+    @Expose
+    private String wireType;
+
+    @Expose
+    private String glassType;
+
+    @Expose
+    private String machineType;
+
+    @Expose
+    private String label;
+
+    @Expose
+    private String origin;
 
     public ProductModel() {
 
@@ -133,7 +148,7 @@ public class ProductModel {
         return labelId;
     }
 
-    public void setLabelId(int labelId) {
+    public void setLabelId(Integer labelId) {
         this.labelId = labelId;
     }
 
