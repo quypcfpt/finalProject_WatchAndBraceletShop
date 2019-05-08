@@ -25,4 +25,8 @@ public interface UserController {
     String loadAllUserAdmin();
     @PutMapping(CoreConstant.API_USER+"/updatestatus/{id}")
     String updateUserById(@PathVariable("id") int id);
+
+    @PostMapping(CoreConstant.API_USER+"/login")
+    @ResponseBody
+    String loginUser(@RequestParam (name = "accountModel") String accountModel, HttpSession session);
 }

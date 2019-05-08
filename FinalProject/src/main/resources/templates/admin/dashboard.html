@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/shared/head :: head"></div>
+<body class="fix-header fix-sidebar card-no-bProduct">
+<div th:replace="admin/shared/delayload :: delayload"></div>
+<div id="main-wrapper">
+    <div th:replace="admin/shared/header :: header"></div>
+    <div th:replace="admin/shared/left_sidebar :: left_sidebar"></div>
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor">Dashboard</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="card-title text-white">Dashboard</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total User</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Product</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Order</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Category</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Wire Type</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Glass Type</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-info"><i class="ti-user"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-light" id="totalUser">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total label</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-building"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalOrganization">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Orgin</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row">
+                                                    <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-clipboard-text"></i></div>
+                                                    <div class="m-l-10 align-self-center">
+                                                        <h3 class="m-b-0 font-lgiht" id="totalTemplate">0</h3>
+                                                        <h5 class="text-muted m-b-0">Total Machine Type</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="card">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="social-widget">
+                                                        <div class="soc-header box-facebook">User</div>
+                                                        <div class="soc-content">
+                                                            <div class="col-6 b-r">
+                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h5 class="text-muted">System Administrator</h5>
+                                                            </div>
+                                                            <div class="col-6 b-r">
+                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h5 class="text-muted">Customer</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="card">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="social-widget">
+                                                        <div class="soc-header box-twitter">Product</div>
+                                                        <div class="soc-content">
+                                                            <div class="col-6 b-r">
+                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h5 class="text-muted">Activate</h5>
+                                                            </div>
+                                                            <div class="col-6 b-r">
+                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h5 class="text-muted">Deactivate</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="card">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="social-widget">
+                                                        <div class="soc-header box-google">Order</div>
+                                                        <div class="soc-content">
+                                                            <div class="col-3 b-r">
+                                                                <h3 class="font-medium" id="systemAdministrator">0</h3>
+                                                                <h5 class="text-muted">Waiting</h5>
+                                                            </div>
+                                                            <div class="col-3 b-r">
+                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h5 class="text-muted">Processing</h5>
+                                                            </div>
+                                                            <div class="col-3 b-r">
+                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h5 class="text-muted">Paid</h5>
+                                                            </div>
+                                                            <div class="col-3 b-r">
+                                                                <h3 class="font-medium" id="eventManager">0</h3>
+                                                                <h5 class="text-muted">Cancel</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div th:replace="admin/shared/footer :: footer"></div>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+</div>
+
+
+
+<div th:replace="admin/shared/script :: script"></div>
+<script src="/st-admin/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="/st-admin/assets/plugins/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        InitDatatable();
+        [# th:if="${msg}"]
+        $.toast({
+            heading: "Success!",
+            text: "Product is created.",
+            position: 'top-right',
+            loaderBg: '#ffff',
+            icon: 'success',
+            hideAfter: 3500
+        });
+            [/]
+                $('form').on('submit', function (e) {
+                    var name = $('#name').val();
+                    if (name == "") {
+                        $.toast({
+                            heading: "Product  is invalid!",
+                            text: "Product  is reuired.",
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                        e.preventDefault();
+                    }
+                });
+    });
+    var InitDatatable = function () {
+        $('#StoryProductsDatatable').dataTable({
+            "ajax": {
+                "url": '/api/product',
+                "method": "GET",
+            },
+            "buttons": [
+                {
+                    text: '<i class="left-icon fa fa-plus"></i>&nbsp; Add Product',
+                    className: 'dt-button-success',
+                    action: function (e, dt, node, config) {
+                       window.location.href ='/admin/product/create';
+                    }
+                },
+            ],
+            dom: 'Bftip',
+            "columns": [
+                {data: 'name'},
+                {data: 'productCode'},
+                {data: 'price'},
+                {data: 'stockIn'},
+                {data: 'stockOut'},
+                {data: 'stockAmount'},
+                {
+                    data: 'status',
+                    render: function (data, type, row) {
+                        if (data == 0) {
+                            return '<button class="btn btn-red"  onclick="ChangeStatus(' + row['id'] + ')">Deactive</button>'
+                        } else if (data == 1) {
+                            return '<button class="btn btn-info"  onclick="ChangeStatus(' + row['id'] + ')">Active</button>'
+                        }
+                    }
+                },
+
+                {
+                    data: 'id', render: function (data) {
+                        return '<button type="button" class="btn btn-success" onclick="getDetail(' + data + ')"><i class="fa fa-pencil"></i></button>'
+                            +'<button type="button" class="btn btn-danger" onclick="Delete(' + data + ')"><i class="fa fa-trash"></i></button>';
+                    }
+                }
+            ],
+            'bAutoWidth': false,
+        });
+    };
+
+    //Add New Event Module
+    function ShowAddNewEventForm() {
+        $("#AddStoryProductsModal").modal().show();
+    }
+    //Click Edit button in datatable row
+    var getDetail = function (id) {
+        window.location.href ="/admin/product/edit/"+id;
+    }
+    //Delete
+    function Delete(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to remove this Product?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+        }, function () {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/product/delete/'+id,
+                success: function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.status_code == 1) {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'success',
+                            hideAfter: 3500,
+                            stack: 6
+                        });
+                        $('#StoryProductsDatatable').DataTable().ajax.reload();
+                    } else {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                },
+                Error: function (result) {
+                    $.toast({
+                        heading: 'Error is occured!',
+                        text: 'Try again, please!',
+                        position: 'top-right',
+                        loaderBg: '#ffff',
+                        icon: 'error',
+                        hideAfter: 3500
+                    });
+                }
+            });
+        });
+    }
+    // Update Status
+    function ChangeStatus(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to change this Product status?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+        }, function () {
+            $.ajax({
+                type: 'PUT',
+                url: '/api/product/updatestatus/'+id,
+                success: function (result) {
+                    var obj = JSON.parse(result);
+                    if (obj.status_code == 1) {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'success',
+                            hideAfter: 3500,
+                            stack: 6
+                        });
+                        $('#StoryProductsDatatable').DataTable().ajax.reload();
+                    } else {
+                        $.toast({
+                            heading: obj.message,
+                            text: obj.data,
+                            position: 'top-right',
+                            loaderBg: '#ffff',
+                            icon: 'error',
+                            hideAfter: 3500
+                        });
+                    }
+                },
+                Error: function (result) {
+                    $.toast({
+                        heading: 'Error is occured!',
+                        text: 'Try again, please!',
+                        position: 'top-right',
+                        loaderBg: '#ffff',
+                        icon: 'error',
+                        hideAfter: 3500
+                    });
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

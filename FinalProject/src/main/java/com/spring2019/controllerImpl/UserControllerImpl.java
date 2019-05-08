@@ -94,4 +94,35 @@ public class UserControllerImpl extends AbstractController implements UserContro
         }
         return gson.toJson(response);
     }
+
+    @Override
+    public String loginUser(String accountModel, HttpSession session) {
+        Response response = new Response<>(CoreConstant.STATUS_CODE_FAIL, CoreConstant.MESSAGE_FAIL);
+        try {
+            LOGGER.info("Check admin login: " + accountModel);
+
+            UserModel userModel = gson.fromJson(accountModel, UserModel.class);
+            User accountEntity = transformer.modelToEntity(userModel);
+            User account = service.getAccountByUsernameAndIsAdmin(accountEntity.getUsername(), accountEntity.getPassword());
+            User user = service.getAccountByUsernameAndIsAdmin(accountEntity.getUsername(), accountEntity.getPassword());
+            if (account != null && user ==null) {
+                LOGGER.info("Admin account is authenticated");
+                session.setAttribute("username", account.getUsername());
+                response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, "1");
+            }else if (user != null && account !=null){
+                LOGGER.info("User account is authenticated");
+                session.setAttribute("username", user.getUsername());
+                response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, "2");
+            }
+                else {
+                LOGGER.info("Admin account not found");
+                response.setResponse(CoreConstant.STATUS_CODE_SUCCESS, CoreConstant.MESSAGE_SUCCESS, "failed");
+            }
+        } catch (Exception e) {
+            response.setResponse(CoreConstant.STATUS_CODE_SERVER_ERROR, CoreConstant.MESSAGE_SERVER_ERROR);
+            LOGGER.error(e.getMessage());
+        }
+        return gson.toJson(response);
+
+    }
 }
