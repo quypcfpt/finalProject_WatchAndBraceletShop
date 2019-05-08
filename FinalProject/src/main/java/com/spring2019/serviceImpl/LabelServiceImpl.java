@@ -28,8 +28,13 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public void save(Label label) {
+    public boolean save(Label label) {
+        Label found = repository.findByNameAndActiveIsTrue(label.getName());
+        if (found != null && !(found.getId().equals(label.getId()))) {
+            return false;
+        }
         repository.save(label);
+        return true;
     }
 
     @Override

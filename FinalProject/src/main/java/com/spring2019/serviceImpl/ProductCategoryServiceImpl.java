@@ -31,8 +31,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     @Override
-    public void save(ProductCategory category) {
-       repository.save(category);
+    public boolean save(ProductCategory category) {
+        ProductCategory found = repository.findByNameAndActiveIsTrue(category.getName());
+        if (found != null && !(found.getId().equals(category.getId()))) {
+            return false;
+        }
+        repository.save(category);
+        return true;
     }
 
     @Override

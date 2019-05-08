@@ -27,8 +27,13 @@ public class OriginServiceImpl implements OriginService {
     }
 
     @Override
-    public void save(Origin origin) {
+    public boolean save(Origin origin) {
+        Origin found = repository.findByNameAndActiveIsTrue(origin.getName());
+        if (found != null && !(found.getId().equals(origin.getId()))) {
+            return false;
+        }
         repository.save(origin);
+        return true;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.spring2019.model;
 
 import com.google.gson.annotations.Expose;
+import com.spring2019.entity.Product;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,19 +18,30 @@ public class OrderDetailModel {
     @Expose
     private int quantity;
     @Expose
+    private ProductModel product;
+    @Expose
+    private OrderModel orderModel;
+    @Expose
     private float totalPrice;
 
-    public OrderDetailModel(Integer id, Integer productId, Integer orderId, float price, int quantity, float totalPrice) {
+    public OrderDetailModel(Integer id, Integer productId, Integer orderId, float price, int quantity) {
         this.id = id;
         this.productId = productId;
         this.orderId = orderId;
         this.price = price;
         this.quantity = quantity;
-        this.totalPrice = totalPrice;
     }
 
     public OrderDetailModel() {
 
+    }
+
+    public ProductModel getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductModel product) {
+        this.product = product;
     }
 
     public Integer getId() {
@@ -80,5 +92,11 @@ public class OrderDetailModel {
         this.totalPrice = totalPrice;
     }
 
+    public OrderModel getOrderModel() {
+        return orderModel;
+    }
 
+    public void setOrderModel(OrderModel orderModel) {
+        this.orderModel = orderModel;
+    }
 }

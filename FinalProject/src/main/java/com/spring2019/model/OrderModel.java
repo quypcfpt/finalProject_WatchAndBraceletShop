@@ -20,7 +20,7 @@ public class OrderModel {
     @Expose
     private String email;
     @Expose
-    private String status;
+    private int status;
     @Expose
     private Float totalPrice;
     @Expose
@@ -33,7 +33,7 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(Integer id, Integer custimerId, String customerName, String address, String phone, String email, String status, Float totalPrice, String note, Date createDateTime, Date paidDateTime) {
+    public OrderModel(Integer id, Integer custimerId, String customerName, String address, String phone, String email, int status, Float totalPrice, String note, Date createDateTime, Date paidDateTime) {
         this.id = id;
         this.custimerId = custimerId;
         this.customerName = customerName;
@@ -95,11 +95,11 @@ public class OrderModel {
         this.email = email;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

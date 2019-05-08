@@ -14,4 +14,5 @@ public interface GlassTypeRepository extends JpaRepository<GlassType,Integer> {
     Page<GlassType> findAllByActive(boolean isActive, Pageable pageable);
     List<GlassType> findAllByActive(boolean isActive);
     GlassType findById(int id);
+    GlassType findByNameAndActiveIsTrue(String name);
 }

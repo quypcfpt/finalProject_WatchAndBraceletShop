@@ -1,20 +1,15 @@
 package com.spring2019.transformerImpl;
 
-import com.spring2019.entity.Order;
-import com.spring2019.model.CameraModel;
+import com.spring2019.entity.Orders;
 import com.spring2019.model.OrderModel;
 import com.spring2019.transformer.OrderTransformer;
-import javafx.scene.Camera;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 
 @Service
 public class OrderTransformerImpl implements OrderTransformer {
 
     @Override
-    public OrderModel entityToModel(Order entity) {
+    public OrderModel entityToModel(Orders entity) {
         OrderModel model = new OrderModel();
 
         model.setId(entity.getId());
@@ -27,13 +22,12 @@ public class OrderTransformerImpl implements OrderTransformer {
         model.setCreateDateTime(entity.getCreateDateTime());
         model.setPaidDateTime(entity.getPaidDateTime());
         model.setStatus(entity.getStatus());
-        model.setTotalPrice(entity.getTotalPrice());
         return model;
     }
 
     @Override
-    public Order modelToEntity(OrderModel model) {
-        Order entity = new Order();
+    public Orders modelToEntity(OrderModel model) {
+        Orders entity = new Orders();
 
         entity.setId(model.getId());
         entity.setCustimerId(model.getCustimerId());
@@ -45,7 +39,6 @@ public class OrderTransformerImpl implements OrderTransformer {
         entity.setCreateDateTime(model.getCreateDateTime());
         entity.setPaidDateTime(model.getPaidDateTime());
         entity.setStatus(model.getStatus());
-        entity.setTotalPrice(model.getTotalPrice());
         return entity;
 
 

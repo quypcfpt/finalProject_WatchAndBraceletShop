@@ -13,4 +13,5 @@ public interface OriginRepository extends JpaRepository<Origin,Integer> {
     Page<Origin> findAllByActive(boolean isActive, Pageable pageable);
     List<Origin> findAllByActive(boolean isActive);
     Origin findById(int id);
+    Origin findByNameAndActiveIsTrue(String name);
 }

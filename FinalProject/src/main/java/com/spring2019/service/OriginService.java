@@ -10,7 +10,7 @@ import java.util.List;
 public interface OriginService {
     public Page<Origin> getAllOriginsActive(Pageable pageable);
     public List<Origin> getAllOrigin();
-    void save(Origin origin);
+    boolean save(Origin origin);
     public Origin getOriginById(int id);
     void delete(int id);
     void updateStatus(int id);

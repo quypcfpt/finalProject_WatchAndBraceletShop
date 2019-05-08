@@ -10,7 +10,7 @@ import java.util.List;
 public interface LabelService {
     public Page<Label> getAllLabelsActive(Pageable pageable);
     public List<Label> getAllLabels();
-    void save(Label label);
+    boolean save(Label label);
     public Label getLabelById(int id);
     void delete(int id);
     void updateStatus(int id);

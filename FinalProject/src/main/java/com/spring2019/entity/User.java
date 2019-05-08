@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "[User]")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +18,13 @@ public class User {
     private String password;
     @Basic
     @Column(name = "LastName", nullable = false,length = 50)
-    private float lastName;
+    private String lastName;
     @Basic
     @Column(name = "MiddleName", nullable = false,length = 50)
-    private int middleName;
+    private String middleName;
     @Basic
     @Column(name = "FirstName", nullable = false,length = 50)
-    private int firstName;
+    private String firstName;
     @Basic
     @Column(name = "Phone", nullable = false,length = 20)
     private String phone;
@@ -61,27 +62,27 @@ public class User {
         this.password = password;
     }
 
-    public float getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(float lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public int getMiddleName() {
+    public String getMiddleName() {
         return middleName;
     }
 
-    public void setMiddleName(int middleName) {
+    public void setMiddleName(String  middleName) {
         this.middleName = middleName;
     }
 
-    public int getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(int firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -120,16 +121,16 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Float.compare(user.lastName, lastName) == 0 &&
-                middleName == user.middleName &&
-                firstName == user.firstName &&
-                status == user.status &&
+        return status == user.status &&
                 roleId == user.roleId &&
                 Objects.equals(id, user.id) &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(middleName, user.middleName) &&
+                Objects.equals(firstName, user.firstName) &&
                 Objects.equals(phone, user.phone) &&
                 Objects.equals(email, user.email);
     }

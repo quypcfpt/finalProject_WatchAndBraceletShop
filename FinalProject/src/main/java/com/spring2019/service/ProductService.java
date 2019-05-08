@@ -10,4 +10,9 @@ import java.util.List;
 public interface ProductService {
     public Page<Product> getAllProductsActive(Pageable pageable);
     public Page<Product>  getAllProducts(Pageable pageable);
+    public List<Product> getAllProductList();
+    boolean save(Product Product);
+    public Product getProductById(int id);
+    void delete(int id);
+    void updateStatus(int id);
 }

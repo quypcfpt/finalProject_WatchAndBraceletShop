@@ -10,4 +10,7 @@ public interface ProductTransformer {
     public ProductModel entityToModel(Product entity);
 
     public Product modelToEntity(ProductModel model);
+
+
+    public Product modelToEntity2(ProductModel model);
 }
