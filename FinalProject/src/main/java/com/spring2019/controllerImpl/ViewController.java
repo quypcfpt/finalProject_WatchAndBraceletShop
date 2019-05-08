@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ViewController {
 
@@ -57,7 +60,10 @@ public class ViewController {
     UserService userService;
 
     @Autowired
-    ProductControllerImpl productControllerImpl;
+    ProductController productController;
+
+    @Autowired
+    ProductCategoryService service;
 
     /**
      * Login Page
@@ -78,7 +84,7 @@ public class ViewController {
      */
     @RequestMapping("/home")
     public String toHome(Model model) {
-        //Excute anything here
+
         return "product/home";
     }
 
@@ -88,13 +94,52 @@ public class ViewController {
      * @param model
      * @return
      */
-    @RequestMapping("/watch")
-    public ModelAndView toWatch(Model model) {
-        ModelAndView view = new ModelAndView("product/watch");
-        String products = productControllerImpl.loadAllProductActive(1, 5, "ASC", "id");
-        view.addObject("products", products);
-        System.out.println(products);
-        return view;
+    @RequestMapping("/watch/{page}")
+    public String toWatch(Model model, @PathVariable("page") int page) {
+        Pageable pageable = null;
+        if (page > 0) {
+            pageable = PageRequest.of(page - 1, 8);
+        }
+        try {
+            MultiProductModel data = new MultiProductModel();
+
+            List<ProductModel> productList = new ArrayList<>();
+            if (page > 0) {
+                Page<Product> products = productService.getAllProductsActive(pageable);
+
+                for (Product product : products) {
+                    productList.add(productTransformer.entityToModel(product));
+                }
+                data.setListProduct(productList);
+                data.setCurrentPage(page);
+                data.setTotalPage(products.getTotalPages());
+                data.setTotalRecord(products.getTotalElements());
+            }
+            data.setListProduct(productList);
+
+            model.addAttribute("result", data);
+        } catch (Exception e) {
+           System.out.println(e.getMessage());
+        }
+        return "product/watch";
+    }
+
+    /**
+     * Home Product Page
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/productdetail")
+    public String toProductDetail(Model model, @RequestParam("proid") int id) {
+        try {
+            Product product = productService.getProductById(id);
+            ProductModel productModel = productTransformer.entityToModel(product);
+            model.addAttribute("prodetail", productModel);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "product/product-detail";
     }
 
     //Admin Product Category
