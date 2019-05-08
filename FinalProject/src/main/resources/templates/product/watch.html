@@ -79,9 +79,9 @@
                 <div class="col-md-3 col-lg-3 mb-4 text-center" th:each="product : ${result.listProduct}">
 
                     <div class="product-entry border">
-                        <a href="#" class="prod-img">
+                        <a th:href="@{/productdetail(proid=${product.id})}" class="prod-img">
                             <img th:src="${product.image}" class="img-fluid"
-                                 alt="Free html5 bootstrap 4 template">
+                                 alt="Free html5 bootstrap 4 template"/>
                         </a>
                         <div class="desc">
                             <h2><a th:href="@{/productdetail(proid=${product.id})}" th:text="${product.name}"></a></h2>

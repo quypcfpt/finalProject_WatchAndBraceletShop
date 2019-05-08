@@ -66,4 +66,14 @@ public class ProductServiceImpl implements ProductService {
             repository.save(entity);
         }
     }
+
+    @Override
+    public List<Product> getAllProductActiveByCategoryId(int categoryId) {
+        return repository.findAllByActiveAndCategoryId(true, categoryId);
+    }
+
+    @Override
+    public List<Product> getAllProductsActive() {
+        return repository.findAllByActive(true);
+    }
 }

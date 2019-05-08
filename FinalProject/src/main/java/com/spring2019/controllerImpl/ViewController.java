@@ -63,7 +63,10 @@ public class ViewController {
     ProductController productController;
 
     @Autowired
-    ProductCategoryService service;
+    ProductCategoryService productCategoryService;
+
+    @Autowired
+    ProductCategoryTransformer transformer;
 
     /**
      * Login Page
@@ -84,7 +87,15 @@ public class ViewController {
      */
     @RequestMapping("/home")
     public String toHome(Model model) {
-
+        getMenu(model);
+        MultiProductModel data = new MultiProductModel();
+        List<ProductModel> productList = new ArrayList<>();
+            List<Product> products = productService.getAllProductsActive();
+            for (Product product : products) {
+                productList.add(productTransformer.entityToModel(product));
+            }
+            data.setListProduct(productList);
+        model.addAttribute("resultProduct", data);
         return "product/home";
     }
 
@@ -96,6 +107,7 @@ public class ViewController {
      */
     @RequestMapping("/watch/{page}")
     public String toWatch(Model model, @PathVariable("page") int page) {
+        getMenu(model);
         Pageable pageable = null;
         if (page > 0) {
             pageable = PageRequest.of(page - 1, 8);
@@ -119,7 +131,7 @@ public class ViewController {
 
             model.addAttribute("result", data);
         } catch (Exception e) {
-           System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return "product/watch";
     }
@@ -132,6 +144,7 @@ public class ViewController {
      */
     @RequestMapping("/productdetail")
     public String toProductDetail(Model model, @RequestParam("proid") int id) {
+        getMenu(model);
         try {
             Product product = productService.getProductById(id);
             ProductModel productModel = productTransformer.entityToModel(product);
@@ -140,6 +153,17 @@ public class ViewController {
             System.out.println(e.getMessage());
         }
         return "product/product-detail";
+    }
+
+    /**
+     * Cart Page
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/cart")
+    public String toCart(Model model) {
+        return "product/cart";
     }
 
     //Admin Product Category
@@ -315,7 +339,7 @@ public class ViewController {
     @GetMapping("/admin/product/create")
     public String postsCreate(Model model) {
         ProductModel productModel = new ProductModel();
-        model.addAttribute("form",productModel);
+        model.addAttribute("form", productModel);
         model.addAttribute("categories", categoryService.getAllProductCategorysAdmin());
         model.addAttribute("wireTypes", wireTypeService.getAllWireTypesAdmin());
         model.addAttribute("galssTypes", glassTypeService.getAllGlassTypes());
@@ -339,7 +363,7 @@ public class ViewController {
             model.addAttribute("labels", labelService.getAllLabels());
             model.addAttribute("orgins", originService.getAllOrigin());
             return "admin/product-form";
-        }else {
+        } else {
             ra.addFlashAttribute("msgerror", "Product is not Existed");
             return "redirect:/admin/product";
         }
@@ -372,9 +396,10 @@ public class ViewController {
         //Excute anything here
         return "admin/user";
     }
+
     @GetMapping("/admin/user/create")
     public String userCreate(Model model) {
-        model.addAttribute("form",new UserModel());
+        model.addAttribute("form", new UserModel());
 
         return "admin/user-form";
     }
@@ -387,11 +412,12 @@ public class ViewController {
             userModel = userTransformer.entityToModel(found);
             model.addAttribute("form", userModel);
             return "admin/user-form";
-        }else {
+        } else {
             ra.addFlashAttribute("msgerror", "Product is not Existed");
             return "redirect:/admin/user";
         }
     }
+
     @PostMapping("/admin/user/save")
     public String userSave(@ModelAttribute("form") UserModel model, RedirectAttributes ra) {
         //TODO validation
@@ -412,5 +438,26 @@ public class ViewController {
     public String dashboard() {
         //Excute anything here
         return "admin/dashboard";
+    }
+
+    private void getMenu(Model model) {
+        MultiProductCategoryModel data = new MultiProductCategoryModel();
+        List<ProductCategoryModel> productCategoryList = new ArrayList<>();
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategorysAdmin();
+        for (ProductCategory ProductCategory : productCategories) {
+            productCategoryList.add(transformer.entityToModel(ProductCategory));
+        }
+        data.setListProductCategory(productCategoryList);
+        model.addAttribute("listCates", data);
+
+        //get label
+        MultiLabelModel dataLabel = new MultiLabelModel();
+        List<LabelModel> labelModelList = new ArrayList<>();
+        List<Label> labelsActive = labelService.getAllLabels();
+        for (Label item : labelsActive) {
+            labelModelList.add(labelTransformer.entityToModel(item));
+        }
+        dataLabel.setListLabel(labelModelList);
+        model.addAttribute("labels", dataLabel);
     }
 }

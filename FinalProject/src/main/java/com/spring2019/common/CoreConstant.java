@@ -9,6 +9,7 @@ public class CoreConstant {
     public static final String API_ORDERDETAIL= "/api/orderdetail";
     public static final String API_ORIGIN= "/api/origin";
     public static final String API_PRODUCTCATEGORY= "/api/productcategory";
+    public static final String API_PRODUCTCATEGORY_ACTIVE= "/api/productcategoryactive";
     public static final String API_ROLE= "/api/role";
     public static final String API_USER= "/api/user";
     public static final String API_WIRETYPE= "/api/wiretype";
