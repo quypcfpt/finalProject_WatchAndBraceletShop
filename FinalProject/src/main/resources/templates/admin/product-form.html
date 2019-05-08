@@ -120,7 +120,7 @@
                                                         class="text-danger">*</span></label>
                                                 <select class="custom-select col-12" id="machineTypeId"
                                                         name="machineTypeId">
-                                                    <option selected value="0" disabled>Select Glass Type</option>
+                                                    <option selected value="0" disabled>Select Machine Type</option>
                                                     <option th:each="item : ${machines}"
                                                             th:value="${item.id}"
                                                             th:text="${item.name}" th:selected="${form.machineTypeId == item.id}">Wireframe</option>
@@ -186,25 +186,52 @@
 <script src="//static.filestackapi.com/filestack-js/1.x.x/filestack.min.js"></script>
 <script th:inline="javascript">
     $(document).ready(function () {
-        // initCategoriesList();
-        // initWireTypesList();
-        // initGlassTypesList();
-        // initMachineTypesList();
-        // initLabelsList();
-        // initOrginsList();
         $('form').on('submit', function (e) {
             var name = $('#name').val();
-            if (name == "") {
-                $.toast({
-                    heading: "Product  is invalid!",
-                    text: "Product  is reuired.",
-                    position: 'top-right',
-                    loaderBg: '#ffff',
-                    icon: 'error',
-                    hideAfter: 3500
-                });
+            var productCode = $('#productCode').val();
+            var categoryId = $('#categoryId').val();
+            var wireTypeId = $('#wireTypeId').val();
+            var machineTypeId = $('#machineTypeId').val();
+            var glassTypeId = $('#glassTypeId').val();
+            var originId = $('#originId').val();
+            var labelId = $('#labelId').val();
+            if (name === "" || productCode === "") {
+                errorToast("Invalid", "Input full required information, please!");
                 e.preventDefault();
+                return;
             }
+
+            if (categoryId < 1) {
+                errorToast("Invalid", "Select Category, please!");
+                e.preventDefault();
+                return;
+            }
+            if (wireTypeId <1) {
+                errorToast("Invalid", "Select Wire Type, please!");
+                e.preventDefault();
+                return;
+            }
+            if (machineTypeId <1) {
+                errorToast("Invalid", "Select Machine Type, please!");
+                e.preventDefault();
+                return;
+            }
+            if (glassTypeId < 1) {
+                errorToast("Invalid", "Select Glass Type, please!");
+                e.preventDefault();
+                return;
+            }
+            if (originId < 1) {
+                errorToast("Invalid", "Select Orgin, please!");
+                e.preventDefault();
+                return;
+            }
+            if (labelId < 1) {
+                errorToast("Invalid", "Select Label, please!");
+                e.preventDefault();
+                return;
+            }
+
         });
     });
     //method to init event list

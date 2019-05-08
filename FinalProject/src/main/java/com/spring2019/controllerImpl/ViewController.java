@@ -516,9 +516,9 @@ public class ViewController {
                 ra.addFlashAttribute("msgerror", "Stocck IN and Stock Out is wrong!");
             }
             if (result) {
-                ra.addFlashAttribute("msg", "Created!");
+                ra.addFlashAttribute("msg", "Sucess!");
             } else {
-                ra.addFlashAttribute("msgerror", "Product is existed!");
+                ra.addFlashAttribute("msgerror", "Product Code is existed!");
             }
             return "redirect:/admin/product";
         }

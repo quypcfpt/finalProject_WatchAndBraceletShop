@@ -37,10 +37,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean save(Product product) {
-        Product found = repository.findByNameAndActiveIsTrue(product.getName());
-        if (found != null && !(found.getId().equals(product.getId()))) {
-            return false;
+        if(product.getId() == null){
+            Product found = repository.findByProductCodeAndActiveIsTrue(product.getProductCode());
+            if (found != null ) {
+                return false;
+            }
+        }else {
+            Product found = repository.findByProductCodeAndActiveIsTrue(product.getProductCode());
+            if (found != null && !(found.getId().equals(product.getId()))) {
+                return false;
+            }
         }
+
         repository.save(product);
         return true;
     }
