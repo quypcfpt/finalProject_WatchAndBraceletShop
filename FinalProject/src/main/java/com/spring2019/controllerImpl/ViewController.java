@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -54,6 +56,9 @@ public class ViewController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    OrderDetailService orderDetailService;
     /**
      * Login Page
      *
@@ -334,7 +339,7 @@ public class ViewController {
     @GetMapping("/admin/user/create")
     public String userCreate(Model model) {
         model.addAttribute("form",new UserModel());
-
+        model.addAttribute("title", "Create User");
         return "admin/user-form";
     }
 
@@ -407,4 +412,17 @@ public class ViewController {
         model.addAttribute("machine", machineTypeService.getAllMachineTypesAdmin().size());
         return "admin/dashboard";
     }
+    //Daily Report
+    @GetMapping("/admin/report")
+    public String report(Model model) {
+        model.addAttribute("title","Report");
+        Date start = new Date();
+        Date end = new Date();
+
+        Calendar cStart = Calendar.getInstance(); cStart.setTime(start);
+        Calendar cEnd = Calendar.getInstance(); cEnd.setTime(end);
+        int soldProduct = orderDetailService.totalSoldProduct(start, end);
+        return "admin/dailyreport";
+    }
+
 }
