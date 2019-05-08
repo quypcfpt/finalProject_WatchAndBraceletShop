@@ -73,15 +73,31 @@
     $(document).ready(function () {
         InitDatatable();
         [# th:if="${msg}"]
+        /*<![CDATA[*/
         $.toast({
             heading: "Success!",
-            text: "Product is created.",
+            text: /*[[${msg}]]*/,
             position: 'top-right',
             loaderBg: '#ffff',
             icon: 'success',
             hideAfter: 3500
         });
+        /*]]>*/
+
             [/]
+                [# th:if="${msgerror}"]
+        /*<![CDATA[*/
+        $.toast({
+            heading: "Success!",
+            text: /*[[${msgerror}]]*/,
+            position: 'top-right',
+            loaderBg: '#ffff',
+            icon: 'error',
+            hideAfter: 3500
+        });
+        /*]]>*/
+
+        [/]
                 $('form').on('submit', function (e) {
                     var name = $('#name').val();
                     if (name == "") {

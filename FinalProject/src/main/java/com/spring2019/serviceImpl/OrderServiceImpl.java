@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,4 +56,16 @@ public class OrderServiceImpl implements OrderService {
             repository.save(entity);
         }
     }
+
+    @Override
+    public int totaltotalOrder(Date startDate, Date endDate) {
+        return  repository.countOrder(startDate, endDate);
+    }
+
+    @Override
+    public int totaltotalOrderByStatus(Date startDate, Date endDate, int status) {
+        return  repository.CountOrderStatus(startDate, endDate, status);
+    }
+
+
 }
