@@ -82,6 +82,12 @@
                                         <p th:text="${prodetail.description}"></p>
                                     </div>
                                 </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button class="addtocart" th:onclick="|sendToModal(
+                                    '${prodetail.id}',
+                                    '${prodetail.name}',
+                                    '${prodetail.price}')|"><i class="icon-shopping-cart"></i> Add to Cart</button>
                             </div>
                         </div>
                     </div>

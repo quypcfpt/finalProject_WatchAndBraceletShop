@@ -22,25 +22,7 @@
     <div class="colorlib-product">
         <div class="container">
             <div class="row row-pb-lg">
-                <div class="col-md-10 offset-md-1">
-                    <div class="process-wrap">
-                        <div class="process text-center active">
-                            <p><span>01</span></p>
-                            <h3>Shopping Cart</h3>
-                        </div>
-                        <div class="process text-center">
-                            <p><span>02</span></p>
-                            <h3>Checkout</h3>
-                        </div>
-                        <div class="process text-center">
-                            <p><span>03</span></p>
-                            <h3>Order Complete</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-pb-lg">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="product-name d-flex">
                         <div class="one-forth text-left px-4">
                             <span>Product Details</span>
@@ -58,118 +40,104 @@
                             <span>Remove</span>
                         </div>
                     </div>
-                    <div class="product-cart d-flex">
-                        <div class="one-forth">
-                            <div class="product-img" style="background-image: url(images/item-6.jpg);">
-                            </div>
-                            <div class="display-tc">
-                                <h3>Product Name</h3>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$68.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <input type="text" id="quantity" name="quantity"
-                                       class="form-control input-number text-center" value="1" min="1" max="100">
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$120.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <a href="#" class="closed"></a>
-                            </div>
-                        </div>
+                    <div id="shopping-cart-body">
+
                     </div>
-                    <div class="product-cart d-flex">
-                        <div class="one-forth">
-                            <div class="product-img" style="background-image: url(images/item-7.jpg);">
-                            </div>
-                            <div class="display-tc">
-                                <h3>Product Name</h3>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$68.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <form action="#">
-                                    <input type="text" name="quantity" class="form-control input-number text-center"
-                                           value="1" min="1" max="100">
-                                </form>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$120.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <a href="#" class="closed"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-cart d-flex">
-                        <div class="one-forth">
-                            <div class="product-img" style="background-image: url(images/item-8.jpg);">
-                            </div>
-                            <div class="display-tc">
-                                <h3>Product Name</h3>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$68.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <input type="text" id="quantity" name="quantity"
-                                       class="form-control input-number text-center" value="1" min="1" max="100">
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$120.00</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <a href="#" class="closed"></a>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="product-cart d-flex">-->
+<!--                        <div class="one-forth">-->
+<!--                            <div class="display-tc">-->
+<!--                                <h3>Product Name</h3>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$68.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <input type="text" id="quantity" name="quantity"-->
+<!--                                       class="form-control input-number text-center" value="1" min="1" max="100">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$120.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <a href="#" class="closed"></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-cart d-flex">-->
+<!--                        <div class="one-forth">-->
+<!--                            <div class="product-img" style="background-image: url(images/item-7.jpg);">-->
+<!--                            </div>-->
+<!--                            <div class="display-tc">-->
+<!--                                <h3>Product Name</h3>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$68.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <form action="#">-->
+<!--                                    <input type="text" name="quantity" class="form-control input-number text-center"-->
+<!--                                           value="1" min="1" max="100">-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$120.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <a href="#" class="closed"></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-cart d-flex">-->
+<!--                        <div class="one-forth">-->
+<!--                            <div class="product-img" style="background-image: url(images/item-8.jpg);">-->
+<!--                            </div>-->
+<!--                            <div class="display-tc">-->
+<!--                                <h3>Product Name</h3>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$68.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <input type="text" id="quantity" name="quantity"-->
+<!--                                       class="form-control input-number text-center" value="1" min="1" max="100">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <span class="price">$120.00</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="one-eight text-center">-->
+<!--                            <div class="display-tc">-->
+<!--                                <a href="#" class="closed"></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
-            </div>
-            <div class="row row-pb-lg">
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="total-wrap">
                         <div class="row">
-                            <div class="col-sm-8">
-                                <form action="#">
-                                    <div class="row form-group">
-                                        <div class="col-sm-9">
-                                            <input type="text" name="quantity" class="form-control input-number"
-                                                   placeholder="Your Coupon Number...">
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <input type="submit" value="Apply Coupon" class="btn btn-primary">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-sm-4 text-center">
+                            <div class="col-md-12 text-center">
                                 <div class="total">
                                     <div class="sub">
                                         <p><span>Subtotal:</span> <span>$200.00</span></p>
@@ -181,9 +149,54 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <form method="post" class="colorlib-form">
+                                    <h2>Thông Tin giao hàng</h2>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="fname">First Name</label>
+                                                <input type="text" id="fname" class="form-control" placeholder="Tên">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lname">Last Name</label>
+                                                <input type="text" id="lname" class="form-control" placeholder="Họ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="fname">Address</label>
+                                                <input type="text" id="address" class="form-control" placeholder="Địa chỉ nhận hàng">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="email">E-mail</label>
+                                                <input type="text" id="email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="Phone">Phone</label>
+                                                <input type="text" id="zippostalcode" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit">Check out</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row row-pb-lg">
+
             </div>
         </div>
     </div>
@@ -194,7 +207,18 @@
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 </div>
+<script src="/st-product/js/shopingcart.js"></script>
+<script>
+    $(document).ready(function () {
+        if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+            displayOrdersToCart();
+            console.log("Cart > 1");
+        } else {
+            productService.default();
+        }
 
+    });
+</script>
 </body>
 </html>
 
