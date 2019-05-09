@@ -108,9 +108,9 @@ function changeProductQuantity(isPlus, orderItemId) {
 
         }
     }
-
-    productService.saveOrderItemToLocalStorage(orders);
-    productService.ResetTotalPrice();
+    //
+    // productService.saveOrderItemToLocalStorage(orders);
+    // productService.ResetTotalPrice();
 }
 
 //Delete OrderItem by OrderItemId from LocalStorage
@@ -122,15 +122,14 @@ function deleteOrderItem(orderItemId) {
 function displayOrdersToCart() {
     if (localStorage.getItem("orders")) {
         var orders = productService.getOrdersFromLocalStorage('orders');
-        // $('#totalcart').text(orders.length);
+        $('#totalcart').text(orders.length);
         var content = "";
         var hasExtraOrderItem = [];
         for (var i = 0; i < orders.length; i++) {
-            var extra = "";
             var totalOrder = 0;
             var totalOrderItem = 0;
             if (orders[i].masterId == null) {
-                totalOrderItem += orders[i].price;
+                totalOrderItem += orders[i].price * orders[i].quantity;
                 var masterProductIndex = i;
                 content += "<div class='product-cart d-flex' id='orderItemId-" + orders[masterProductIndex].orderItemId + "'>"
                     + "<div class='one-forth'>"
@@ -145,9 +144,9 @@ function displayOrdersToCart() {
                     + "</div>"
                     + "<div class='one-eight text-center'>"
                     + "<div class='display-tc'>"
-                    + "<button class='minus-btn quantity-counter-size' onclick='changeProductQuantity(false, " + orders[masterProductIndex].orderItemId + ")'>-</button>"
+                    + "<button class='close' style='float: left;' onclick='changeProductQuantity(false, " + orders[masterProductIndex].orderItemId + ")'>-</button>"
                     + " <span class='quantity'>" + orders[masterProductIndex].quantity + "</span>"
-                    + "<button class='plus-btn quantity-counter-size' onclick='changeProductQuantity(true, " + orders[masterProductIndex].orderItemId + ")'>+</button>"
+                    + "<button class='close' onclick='changeProductQuantity(true, " + orders[masterProductIndex].orderItemId + ")'>+</button>"
                     + "</div>"
                     + "</div>"
                     + " <div class='one-eight text-center'>"
@@ -164,20 +163,14 @@ function displayOrdersToCart() {
 
                 $("#shopping-cart-body").html(content);
 
-                if (extra == "") {
-                    hasExtraOrderItem.push(orders[masterProductIndex].orderItemId);
-                }
+
 
             }
         }
 
 
         productService.ResetTotalPrice();
-        for (var i = 0; i < hasExtraOrderItem.length; i++) {
-            $("#orderItemId-" + hasExtraOrderItem[i] + " #hasExtra").css('display', 'none');
-        }
 
-        productService.ResetTotalPrice();
 
 
     }
@@ -269,7 +262,8 @@ var productService = {
     */
     addProductToCart: function (tempProductList, orderItemId) {
         if (tempProductList == null) {
-            alert("Xin vui lòng thử lại. Cảm ơn!")
+            swal("Error", "Xin vui lòng thử lại. Cảm ơn!", "error");
+
         } else {
 
             //set orderItemId for all items in tempProductList
@@ -321,9 +315,11 @@ var productService = {
                 for (var i = 0; i < tempProductList.length; i++) {
                     orders.push(Object.assign(tempProductList[i]));
                 }
+                totalShoppingcart = orders.length;
+                $('#totalcart').text(totalShoppingcart);
                 productService.saveOrdersToLocalStorage('orders', orders);
             }
-
+            swal("Add to cart", "Thành thành công sản phẩm vào giỏ hàng", "success");
         }
 
         orderItem = null;
@@ -337,7 +333,10 @@ var productService = {
         for (var i = 0; i < orders.length; i++) {
             totalShoppingcart += orders[i].price * orders[i].quantity;
         }
-        $('#totalprice').html(formatCurrency(totalShoppingcart.toString()));
+        $('#subtotalprice').html(formatCurrency(totalShoppingcart.toString())+" VND");
+        var deliveryfee = 0;
+        totalpriceorder = totalShoppingcart + deliveryfee;
+        $('#totalprice').html(formatCurrency(totalpriceorder.toString())+ " VND");
     },
 
     saveOrderItemToLocalStorage: function (orderItem) {
@@ -526,8 +525,7 @@ var totalPriceItem = orderItemList[0].quantity * orderItemList[0].price;
             productService.saveOrdersToLocalStorage('orders', orders);
             productService.ResetTotalPrice();
             if (localStorage.getItem('orders') && localStorage.getItem('orders') == "[]") {
-                $("body").removeClass("resize-screen");
-                SmoothlyMenu();
+               displayOrdersToCart();
             }
         } else {
             //change HTML code in shopping cart
@@ -545,8 +543,7 @@ var totalPriceItem = orderItemList[0].quantity * orderItemList[0].price;
                 productService.saveOrdersToLocalStorage('orders', orders);
                 productService.ResetTotalPrice();
                 if (localStorage.getItem('orders') && localStorage.getItem('orders') == "[]") {
-                    $("body").removeClass("resize-screen");
-                    SmoothlyMenu();
+                    displayOrdersToCart();
                 }
             });
 
@@ -579,8 +576,7 @@ var totalPriceItem = orderItemList[0].quantity * orderItemList[0].price;
             productService.saveOrdersToLocalStorage('orders', orders);
             productService.ResetTotalPrice();
             if (localStorage.getItem('orders') && localStorage.getItem('orders') == "[]") {
-                $("body").removeClass("resize-screen");
-                SmoothlyMenu();
+                displayOrdersToCart();
             }
         });
 

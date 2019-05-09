@@ -118,7 +118,11 @@
                         </a>
                         <div class="desc">
                             <h2><a th:href="@{/productdetail(proid=${product.id})}" th:text="${product.name}"></a></h2>
-                            <span class="price" th:text="${product.price}"></span>
+                            <span class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')}"></span>
+                            <button class="addtocart" th:onclick="|sendToModal(
+                                    '${product.id}',
+                                    '${product.name}',
+                                    '${product.price}')|"><i class="icon-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
                 </div>
