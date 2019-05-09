@@ -4,6 +4,7 @@ import com.spring2019.controller.ProductController;
 import com.spring2019.entity.*;
 import com.spring2019.model.*;
 import com.spring2019.service.*;
+import com.spring2019.serviceImpl.EmailServiceImpl;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
 import org.hibernate.criterion.Order;
@@ -33,6 +34,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
@@ -99,6 +101,8 @@ public class ViewController {
     @Autowired
     OrderDetailTransformer orderDetailTransformer;
 
+    @Autowired
+    EmailServiceImpl emailService;
     /**
      * Login Page
      *
@@ -933,17 +937,18 @@ public class ViewController {
         ra.addFlashAttribute("msg", msg);
         modeView.addAttribute("customer",model);
         modeView.addAttribute("detail",listresult);
-      
-//        File file = null;
-//        try {
-//            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
-//            String content = new String(Files.readAllBytes(file.toPath()));
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+      File file = null;
+        try {
+            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
+            String content = new String(Files.readAllBytes(file.toPath()));
+            emailService.sendMessage("tinthse62244@fpt.edu.vn", "Order Information", content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
    return "product/orderresult";
     }
 
