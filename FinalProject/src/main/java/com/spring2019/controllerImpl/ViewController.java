@@ -13,11 +13,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -846,8 +852,8 @@ public class ViewController {
             detail2.setPrice(200);
             detail.setOrderById(order);
             detail2.setOrderById(order);
-                orderDetailService.save(detail);
-                orderDetailService.save(detail2);
+            orderDetailService.save(detail);
+            orderDetailService.save(detail2);
         }
         return "";
     }
@@ -856,6 +862,16 @@ public class ViewController {
     public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra) {
         //Excute anything here
         String cartString = model.getCartString();
+        File file = null;
+        try {
+            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
+            String content = new String(Files.readAllBytes(file.toPath()));
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "product/cart";
     }
 }
