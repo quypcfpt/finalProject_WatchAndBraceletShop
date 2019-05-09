@@ -7,6 +7,9 @@ import com.spring2019.service.*;
 import com.spring2019.serviceImpl.ProductCategoryServiceImpl;
 import com.spring2019.transformer.*;
 import org.hibernate.criterion.Order;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -863,29 +866,72 @@ public class ViewController {
 
     @RequestMapping("/test")
     public String addOrder(Model model) {
-        Orders order = new Orders();
-        order.setCustomerName("Quy");
-        order.setAddress("14 Cộng Hòa");
-        order.setStatus(1);
-        order.setEmail("QUyPC@gmail.com");
-        Orders orders = orderService.save(order);
-        if (orders != null) {
-            Product pro = new Product();
-            pro.setId(1);
-            OrderDetail detail = new OrderDetail();
-            detail.setProductById(pro);
-            detail.setQuantity(3);
-            detail.setPrice(100);
-            pro.setId(2);
-            OrderDetail detail2 = new OrderDetail();
-            detail2.setProductById(pro);
-            detail2.setQuantity(4);
-            detail2.setPrice(200);
-            detail.setOrderById(order);
-            detail2.setOrderById(order);
-                orderDetailService.save(detail);
-                orderDetailService.save(detail2);
+        String obj = "";
+        parseJsonIntoList(obj);
+
+        String msg="";
+//        Orders order = new Orders();
+//        order.setCustomerName("Quy");
+//        order.setAddress("14 Cộng Hòa");
+//        order.setStatus(1);
+//        order.setEmail("QUyPC@gmail.com");
+//        Orders orders = orderService.save(order);
+//        if (orders != null) {
+//            Product pro = new Product();
+//            pro.setId(1);
+//            OrderDetail detail = new OrderDetail();
+//            detail.setProductById(pro);
+//            detail.setQuantity(3);
+//            detail.setPrice(100);
+//            pro.setId(2);
+//            OrderDetail detail2 = new OrderDetail();
+//            detail2.setProductById(pro);
+//            detail2.setQuantity(4);
+//            detail2.setPrice(200);
+//            detail.setOrderById(order);
+//            detail2.setOrderById(order);
+//            orderDetailService.save(detail);
+//            orderDetailService.save(detail2);
+//            Product updatePro = productService.getProductById(pro.getId());
+//            updatePro.setStockOut(updatePro.getStockOut()+detail.getQuantity());
+//            updatePro.setStockAmount(updatePro.getStockIn() -  updatePro.getStockOut());
+//            if(updatePro.getStockAmount() <0){
+//                 msg = "Sorry your order cannot complete because the good is out of stock";
+//            }
+//            msg = "Your Order is Success . Please wait for 48h to delivery";
+//        }
+        msg = "Can not  create order . Please try again";
+        return msg;
+    }
+
+    public List<OrderDetail> parseJsonIntoList(String jsonObject) throws JSONException {
+        String local="[{'productId' : '3','price':'3000','productName':'dong ho','quantity':'1'}," +
+                "{'productId' : '1','price':'4000','productName':'dong ho 2','quantity':'2'}," +
+                "{'productId' : '2','price':'4000','productName':'dong ho 1','quantity':'3'}]";
+        List<OrderDetail> resultList = new ArrayList<>();
+//        JSONObject jsonObj = new JSONObject(local);
+        JSONArray contacts = new JSONArray(local);
+        for (int i = 0 ; i< contacts.length();i++){
+            JSONObject cam = contacts.getJSONObject(i);
+            int id = cam.getInt("id");
+            String description = cam.getString("description");
+            String position = cam.getString("position");
+            int observerStatus = cam.getInt("observerStatus");
+            float distance = Float.parseFloat(cam.getString("distance"));
+//            StreetModel street =  new StreetModel();
+//            street.setId(cam.getJSONObject("street").getInt("id"));
+//            street.setCity(cam.getJSONObject("street").getString("city"));
+//            street.setDistrict(cam.getJSONObject("street").getString("district"));
+//            street.setName(cam.getJSONObject("street").getString("name"));
+//            resultList.add(new CameraModel(id,description,position,observerStatus,distance,street));
         }
-        return "";
+        return resultList;
+    }
+
+    @PostMapping("/cart/save")
+    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra) {
+        //Excute anything here
+        String cartString = model.getCartString();
+        return "product/cart";
     }
 }

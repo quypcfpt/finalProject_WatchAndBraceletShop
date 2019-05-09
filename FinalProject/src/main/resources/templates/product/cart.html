@@ -43,96 +43,6 @@
                     <div id="shopping-cart-body">
 
                     </div>
-<!--                    <div class="product-cart d-flex">-->
-<!--                        <div class="one-forth">-->
-<!--                            <div class="display-tc">-->
-<!--                                <h3>Product Name</h3>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$68.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <input type="text" id="quantity" name="quantity"-->
-<!--                                       class="form-control input-number text-center" value="1" min="1" max="100">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$120.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <a href="#" class="closed"></a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="product-cart d-flex">-->
-<!--                        <div class="one-forth">-->
-<!--                            <div class="product-img" style="background-image: url(images/item-7.jpg);">-->
-<!--                            </div>-->
-<!--                            <div class="display-tc">-->
-<!--                                <h3>Product Name</h3>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$68.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <form action="#">-->
-<!--                                    <input type="text" name="quantity" class="form-control input-number text-center"-->
-<!--                                           value="1" min="1" max="100">-->
-<!--                                </form>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$120.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <a href="#" class="closed"></a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="product-cart d-flex">-->
-<!--                        <div class="one-forth">-->
-<!--                            <div class="product-img" style="background-image: url(images/item-8.jpg);">-->
-<!--                            </div>-->
-<!--                            <div class="display-tc">-->
-<!--                                <h3>Product Name</h3>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$68.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <input type="text" id="quantity" name="quantity"-->
-<!--                                       class="form-control input-number text-center" value="1" min="1" max="100">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <span class="price">$120.00</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="one-eight text-center">-->
-<!--                            <div class="display-tc">-->
-<!--                                <a href="#" class="closed"></a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
                 <div class="col-md-4">
                     <div class="total-wrap">
@@ -140,47 +50,43 @@
                             <div class="col-md-12 text-center">
                                 <div class="total">
                                     <div class="sub">
-                                        <p><span>Subtotal:</span> <span>$200.00</span></p>
-                                        <p><span>Delivery:</span> <span>$0.00</span></p>
-                                        <p><span>Discount:</span> <span>$45.00</span></p>
+                                        <p><span>Subtotal:</span> <span id="subtotalprice">0 VND</span></p>
+                                        <p><span>Delivery:</span> <span>0 VND</span></p>
                                     </div>
                                     <div class="grand-total">
-                                        <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                        <p><span><strong>Total:</strong></span> <span id="totalprice">0 VND</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <form method="post" class="colorlib-form">
+                                <form method="post" class="colorlib-form" action="/cart/save" modelAttribute="form">
                                     <h2>Thông Tin giao hàng</h2>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <input type="hidden" name="cartString" id="cartString"/>
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="fname">First Name</label>
-                                                <input type="text" id="fname" class="form-control" placeholder="Tên">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="lname">Last Name</label>
-                                                <input type="text" id="lname" class="form-control" placeholder="Họ">
+                                                <label for="fname">Name</label>
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="Tên Người nhận">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="fname">Address</label>
-                                                <input type="text" id="address" class="form-control" placeholder="Địa chỉ nhận hàng">
+                                                <input type="text" id="address" name="address" class="form-control"
+                                                       placeholder="Địa chỉ nhận hàng">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="email">E-mail</label>
-                                                <input type="text" id="email" class="form-control" placeholder="Email">
+                                                <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="Phone">Phone</label>
-                                                <input type="text" id="zippostalcode" class="form-control" placeholder="">
+                                                <input type="text" id="phone" name="phone" class="form-control"
+                                                       placeholder="Số điện thoại người nhận">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -216,7 +122,16 @@
         } else {
             productService.default();
         }
-
+        $('form').on('submit', function (e) {
+            if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+               var cart = localStorage.getItem('orders');
+               $('#cartString').val(cart);
+            } else {
+               swal("Cart is Empty!");
+               e.preventDefault();
+               return;
+            }
+        });
     });
 </script>
 </body>

@@ -1,13 +1,9 @@
 package com.spring2019.transformerImpl;
 
 import com.spring2019.entity.WireType;
-import com.spring2019.model.CameraModel;
 import com.spring2019.model.WireTypeModel;
 import com.spring2019.transformer.WireTransformer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 
 @Service
 public class WireTransformerImpl implements WireTransformer {
