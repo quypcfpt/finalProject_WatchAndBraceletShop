@@ -12,9 +12,19 @@ public class CartModel {
     @Expose
     private String phone;
     @Expose
+    private String note;
+    @Expose
     private String cartString;
     @Expose
     private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getNote() {
         return note;

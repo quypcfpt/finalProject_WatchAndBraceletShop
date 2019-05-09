@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
@@ -888,7 +896,18 @@ public class ViewController {
         ra.addFlashAttribute("msg", msg);
         modeView.addAttribute("customer",model);
         modeView.addAttribute("detail",listresult);
-        return "product/orderresult";
+      
+        File file = null;
+        try {
+            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
+            String content = new String(Files.readAllBytes(file.toPath()));
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+   return "product/orderresult";
     }
 
 }
