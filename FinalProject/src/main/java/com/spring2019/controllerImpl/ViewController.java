@@ -103,6 +103,7 @@ public class ViewController {
 
     @Autowired
     EmailServiceImpl emailService;
+
     /**
      * Login Page
      *
@@ -928,19 +929,33 @@ public class ViewController {
     }
 
     @PostMapping("/cart/save")
-    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra , Model modeView) {
+    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra, Model modeView) {
         //Excute anything here
         getMenu(modeView);
         String cartString = model.getCartString();
         List<OrderDetail> listresult = parseJsonIntoList(cartString);
         String msg = saveCart(listresult, model);
         ra.addFlashAttribute("msg", msg);
-        modeView.addAttribute("customer",model);
-        modeView.addAttribute("detail",listresult);
-      File file = null;
+        modeView.addAttribute("customer", model);
+        modeView.addAttribute("detail", listresult);
         try {
-            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
+            File file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
             String content = new String(Files.readAllBytes(file.toPath()));
+            content.replace("{name}", model.getName());
+            content.replace("{address}", model.getAddress());
+            content.replace("{phone}", model.getPhone());
+            content.replace("{note}", model.getNote());
+            long totalPrice = 0;
+            for (int i = 0 ; i < listresult.size(); i++) {
+                totalPrice += (listresult.get(i).getQuantity() * listresult.get(i).getPrice());
+                String contentItem = "<tr>" +
+                        "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+(i+1)+"</p></td>" +
+                        "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getProductById().getName()+"</p></td>" +
+                        "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getQuantity()+"</p></td>" +
+                        "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getPrice()+"</p></td>" +
+                        "        </tr>";
+            }
+            content.replace("{totalprice}", totalPrice + "");
             emailService.sendMessage("tinthse62244@fpt.edu.vn", "Order Information", content);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -949,7 +964,7 @@ public class ViewController {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-   return "product/orderresult";
+        return "product/orderresult";
     }
 
 }
