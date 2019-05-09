@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
-                    <h2>View All Products</h2>
+                    <h2>Vòng tay</h2>
                 </div>
             </div>
             <div class="col-lg-9 col-xl-9">
@@ -35,7 +35,11 @@
                             </a>
                             <div class="desc">
                                 <h2><a th:href="@{/productdetail(proid=${prod.id})}" th:text="${prod.name}"></a></h2>
-                                <span class="price" th:text="${prod.price}"></span>
+                                <span class="price" th:text="${#numbers.formatDecimal(prod.price, 0, 'POINT', 0, 'POINT')}"></span>
+                                <button class="addtocart" th:onclick="|sendToModal(
+                                    '${prod.id}',
+                                    '${prod.name}',
+                                    '${prod.price}')|"><i class="icon-shopping-cart"></i> Thêm vào giỏ hàng</button>
                             </div>
                         </div>
                     </div>
