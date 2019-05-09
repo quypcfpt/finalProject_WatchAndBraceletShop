@@ -851,4 +851,11 @@ public class ViewController {
         }
         return "";
     }
+
+    @PostMapping("/cart/save")
+    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra) {
+        //Excute anything here
+        String cartString = model.getCartString();
+        return "product/cart";
+    }
 }

@@ -59,39 +59,34 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <form method="post" class="colorlib-form">
+                                <form method="post" class="colorlib-form" action="/cart/save" modelAttribute="form">
                                     <h2>Thông Tin giao hàng</h2>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <input type="hidden" name="cartString" id="cartString"/>
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="fname">First Name</label>
-                                                <input type="text" id="fname" class="form-control" placeholder="Tên">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="lname">Last Name</label>
-                                                <input type="text" id="lname" class="form-control" placeholder="Họ">
+                                                <label for="fname">Name</label>
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="Tên Người nhận">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="fname">Address</label>
-                                                <input type="text" id="address" class="form-control"
+                                                <input type="text" id="address" name="address" class="form-control"
                                                        placeholder="Địa chỉ nhận hàng">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="email">E-mail</label>
-                                                <input type="text" id="email" class="form-control" placeholder="Email">
+                                                <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="Phone">Phone</label>
-                                                <input type="text" id="zippostalcode" class="form-control"
-                                                       placeholder="">
+                                                <input type="text" id="phone" name="phone" class="form-control"
+                                                       placeholder="Số điện thoại người nhận">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -127,7 +122,16 @@
         } else {
             productService.default();
         }
-
+        $('form').on('submit', function (e) {
+            if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+               var cart = localStorage.getItem('orders');
+               $('#cartString').val(cart);
+            } else {
+               swal("Cart is Empty!");
+               e.preventDefault();
+               return;
+            }
+        });
     });
 </script>
 </body>

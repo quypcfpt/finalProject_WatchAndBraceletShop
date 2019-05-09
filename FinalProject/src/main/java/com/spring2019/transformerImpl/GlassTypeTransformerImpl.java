@@ -1,14 +1,9 @@
 package com.spring2019.transformerImpl;
 
 import com.spring2019.entity.GlassType;
-import com.spring2019.model.CameraModel;
 import com.spring2019.model.GlassTypeModel;
 import com.spring2019.transformer.GlassTypeTransformer;
-import javafx.scene.Camera;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 
 @Service
 public class GlassTypeTransformerImpl implements GlassTypeTransformer {
