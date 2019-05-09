@@ -133,24 +133,15 @@
 </div>
 <script src="/st-product/js/shopingcart.js"></script>
 <script>
-    // $(document).ready(function () {
-    //     if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
-    //         displayOrdersToCart();
-    //         console.log("Cart > 1");
-    //     } else {
-    //         productService.default();
-    //     }
-    //     $('form').on('submit', function (e) {
-    //         if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
-    //            var cart = localStorage.getItem('orders');
-    //            $('#cartString').val(cart);
-    //         } else {
-    //            swal("Cart is Empty!");
-    //            e.preventDefault();
-    //            return;
-    //         }
-    //     });
-    // });
+    $(document).ready(function () {
+        if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+            var orders = productService.getOrdersFromLocalStorage("orders");
+            orders = [];
+            productService.saveOrdersToLocalStorage("orders", orders);
+        } else {
+            productService.default();
+        }
+    });
 </script>
 </body>
 </html>
