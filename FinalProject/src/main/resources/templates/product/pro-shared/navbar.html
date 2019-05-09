@@ -3,17 +3,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-7 col-md-9">
-                    <div id="colorlib-logo"><a href="home.html">Watch And Bracelet</a></div>
+                    <div id="colorlib-logo"><a th:href="@{/home}">Watch And Bracelet</a></div>
                 </div>
-                <div class="col-sm-5 col-md-3">
-                    <form action="#" class="search-wrap">
-                        <div class="form-group">
-                            <input type="search" class="form-control search" placeholder="Search">
-                            <button class="btn btn-primary submit-search text-center" type="submit"><i
-                                    class="icon-search"></i></button>
-                        </div>
-                    </form>
-                </div>
+                <!--<div class="col-sm-5 col-md-3">-->
+                    <!--<form action="#" class="search-wrap">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="search" class="form-control search" placeholder="Search">-->
+                            <!--<button class="btn btn-primary submit-search text-center" type="submit"><i-->
+                                    <!--class="icon-search"></i></button>-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
             </div>
             <div class="row">
                 <div class="col-sm-12 text-left menu-1">
@@ -24,7 +24,7 @@
                             <ul class="dropdown">
                                 <li th:each="cate : ${listCates.listProductCategory}" th:switch="${cate.name}">
                                     <a th:href="@{/watch/1}" th:text="${cate.name}" th:case="'Đồng Hồ'"></a>
-                                    <a href="#" th:text="${cate.name}" th:case="'Vòng tay'"></a>
+                                    <a th:href="@{/bracelet/1}" th:text="${cate.name}" th:case="'Vòng tay'"></a>
                                 </li>
                             </ul>
                         </li>
@@ -34,10 +34,7 @@
                                 <li th:each="label : ${labels.listLabel}"><a href="#" th:text="${label.name}"></a></li>
                             </ul>
                         </li>
-                        <!--<li><a href="women.html">Women</a></li>-->
-                        <!--<li><a href="about.html">About</a></li>-->
-                        <!--<li><a href="contact.html">Contact</a></li>-->
-                        <li class="cart"><a th:href="@{/cart}"><i class="icon-shopping-cart"></i> Cart</a></li>
+                        <li class="cart"><a th:href="@{/cart}"><i class="icon-shopping-cart"></i> Giỏ hàng</a></li>
                     </ul>
                 </div>
             </div>
@@ -50,14 +47,14 @@
                     <div class="row">
                         <div class="owl-carousel2">
                             <div class="item">
-                                <div class="col">
-                                    <h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>
-                                </div>
+                                <!--<div class="col">-->
+                                    <!--<h3><a href="#">25% off (Almost) Everything! Use Code: Summer Sale</a></h3>-->
+                                <!--</div>-->
                             </div>
                             <div class="item">
-                                <div class="col">
-                                    <h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>
-                                </div>
+                                <!--<div class="col">-->
+                                    <!--<h3><a href="#">Our biggest sale yet 50% off all summer shoes</a></h3>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>

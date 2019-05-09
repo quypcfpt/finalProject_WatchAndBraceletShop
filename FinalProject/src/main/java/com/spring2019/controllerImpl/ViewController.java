@@ -157,7 +157,7 @@ public class ViewController {
 
             List<ProductModel> productList = new ArrayList<>();
             if (page > 0) {
-                Page<Product> products = productService.getAllProductsActive(pageable);
+                Page<Product> products = productService.getAllProductActiveByCategoryId(1, pageable);
 
                 for (Product product : products) {
                     productList.add(productTransformer.entityToModel(product));
@@ -174,6 +174,43 @@ public class ViewController {
             System.out.println(e.getMessage());
         }
         return "product/watch";
+    }
+
+    /**
+     * Home Product Page
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/bracelet/{page}")
+    public String toBracelet(Model model, @PathVariable("page") int page) {
+        getMenu(model);
+        Pageable pageable = null;
+        if (page > 0) {
+            pageable = PageRequest.of(page - 1, 8);
+        }
+        try {
+            MultiProductModel data = new MultiProductModel();
+
+            List<ProductModel> productList = new ArrayList<>();
+            if (page > 0) {
+                Page<Product> products = productService.getAllProductActiveByCategoryId(2, pageable);
+
+                for (Product product : products) {
+                    productList.add(productTransformer.entityToModel(product));
+                }
+                data.setListProduct(productList);
+                data.setCurrentPage(page);
+                data.setTotalPage(products.getTotalPages());
+                data.setTotalRecord(products.getTotalElements());
+            }
+            data.setListProduct(productList);
+
+            model.addAttribute("proBracelet", data);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return "product/bracelet";
     }
 
     /**
