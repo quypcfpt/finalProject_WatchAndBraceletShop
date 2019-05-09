@@ -43,6 +43,9 @@ public class OrderControllerImpl extends AbstractController implements OrderCont
             List<Orders> ordersList = service.getAllListOrders();
 
             for (Orders orders : ordersList) {
+                if(orders.getPaidDateTime()== null){
+                    orders.setPaidDateTime("Chưa Thanh Toán");
+                }
                 orderModels.add(transformer.entityToModel(orders));
             }
             DatatableModel result = new DatatableModel();

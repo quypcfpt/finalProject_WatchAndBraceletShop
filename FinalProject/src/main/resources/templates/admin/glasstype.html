@@ -18,7 +18,7 @@
                         <h3 class="text-themecolor">Manage</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active">Manage Category</li>
+                            <li class="breadcrumb-item active">Manage Glass Type</li>
                         </ol>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
         [# th:if="${msg}"]
         $.toast({
             heading: "Success!",
-            text: "Category is created.",
+            text: "Glass Type is created.",
             position: 'top-right',
             loaderBg: '#ffff',
             icon: 'success',
@@ -128,8 +128,8 @@
                     var name = $('#name').val();
                     if (name == "") {
                         $.toast({
-                            heading: "Category Name is invalid!",
-                            text: "Category Name is reuired.",
+                            heading: "Glass Type Name is invalid!",
+                            text: "Glass Type Name is reuired.",
                             position: 'top-right',
                             loaderBg: '#ffff',
                             icon: 'error',
@@ -147,7 +147,7 @@
             },
             "buttons": [
                 {
-                    text: '<i class="left-icon fa fa-plus"></i>&nbsp;Create Category',
+                    text: '<i class="left-icon fa fa-plus"></i>&nbsp;Create Glass Type',
                     className: 'dt-button-success',
                     action: function (e, dt, node, config) {
                         ShowAddNewEventForm();

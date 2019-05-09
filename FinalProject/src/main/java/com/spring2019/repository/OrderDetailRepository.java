@@ -21,7 +21,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail,Integer
                     "WHERE "+
                     ":startDate <= o.createDateTime and o.createDateTime <= :endDate" +
                     "    and od.orderById = o.id")
-    int CountSoldProduct(@Param("startDate") Date startDate, @Param("endDate")Date endDate);
+    int CountSoldProduct(@Param("startDate") String startDate, @Param("endDate")String endDate);
 
     @Query(value =
             "Select  " +
@@ -31,5 +31,5 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail,Integer
                     "WHERE "+
                     ":startDate <= o.createDateTime and o.createDateTime <= :endDate" +
                     "    and od.orderById = o.id")
-    int CountTotalPrice(@Param("startDate") Date startDate, @Param("endDate")Date endDate);
+    long CountTotalPrice(@Param("startDate") String startDate, @Param("endDate")String endDate);
 }

@@ -110,7 +110,7 @@ public class ViewController {
      * @param model
      * @return
      */
-    @RequestMapping(value = {"/login", "/"})
+    @RequestMapping(value = {"/login"})
     public String toLogin(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -130,7 +130,7 @@ public class ViewController {
      * @param model
      * @return
      */
-    @RequestMapping("/home")
+    @RequestMapping(value = {"/home","/"})
     public String toHome(Model model) {
         getMenu(model);
         MultiProductModel data = new MultiProductModel();
@@ -766,7 +766,7 @@ public class ViewController {
                 model.addAttribute("soldProduct", soldProduct);
 
                 //Sold Product
-                int totalPrice = orderDetailService.totaltotalPrice(startDate, endDate);
+                long totalPrice = orderDetailService.totaltotalPrice(startDate, endDate);
                 model.addAttribute("totalprice", soldProduct);
 
                 //Orders
@@ -921,8 +921,9 @@ public class ViewController {
             Product proResult = new Product();
             proResult.setId(productId);
             proResult.setName(proName.trim());
-            float price = Float.parseFloat(cam.getString("price"));
-            OrderDetail detail = new OrderDetail(proResult, price, quantity);
+            float price = cam.getFloat("price");
+            long longprice =(long) price;
+            OrderDetail detail = new OrderDetail(proResult, longprice, quantity);
             resultList.add(detail);
         }
         return resultList;
@@ -931,7 +932,7 @@ public class ViewController {
     @PostMapping("/cart/save")
     public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra, Model modeView) {
         //Excute anything here
-        getMenu(modeView);
+getMenu(modeView);
         String cartString = model.getCartString();
         List<OrderDetail> listresult = parseJsonIntoList(cartString);
         String msg = saveCart(listresult, model);

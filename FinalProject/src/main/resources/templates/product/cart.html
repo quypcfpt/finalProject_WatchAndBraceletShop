@@ -130,6 +130,15 @@
             productService.default();
         }
         $('form').on('submit', function (e) {
+            var name = $('#name').val();
+            var address = $('#adress').val();
+            var email=$("#email").val();
+            var phone = $('#phone').val();
+            if(name == "" || address == "" || email == ""||phone =="") {
+                swal("Invalid", "Name, email, address and phone are required", "error");
+                e.preventDefault();
+                return;
+            }
             if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
                var cart = localStorage.getItem('orders');
                $('#cartString').val(cart);

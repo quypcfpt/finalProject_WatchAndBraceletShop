@@ -18,12 +18,12 @@ public class OrderDetail {
     private Orders orderById;
     @Basic
     @Column(name = "Price", nullable = false)
-    private float price;
+    private long price;
     @Basic
     @Column(name = "Quantity", nullable = false)
     private int quantity;
 
-    public OrderDetail(Product productById, float price, int quantity) {
+    public OrderDetail(Product productById, long price, int quantity) {
         this.productById = productById;
         this.price = price;
         this.quantity = quantity;
@@ -55,11 +55,11 @@ public class OrderDetail {
         this.orderById = orderById;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

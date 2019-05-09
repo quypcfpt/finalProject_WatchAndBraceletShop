@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -50,11 +52,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public int totalSoldProduct(Date startDate, Date endDate) {
-       return  repository.CountSoldProduct(startDate, endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+       return  repository.CountSoldProduct(dateFormat.format(startDate), dateFormat.format(endDate));
     }
     @Override
-    public int totaltotalPrice(Date startDate, Date endDate) {
-        return  repository.CountTotalPrice(startDate, endDate);
+    public long totaltotalPrice(Date startDate, Date endDate) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return  repository.CountTotalPrice(dateFormat.format(startDate), dateFormat.format(endDate));
     }
 
     @Override

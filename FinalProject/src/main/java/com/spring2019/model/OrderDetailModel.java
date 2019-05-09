@@ -14,7 +14,7 @@ public class OrderDetailModel {
     @Expose
     private Integer orderId;
     @Expose
-    private float price;
+    private long price;
     @Expose
     private int quantity;
     @Expose
@@ -24,7 +24,7 @@ public class OrderDetailModel {
     @Expose
     private float totalPrice;
 
-    public OrderDetailModel(Integer id, Integer productId, Integer orderId, float price, int quantity) {
+    public OrderDetailModel(Integer id, Integer productId, Integer orderId, long price, int quantity) {
         this.id = id;
         this.productId = productId;
         this.orderId = orderId;
@@ -69,11 +69,11 @@ public class OrderDetailModel {
         this.orderId = orderId;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

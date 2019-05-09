@@ -79,7 +79,9 @@
                                                        value="Upload"/>
                                                 <div class="input-group">
                                                     <input type="hidden" name="image" id="imageUrl" th:value="${form.image}"/>
-                                                    <div id="review_container"></div>
+                                                    <div id="review_container">
+                                                        <img th:src="${form.image}" th:width="250" th:height="250">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

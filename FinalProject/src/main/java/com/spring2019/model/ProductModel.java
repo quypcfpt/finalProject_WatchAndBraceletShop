@@ -23,7 +23,7 @@ public class ProductModel {
     @Expose
     private int machineTypeId;
     @Expose
-    private Integer labelId;
+    private int labelId;
     @Expose
     private int originId;
     @Expose

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -48,10 +50,14 @@ public class OrderServiceImpl implements OrderService {
                 entity.setStatus(2);
             }else if (entity.getStatus() == 2) {
                 entity.setStatus(3);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                entity.setPaidDateTime(dateFormat.format(date));
             } else if (entity.getStatus() == 3) {
                 entity.setStatus(4);
+
             }else{
-                entity.setStatus(1);
+              return;
             }
             repository.save(entity);
         }
@@ -59,16 +65,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int totaltotalOrder(Date startDate, Date endDate) {
-        return  repository.countOrder(startDate, endDate);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return  repository.countOrder(dateFormat.format(startDate), dateFormat.format(endDate));
     }
 
     @Override
     public int totaltotalOrderByStatus(Date startDate, Date endDate, int status) {
-        return  repository.CountOrderStatus(startDate, endDate, status);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return  repository.CountOrderStatus(dateFormat.format(startDate), dateFormat.format(endDate), status);
     }
 
     @Override
     public Orders save(Orders orders) {
+
+
         return repository.save(orders);
     }
 

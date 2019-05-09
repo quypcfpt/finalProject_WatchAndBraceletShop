@@ -22,7 +22,7 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
                     "Orders o " +
                     "WHERE " +
                     ":startDate <= o.createDateTime and o.createDateTime <= :endDate")
-    int countOrder(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    int countOrder(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
     @Query(value =
             "Select  " +
@@ -32,6 +32,6 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
                     "WHERE " +
                     ":startDate <= o.createDateTime and o.createDateTime <= :endDate" +
                     "  and o.status = :status")
-    int CountOrderStatus(@Param("startDate") Date startDate, @Param("endDate")Date endDate, @Param("status") int status);
+    int CountOrderStatus(@Param("startDate") String startDate, @Param("endDate")String endDate, @Param("status") int status);
 
 }
