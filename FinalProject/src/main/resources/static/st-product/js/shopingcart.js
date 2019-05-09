@@ -17,16 +17,16 @@ var product = {
 };
 var tempProductList = [];
 
-//load orders from local storage to display on cart when windown reload
-// $(document).ready(function () {
-//     if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
-//         displayOrdersToCart();
-//         console.log("Cart > 1");
-//     } else {
-//         productService.default();
-//     }
-//
-// });
+// load orders from local storage to display on cart when windown reload
+$(document).ready(function () {
+    if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+        // displayOrdersToCart();
+        console.log("Cart > 1");
+    } else {
+        productService.default();
+    }
+
+});
 //send product to extra modal
 function sendToModal(productId, productName, price) {
 
