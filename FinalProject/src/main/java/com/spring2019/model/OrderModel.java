@@ -29,6 +29,8 @@ public class OrderModel {
     @Expose
     private String paidDateTime;
     @Expose
+    private String code;
+    @Expose
     private List<OrderDetailModel> list;
     public OrderModel() {
     }
@@ -133,5 +135,13 @@ public class OrderModel {
 
     public void setList(List<OrderDetailModel> list) {
         this.list = list;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
