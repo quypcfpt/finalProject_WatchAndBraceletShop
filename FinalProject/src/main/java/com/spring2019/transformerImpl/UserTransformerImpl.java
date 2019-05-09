@@ -1,13 +1,9 @@
 package com.spring2019.transformerImpl;
 
 import com.spring2019.entity.User;
-import com.spring2019.model.CameraModel;
 import com.spring2019.model.UserModel;
 import com.spring2019.transformer.UserTransformer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 
 @Service
 public class UserTransformerImpl implements UserTransformer {
