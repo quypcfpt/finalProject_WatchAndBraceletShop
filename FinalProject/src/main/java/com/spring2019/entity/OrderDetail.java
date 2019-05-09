@@ -23,6 +23,13 @@ public class OrderDetail {
     @Column(name = "Quantity", nullable = false)
     private int quantity;
 
+    public OrderDetail(Product productById, float price, int quantity) {
+        this.productById = productById;
+        this.price = price;
+        this.quantity = quantity;
+    }
+    public OrderDetail() {
+    }
 
     public Integer getId() {
         return id;

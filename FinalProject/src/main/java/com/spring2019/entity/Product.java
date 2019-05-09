@@ -20,7 +20,7 @@ public class Product {
     private String imge;
     @Basic
     @Column(name = "Price", nullable = false)
-    private float price;
+    private long price;
     @Basic
     @Column(name = "WireTypeId", nullable = false)
     private int wireTypeId;
@@ -89,11 +89,11 @@ public class Product {
         this.description = description;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

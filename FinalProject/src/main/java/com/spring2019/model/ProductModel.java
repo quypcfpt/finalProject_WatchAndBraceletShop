@@ -13,7 +13,7 @@ public class ProductModel {
     @Expose
     private String description;
     @Expose
-    private float price;
+    private long price;
     @Expose
     private String image;
     @Expose
@@ -60,7 +60,7 @@ public class ProductModel {
 
     }
 
-    public ProductModel(Integer id, String name, String description, float price, String image, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int stockAmount, int stockIn, int stockOut, int categoryId, boolean active) {
+    public ProductModel(Integer id, String name, String description, long price, String image, int wireTypeId, int glassTypeId, int machineTypeId, int labelId, int originId, int status, String productCode, int stockAmount, int stockIn, int stockOut, int categoryId, boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -112,11 +112,11 @@ public class ProductModel {
         this.description = description;
     }
 
-    public float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

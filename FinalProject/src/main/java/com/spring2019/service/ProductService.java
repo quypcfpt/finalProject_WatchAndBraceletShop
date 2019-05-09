@@ -21,4 +21,5 @@ public interface ProductService {
     List<Product> getAllProductsActive();
 
     ProductDetailModel getProductDetail(int id);
+    Product findByName(String name);
 }

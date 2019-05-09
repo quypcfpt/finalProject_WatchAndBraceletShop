@@ -136,4 +136,9 @@ public class ProductServiceImpl implements ProductService {
 
         return productDetailModel;
     }
+
+    @Override
+    public Product findByName(String name) {
+        return repository.findByNameAndActiveIsTrue(name);
+    }
 }

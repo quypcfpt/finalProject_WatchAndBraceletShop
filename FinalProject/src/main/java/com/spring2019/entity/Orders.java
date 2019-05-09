@@ -31,12 +31,14 @@ public class Orders {
     private String  note;
     @Basic
     @Column(name = "CreateDateTime", nullable = false)
-    private Date createDateTime;
+    private String createDateTime;
     @Basic
     @Column(name = "PaidDateTime", nullable = false)
-    private Date  paidDateTime;
-    @OneToMany(mappedBy = "orderById")
-    private List<OrderDetail> detail = new ArrayList<>() ;
+    private String  paidDateTime;
+    @Basic
+    @Column(name = "Code", nullable = false)
+    private String  code;
+
 
     public Integer getId() {
         return id;
@@ -96,28 +98,28 @@ public class Orders {
         this.note = note;
     }
 
-    public Date getCreateDateTime() {
+    public String getCreateDateTime() {
         return createDateTime;
     }
 
-    public void setCreateDateTime(Date createDateTime) {
+    public void setCreateDateTime(String createDateTime) {
         this.createDateTime = createDateTime;
     }
 
-    public Date getPaidDateTime() {
+    public String getPaidDateTime() {
         return paidDateTime;
     }
 
-    public void setPaidDateTime(Date paidDateTime) {
+    public void setPaidDateTime(String paidDateTime) {
         this.paidDateTime = paidDateTime;
     }
 
-    public List<OrderDetail> getDetail() {
-        return detail;
+    public String getCode() {
+        return code;
     }
 
-    public void setDetail(List<OrderDetail> detail) {
-        this.detail = detail;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

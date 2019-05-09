@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="product/pro-shared/head :: head"></div>
+<body>
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    <div th:replace="product/pro-shared/navbar :: navbar"></div>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Shopping Cart</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-md-8">
+                    <div class="product-name d-flex">
+                        <div class="one-forth text-left px-4">
+                            <span>Product Details</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Price</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Quantity</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Total</span>
+                        </div>
+                        <div class="one-eight text-center px-4">
+                            <span>Remove</span>
+                        </div>
+                    </div>
+                    <div id="shopping-cart-body">
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="total-wrap">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="total">
+                                    <div class="sub">
+                                        <p><span>Subtotal:</span> <span id="subtotalprice">0 VND</span></p>
+                                        <p><span>Delivery:</span> <span>0 VND</span></p>
+                                    </div>
+                                    <div class="grand-total">
+                                        <p><span><strong>Total:</strong></span> <span id="totalprice">0 VND</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <form method="post" class="colorlib-form" action="/cart/save" modelAttribute="form">
+                                    <h2>Thông Tin giao hàng</h2>
+                                    <div class="row">
+                                        <input type="hidden" name="cartString" id="cartString"/>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="fname">Name</label>
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="Tên Người nhận">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="fname">Address</label>
+                                                <input type="text" id="address" name="address" class="form-control"
+                                                       placeholder="Địa chỉ nhận hàng">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="email">E-mail</label>
+                                                <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="Phone">Phone</label>
+                                                <input type="text" id="phone" name="phone" class="form-control"
+                                                       placeholder="Số điện thoại người nhận">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit">Check out</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-pb-lg">
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="product/pro-shared/footer :: footer"></div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+<script src="/st-product/js/shopingcart.js"></script>
+<script>
+    $(document).ready(function () {
+        if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+            displayOrdersToCart();
+            console.log("Cart > 1");
+        } else {
+            productService.default();
+        }
+        $('form').on('submit', function (e) {
+            if (localStorage.getItem("orders") != "[]" && localStorage.getItem("orders")) {
+               var cart = localStorage.getItem('orders');
+               $('#cartString').val(cart);
+            } else {
+               swal("Cart is Empty!");
+               e.preventDefault();
+               return;
+            }
+        });
+    });
+</script>
+</body>
+</html>
+

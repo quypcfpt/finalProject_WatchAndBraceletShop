@@ -25,15 +25,15 @@ public class OrderModel {
     @Expose
     private String note;
     @Expose
-    private Date createDateTime;
+    private String createDateTime;
     @Expose
-    private Date paidDateTime;
+    private String paidDateTime;
     @Expose
     private List<OrderDetailModel> list;
     public OrderModel() {
     }
 
-    public OrderModel(Integer id, String customerName, String address, String phone, String email, int status, Float totalPrice, String note, Date createDateTime, Date paidDateTime) {
+    public OrderModel(Integer id, String customerName, String address, String phone, String email, int status, Float totalPrice, String note, String createDateTime, String paidDateTime) {
         this.id = id;
         this.customerName = customerName;
         this.address = address;
@@ -111,19 +111,19 @@ public class OrderModel {
         this.note = note;
     }
 
-    public Date getCreateDateTime() {
+    public String getCreateDateTime() {
         return createDateTime;
     }
 
-    public void setCreateDateTime(Date createDateTime) {
+    public void setCreateDateTime(String createDateTime) {
         this.createDateTime = createDateTime;
     }
 
-    public Date getPaidDateTime() {
+    public String getPaidDateTime() {
         return paidDateTime;
     }
 
-    public void setPaidDateTime(Date paidDateTime) {
+    public void setPaidDateTime(String paidDateTime) {
         this.paidDateTime = paidDateTime;
     }
 

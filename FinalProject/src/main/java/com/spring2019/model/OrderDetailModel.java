@@ -32,6 +32,7 @@ public class OrderDetailModel {
         this.quantity = quantity;
     }
 
+
     public OrderDetailModel() {
 
     }

@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
@@ -30,8 +31,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -827,74 +826,69 @@ public class ViewController {
         return "product/cart";
     }
 
-    @RequestMapping("/test")
-    public String addOrder(Model model) {
-        String obj = "";
-        parseJsonIntoList(obj);
-
-        String msg="";
-//        Orders order = new Orders();
-//        order.setCustomerName("Quy");
-//        order.setAddress("14 Cộng Hòa");
-//        order.setStatus(1);
-//        order.setEmail("QUyPC@gmail.com");
-//        Orders orders = orderService.save(order);
-//        if (orders != null) {
-//            Product pro = new Product();
-//            pro.setId(1);
-//            OrderDetail detail = new OrderDetail();
-//            detail.setProductById(pro);
-//            detail.setQuantity(3);
-//            detail.setPrice(100);
-//            pro.setId(2);
-//            OrderDetail detail2 = new OrderDetail();
-//            detail2.setProductById(pro);
-//            detail2.setQuantity(4);
-//            detail2.setPrice(200);
-//            detail.setOrderById(order);
-//            detail2.setOrderById(order);
-//            orderDetailService.save(detail);
-//            orderDetailService.save(detail2);
-//            Product updatePro = productService.getProductById(pro.getId());
-//            updatePro.setStockOut(updatePro.getStockOut()+detail.getQuantity());
-//            updatePro.setStockAmount(updatePro.getStockIn() -  updatePro.getStockOut());
-//            if(updatePro.getStockAmount() <0){
-//                 msg = "Sorry your order cannot complete because the good is out of stock";
-//            }
-//            msg = "Your Order is Success . Please wait for 48h to delivery";
-//        }
-        msg = "Can not  create order . Please try again";
+    public String saveCart(List<OrderDetail> list, CartModel cart) {
+        String msg = "";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        Orders order = new Orders();
+        order.setCode(UUID.randomUUID().toString());
+        order.setCustomerName(cart.getName());
+        order.setAddress(cart.getAddress());
+        order.setStatus(1);
+        order.setEmail(cart.getEmail());
+        order.setPhone(cart.getPhone());
+        order.setCreateDateTime(dateFormat.format(date));
+        order.setNote(cart.getNote());
+        Orders orders = orderService.save(order);
+        if (orders != null) {
+            for (OrderDetail detail : list) {
+                detail.setOrderById(orders);
+                orderDetailService.save(detail);
+                Product updatePro = productService.getProductById(detail.getProductById().getId());
+                updatePro.setStockOut(updatePro.getStockOut() + detail.getQuantity());
+                updatePro.setStockAmount(updatePro.getStockIn() - updatePro.getStockOut());
+                if (updatePro.getStockAmount() < 0) {
+                    msg = "Sorry your order cannot complete because the good is out of stock";
+                } else {
+                    msg = "Your Order is Success . Please wait for 48h to delivery";
+                    productService.save(updatePro);
+                }
+            }
+        } else {
+            msg = "Can not  create order . Please try again";
+        }
         return msg;
     }
 
     public List<OrderDetail> parseJsonIntoList(String jsonObject) throws JSONException {
-        String local="[{'productId' : '3','price':'3000','productName':'dong ho','quantity':'1'}," +
-                "{'productId' : '1','price':'4000','productName':'dong ho 2','quantity':'2'}," +
-                "{'productId' : '2','price':'4000','productName':'dong ho 1','quantity':'3'}]";
         List<OrderDetail> resultList = new ArrayList<>();
-//        JSONObject jsonObj = new JSONObject(local);
-        JSONArray contacts = new JSONArray(local);
-        for (int i = 0 ; i< contacts.length();i++){
+        JSONArray contacts = new JSONArray(jsonObject);
+        for (int i = 0; i < contacts.length(); i++) {
             JSONObject cam = contacts.getJSONObject(i);
-            int id = cam.getInt("id");
-            String description = cam.getString("description");
-            String position = cam.getString("position");
-            int observerStatus = cam.getInt("observerStatus");
-            float distance = Float.parseFloat(cam.getString("distance"));
-//            StreetModel street =  new StreetModel();
-//            street.setId(cam.getJSONObject("street").getInt("id"));
-//            street.setCity(cam.getJSONObject("street").getString("city"));
-//            street.setDistrict(cam.getJSONObject("street").getString("district"));
-//            street.setName(cam.getJSONObject("street").getString("name"));
-//            resultList.add(new CameraModel(id,description,position,observerStatus,distance,street));
+            int productId = cam.getInt("productId");
+            int quantity = cam.getInt("quantity");
+            String proName = cam.getString("productName");
+            Product proResult = new Product();
+            proResult.setId(productId);
+            proResult.setName(proName.trim());
+            float price = Float.parseFloat(cam.getString("price"));
+            OrderDetail detail = new OrderDetail(proResult, price, quantity);
+            resultList.add(detail);
         }
         return resultList;
     }
 
     @PostMapping("/cart/save")
-    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra) {
+    public String toCart(@ModelAttribute("form") CartModel model, RedirectAttributes ra , Model modeView) {
         //Excute anything here
+        getMenu(modeView);
         String cartString = model.getCartString();
-        return "product/cart";
+        List<OrderDetail> listresult = parseJsonIntoList(cartString);
+        String msg = saveCart(listresult, model);
+        ra.addFlashAttribute("msg", msg);
+        modeView.addAttribute("customer",model);
+        modeView.addAttribute("detail",listresult);
+        return "product/orderresult";
     }
+
 }
