@@ -941,22 +941,24 @@ public class ViewController {
         try {
             File file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
             String content = new String(Files.readAllBytes(file.toPath()));
-            content.replace("{name}", model.getName());
-            content.replace("{address}", model.getAddress());
-            content.replace("{phone}", model.getPhone());
-            content.replace("{note}", model.getNote());
+            content = content.replace("{name}", model.getName());
+            content = content.replace("{address}", model.getAddress());
+            content = content.replace("{phone}", model.getPhone());
+            content = content.replace("{note}", model.getNote());
             long totalPrice = 0;
+            String contentItem ="";
             for (int i = 0 ; i < listresult.size(); i++) {
                 totalPrice += (listresult.get(i).getQuantity() * listresult.get(i).getPrice());
-                String contentItem = "<tr>" +
+                contentItem += "<tr>" +
                         "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+(i+1)+"</p></td>" +
                         "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getProductById().getName()+"</p></td>" +
                         "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getQuantity()+"</p></td>" +
                         "            <td style='vertical-align:top;width:77.85pt'><p style='margin-left:0in; margin-right:0in; text-align:center'>"+listresult.get(i).getPrice()+"</p></td>" +
                         "        </tr>";
             }
-            content.replace("{totalprice}", totalPrice + "");
-            emailService.sendMessage("tinthse62244@fpt.edu.vn", "Order Information", content);
+            content =content.replace("{content}", contentItem);
+            content = content.replace("{totalprice}", totalPrice + "");
+            emailService.sendMessage(model.getEmail(), "Order Information", content);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
