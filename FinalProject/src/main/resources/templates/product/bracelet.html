@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="product/pro-shared/head :: head"></div>
+<body>
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    <div th:replace="product/pro-shared/navbar :: navbar"></div>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Bracelet</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+                    <h2>View All Products</h2>
+                </div>
+            </div>
+            <div class="col-lg-9 col-xl-9">
+                <div class="row row-pb-md">
+                    <div class="col-lg-4 mb-4 text-center" th:each="prod : ${proBracelet.listProduct}">
+                        <div class="product-entry border">
+                            <a th:href="@{/productdetail(proid=${prod.id})}" class="prod-img">
+                                <img th:src="${prod.image}" class="img-fluid"
+                                     alt="Free html5 bootstrap 4 template"/>
+                            </a>
+                            <div class="desc">
+                                <h2><a th:href="@{/productdetail(proid=${prod.id})}" th:text="${prod.name}"></a></h2>
+                                <span class="price" th:text="${prod.price}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="block-27">
+                            <ul>
+                                <th:block th:each="i: ${#numbers.sequence(0, proBracelet.totalPage - 1)}">
+                                    <li th:if="${proBracelet.currentPage == (i+1)}" class="active"><span th:text="${i+1}"></span>
+                                    </li>
+                                    <li th:if="${proBracelet.currentPage !=(i+1)}"><a th:href="@{/bracelet/{page}(page=${i+1})}"
+                                                                                 th:text="${i+1}">5</a></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="product/pro-shared/footer :: footer"></div>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+</body>
+</html>
+

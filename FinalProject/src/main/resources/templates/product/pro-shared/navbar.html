@@ -24,7 +24,7 @@
                             <ul class="dropdown">
                                 <li th:each="cate : ${listCates.listProductCategory}" th:switch="${cate.name}">
                                     <a th:href="@{/watch/1}" th:text="${cate.name}" th:case="'Đồng Hồ'"></a>
-                                    <a href="#" th:text="${cate.name}" th:case="'Vòng tay'"></a>
+                                    <a th:href="@{/bracelet/1}" th:text="${cate.name}" th:case="'Vòng tay'"></a>
                                 </li>
                             </ul>
                         </li>
@@ -34,7 +34,7 @@
                                 <li th:each="label : ${labels.listLabel}"><a href="#" th:text="${label.name}"></a></li>
                             </ul>
                         </li>
-                        <!--<li><a href="women.html">Women</a></li>-->
+                        <!--<li><a href="bracelet.html">Women</a></li>-->
                         <!--<li><a href="about.html">About</a></li>-->
                         <!--<li><a href="contact.html">Contact</a></li>-->
                         <li class="cart"><a th:href="@{/cart}"><i class="icon-shopping-cart"></i> Cart [<span id="totalcart">0</span>]</a></li>

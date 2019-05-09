@@ -17,7 +17,7 @@ public interface ProductService {
     public Product getProductById(int id);
     void delete(int id);
     void updateStatus(int id);
-    List<Product> getAllProductActiveByCategoryId(int categoryId);
+    Page<Product> getAllProductActiveByCategoryId(int categoryId, Pageable pageable);
     List<Product> getAllProductsActive();
 
     ProductDetailModel getProductDetail(int id);
