@@ -934,16 +934,16 @@ public class ViewController {
         modeView.addAttribute("customer",model);
         modeView.addAttribute("detail",listresult);
       
-        File file = null;
-        try {
-            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
-            String content = new String(Files.readAllBytes(file.toPath()));
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        File file = null;
+//        try {
+//            file = ResourceUtils.getFile("classpath:templates/orderconfirm.html");
+//            String content = new String(Files.readAllBytes(file.toPath()));
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
    return "product/orderresult";
     }
 
